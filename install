@@ -1,0 +1,10 @@
+#!/usr/bin/env zsh
+echo "Stowing dotfiles..."
+
+for i in $(echo $STOW_FOLDERS | sed "s/,/ /g")
+do
+  stow -R "$i"
+done
+
+echo "Done"
+
