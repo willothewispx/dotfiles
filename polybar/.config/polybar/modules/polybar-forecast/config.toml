@@ -1,0 +1,22 @@
+# Register at https://openweathermap.org to get your API key
+# If you don't want to write your key here, you can delete this line and use the OWM_API_KEY environment variable instead
+api_key = "dddc351136a1c25bd534e607933b26a8"
+
+# This is for Montreal, find your city at https://openweathermap.org
+# The id will be the last part of the URL
+city_id = "2950159"
+
+# Output format, using Handlebars syntax, meaning variables should be used like {{ this }}
+# Available tokens are:
+# - temp_celcius
+# - temp_kelvin
+# - temp_fahrenheit
+# - temp_icon
+# - trend
+# - forecast_celcius
+# - forecast_kelvin
+# - forecast_fahrenheit
+# - forecast_icon
+
+# display = "%{F#d3869b}{{ temp_icon }}%{F-} {{ temp_celcius }}°C {{ trend }} %{F#d3869b}{{ forecast_icon }}%{F-} {{ forecast_celcius }}°C"
+display = "%{F#d3869b}{{ temp_icon }}%{F-} {{ temp_celcius }}°C    %{F#d3869b}{{ forecast_icon }}%{F-} {{ forecast_celcius }}°C"

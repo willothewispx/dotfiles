@@ -1,0 +1,426 @@
+;===============================================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;===============================================================================
+
+[colors]
+; Gruvbox Material Medium Dark
+background = #292828
+foreground = #d4be98
+
+background-light = #3c3836
+foreground-dark = #7c6f64
+
+border = #191a1a
+
+grey = #a89984
+
+orange = #e78a4e
+yellow = #d8a657
+blue = #7daea3
+green = #a9b665
+purple = #d3869b
+aqua = #89b482
+violet = #bc99ed
+
+dark-red = #4c3432
+
+;===============================================================================
+
+[fonts]
+text = Iosevka Nerd Font:style=Regular:size=11;0
+awesome1 = Font Awesome 5 Free Regular:style=Regular:size=12;0
+awesome2 = Font Awesome 5 Free Solid:style=Solid:size=12;0
+awesome3 = Font Awesome 5 Brands:style=Regular:size=12;0
+weather = Weather Icons:style=Regular:size=12;0
+material = Material Icons:style=Regular:size=12;0
+
+;===============================================================================
+
+[bar/main]
+width = 100%
+height = 25
+radius = 0
+fixed-center = true
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 1
+
+; Use $ xrandr -q | grep " connected" | cut -d ' ' -f1
+monitor = DisplayPort-2
+
+font-0 = ${fonts.text}
+font-1 = ${fonts.awesome1}
+font-2 = ${fonts.weather}
+
+line-size = 2
+border-size = 2
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+border-color = ${colors.border}
+
+
+modules-left = i3 xwindow
+modules-center = date
+modules-right = weather pulseaudio memory filesystem xkeyboard
+;===============================================================================
+
+[bar/secondary]
+width = 100%
+height = 25
+radius = 0
+fixed-center = true
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 1
+
+; Use $ xrandr -q | grep " connected" | cut -d ' ' -f1
+monitor = HDMI-A-0
+
+font-0 = ${fonts.text}
+font-1 = ${fonts.awesome1}
+
+line-size = 2
+border-size = 2
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+border-color = ${colors.border}
+
+
+modules-left = i3 xwindow
+modules-center = date
+modules-right =
+;===============================================================================
+
+[module/i3]
+type = internal/i3
+
+; Sort the workspaces by index instead of the default
+; sorting that groups the workspaces by output
+; Default: false
+index-sort = true
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing 'code' in the label
+; Default: false
+fuzzy-match = true
+
+; ws-icon-[0-9]+ = <label>;<icon>
+; NOTE: The <label> needs to match the name of the i3 workspace
+; Neither <label> nor <icon> can contain a semicolon (;)
+ws-icon-0 = term;
+ws-icon-1 = ffox;
+ws-icon-2 = 3;
+ws-icon-3 = 4;
+ws-icon-4 = 5;
+ws-icon-5 = 6;
+ws-icon-6 = 7;
+ws-icon-7 = 8;
+ws-icon-8 = 9;
+; NOTE: You cannot skip icons, e.g. to get a ws-icon-6
+; you must also define a ws-icon-5.
+; NOTE: Icon will be available as the %icon% token inside label-*
+TODO: test
+
+; Available tags:
+;   <label-state> (default) - gets replaced with <label-(focused|unfocused|visible|urgent)>
+;   <label-mode> (default)
+format = <label-state> <label-mode>
+
+; Available tokens:
+;   %mode%
+; Default: %mode%
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-background = #e60053
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-focused = %icon%  %name%
+label-focused-foreground = ${colors.foreground}
+label-focused-underline = ${colors.yellow}
+label-focused-padding = 3
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+;   %output%
+; Default: %icon%  %name%
+label-unfocused = %icon%  %name%
+label-unfocused-padding = 3
+
+; visible = Active workspace on unfocused monitor
+label-visible = %icon%  %name%
+label-visible-background = ${colors.background}
+label-visible-underline = ${colors.grey}
+label-visible-padding = 3
+
+; urgent = Workspace with urgency hint set
+label-urgent = %name%
+label-urgent-background = #ffffff
+label-urgent-padding = 3
+
+;===============================================================================
+
+[module/xwindow]
+type = internal/xwindow
+
+; Available tokens:
+;   %title%
+; Default: %title%
+label = %title%
+label-maxlen = 50
+
+;===============================================================================
+
+[module/filesystem]
+type = internal/fs
+
+interval = 25
+
+mount-0 = /
+mount-1 = /home
+
+label-mounted = %{F#7daea3}%mountpoint%%{F-}: %percentage_used%%
+label-unmounted = %mountpoint% not mounted
+label-unmounted-foreground = ${colors.foreground}
+format-mounted-underline = ${colors.blue} 
+
+;===============================================================================
+
+[module/pulseaudio]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_12_00.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-volume = %{F#a9b665}<ramp-volume>%{F-} <label-volume>
+
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+;format-muted = <label-muted>
+
+; Available tokens:
+;   %percentage% (default)
+;   %decibels%
+;label-volume = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+;   %decibels%
+label-muted = 婢 muted
+label-muted-foreground = ${colors.dark-red}
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 
+ramp-volume-1 = 奔
+ramp-volume-2 = 墳
+
+; Right and Middle click
+click-right = pavucontrol
+; click-middle = 
+
+format-volume-underline = ${colors.green}
+format-muted-underline = ${colors.dark-red}
+
+[module/memory]
+type = internal/memory
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+
+; Available tags:
+;   <label> (default)
+;   <bar-used>
+;   <bar-free>
+;   <ramp-used>
+;   <ramp-free>
+;   <bar-swap-used>
+;   <bar-swap-free>
+;   <ramp-swap-used>
+;   <ramp-swap-free>
+format = <label>
+
+; Available tokens:
+;   %percentage_used% (default)
+;   %percentage_free%
+;   %gb_used%
+;   %gb_free%
+;   %gb_total%
+;   %mb_used%
+;   %mb_free%
+;   %mb_total%
+;   %percentage_swap_used%
+;   %percentage_swap_free%
+;   %mb_swap_total%
+;   %mb_swap_free%
+;   %mb_swap_used%
+;   %gb_swap_total%
+;   %gb_swap_free%
+;   %gb_swap_used%
+label = %{F#e78a4e}%{F-} %percentage_used%%
+
+format-underline = ${colors.orange}
+
+;===============================================================================
+
+[module/weather]
+type = custom/script
+
+exec = $HOME/.config/polybar/modules/polybar-forecast/polybar-forecast-linux-x86_64
+exec-if = ping openweathermap.org -c 1
+interval = 600
+label-font = 3
+
+format-underline = ${colors.purple}
+
+;===============================================================================
+
+[module/date]
+type = internal/date
+
+; Seconds to sleep between updates
+; Default: 1.0
+interval = 1.0
+
+; See "https://en.cppreference.com/w/cpp/io/manip/put_time" for details on how to format the date string
+; NOTE: if you want to use syntax tags here you need to use %%{...}
+date = %a, %d. %b %Y
+
+; Optional time format
+time = %H:%M
+
+; if `date-alt` or `time-alt` is defined, clicking
+; the module will toggle between formats
+date-alt = %a, %d %b %Y
+time-alt = %H:%M:%S
+
+; Available tags:
+;   <label> (default)
+format = %{F#89b482}%{F-}  <label>
+
+; Available tokens:
+;   %date%
+;   %time%
+; Default: %date%
+label = %date% %{F#89b482}%{F-}  %time%
+label-font = 3
+label-foreground = ${colors.foreground}
+
+format-underline = ${colors.aqua}
+
+;===============================================================================
+
+[module/xkeyboard]
+type = internal/xkeyboard
+
+; List of indicators to ignore
+blacklist-0 = num lock
+blacklist-1 = scroll lock
+
+; Available tags:
+;   <label-layout> (default)
+;   <label-indicator> (default)
+format = <label-layout> <label-indicator>
+format-spacing = 0
+
+; Available tokens:
+;   %layout%
+;   %name%
+;   %number%
+;   %icon%
+;   %variant% (unreleased)
+; Default: %layout%
+label-layout = %name%
+label-layout-padding = 2
+label-layout-background = ${colors.background}
+label-layout-foreground = ${colors.foreground}
+
+format-underline = ${colors.violet}
+
+; Available tokens:
+;   %name%
+; Default: %name%
+; @deprecated, use label-indicator-on
+label-indicator = %name%
+
+; layout-icon-[0-9]+ = layout;icon
+; Assign each layout an icon that will be available as %icon% token for the
+; <label-layout> tag. The part before ';' will try to match %layout% value.
+layout-icon-default = some-icon
+layout-icon-0 = ch;C
+layout-icon-1 = us;U
+
+; indicator-icon-[0-9]+ = indicator;off icon;on icon
+; Provides the content of the %icon% token in label-indicator-*
+indicator-icon-default = 
+indicator-icon-0 = caps lock;-CL;+CL
+indicator-icon-1 = scroll lock;;+SL
+indicator-icon-2 = num lock;-NL;+NL
+
+; Replaces label-indicator
+; Available tokens:
+;   %name%
+;   %icon%
+; Default: %name%
+label-indicator-on = +%name%
+; Available tokens:
+;   %name%
+;   %icon%
+; Default: (none)
+label-indicator-off = -%name%
+
+; Replaces label-indicator-* if for specific indicators
+; Available tokens:
+;   %name%
+;   %icon%
+label-indicator-on-capslock = 
+label-indicator-off-capslock = 
+label-indicator-on-numlock = 
+label-indicator-off-numlock = 
+label-indicator-on-scrolllock = 
+label-indicator-off-scrolllock = 
