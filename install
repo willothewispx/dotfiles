@@ -3,6 +3,7 @@ echo "Stowing dotfiles..."
 
 for i in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
+  echo "--> stowing $i"
   stow -R "$i"
 done
 

@@ -53,9 +53,9 @@ export DOTFILES="$HOME/.dotfiles"
 export STOW_DIR=$DOTFILES
 
 if  [[ "$OSTYPE" == "darwin"* ]]; then
-	export STOW_FOLDERS=alacritty,kitty-mac,nvim,zsh
+	export STOW_FOLDERS="alacritty,kitty-mac,nvim,zsh"
 else
-	export STOW_FOLDERS=alacritty,i3,kitty-arch,nvim,zathura,zsh
+  export STOW_FOLDERS="alacritty,awesome,i3,kitty-arch,nvim,polybar,zathura,zsh"
 fi
 
 ################################################################################

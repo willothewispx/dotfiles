@@ -19,5 +19,10 @@ wk.register({
     name = 'Search',
     p = {'Search in Projekt'}
   },
+  t = {
+    t = {'Show TODOs'},
+    u = {'Harpoon Terminal 1'},
+    e = {'Harpoon Terminal 2'},
+  },
   b = {'Search Buffers'}
 }, { prefix = '<leader>' })

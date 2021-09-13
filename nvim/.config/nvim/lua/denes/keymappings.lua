@@ -99,4 +99,4 @@ vim.api.nvim_set_keymap('n', 'gc', '<Plug>kommentary_motion_default', {})
 vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', {noremap = true})
 
 -- Todo-comments
-vim.api.nvim_set_keymap('n', '<leader>td', ':TodoTelescope<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>tt', ':TodoTelescope<CR>', {noremap = true})
