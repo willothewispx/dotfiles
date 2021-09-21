@@ -63,19 +63,19 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    awful.layout.suit.floating,
+    -- awful.layout.suit.tile.left,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.top,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -166,12 +166,51 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+local secondary_screen = screen.primary:get_next_in_direction('left')
+
+  -- Each screen has its own tag table.
+local primary_tags = {
+  names = {
+    "main",
+    "www",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7"
+  },
+  layouts = {
+    awful.layout.layouts[1],
+    awful.layout.layouts[1],
+    awful.layout.layouts[1],
+    awful.layout.layouts[1],
+    awful.layout.layouts[1],
+    awful.layout.layouts[1],
+    awful.layout.layouts[1],
+  },
+  icons = {
+    os.getenv('HOME') .. '/.config/awesome/icons/console.png',
+    os.getenv('HOME') .. '/.config/awesome/icons/web.png',
+    os.getenv('HOME') .. '/.config/awesome/icons/numeric-3.png',
+    os.getenv('HOME') .. '/.config/awesome/icons/numeric-4.png',
+    os.getenv('HOME') .. '/.config/awesome/icons/numeric-5.png',
+    os.getenv('HOME') .. '/.config/awesome/icons/numeric-6.png',
+    os.getenv('HOME') .. '/.config/awesome/icons/folder.png',
+  }
+}
+
+awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, secondary_screen, awful.layout.layouts[1])
+local primary
+primary = awful.tag(primary_tags.names, screen.primary, primary_tags.layouts)
+for i, t in ipairs(primary) do
+      awful.tag.seticon(primary_tags.icons[i], t)
+      awful.tag.setproperty(t, "icon_only", 1)
+  end
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
 
-    -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -198,23 +237,63 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox_top = awful.wibar({ position = "top", screen = s })
+    s.mywibox_bot = awful.wibar({ position = "bottom", screen = s })
+
+    local trayscreen = screen.primary
+    local tray = wibox.widget.systray()
+    tray:set_screen(trayscreen)
+
+    local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+    local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
 
     -- Add widgets to the wibox
-    s.mywibox:setup {
+    s.mywibox_top:setup {
+      {
+        layout = wibox.layout.align.horizontal,
+        expand = "none",
+        { -- Left widgets
+          layout = wibox.layout.fixed.horizontal,
+          mylauncher,
+          s.mytaglist,
+          s.mypromptbox,
+        },
+        { -- Middle widget
+          layout = wibox.layout.fixed.horizontal,
+          mytextclock
+        },
+        { -- Right widgets
+          layout = wibox.layout.fixed.horizontal,
+          volume_widget{
+            widget_type = 'arc'
+          },
+          weather_widget({
+            api_key = require("secrets").openweatherapikey,
+            coordinates = {52.3127, 13.2437},
+            time_format_12h = false,
+            units = 'metric',
+            both_units_widget = false,
+            show_hourly_forecast = true,
+            show_daily_forecast = true,
+          }),
+        },
+      },
+      bottom = 2, -- don't forget to increase wibar height
+      color = "#888888",
+      widget = wibox.container.margin,
+    }
+
+    s.mywibox_bot:setup {
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
-            s.mytaglist,
-            s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock,
+            tray,
             s.mylayoutbox,
         },
     }
@@ -230,7 +309,10 @@ root.buttons(gears.table.join(
 -- }}}
 
 -- {{{ Key bindings
+
 globalkeys = gears.table.join(
+ awful.key({ modkey, "Shift"          }, "x",      function () mykeyboardlayout.next_layout(); end,
+              {description="Toggle keyboard layout", group="awesome"}),
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
@@ -439,8 +521,22 @@ clientbuttons = gears.table.join(
     end)
 )
 
+-- Custom keybinds
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+
+globalkeys = gears.table.join(globalkeys,
+  -- Volume
+  awful.key({}, "#123", function() volume_widget:inc() end),
+  awful.key({}, "#122", function() volume_widget:dec() end),
+  awful.key({}, "#121", function() volume_widget:toggle() end),
+
+  -- Browser
+  awful.key({modkey}, 'b', function () awful.spawn('brave') end)
+)
+
 -- Set keys
 root.keys(globalkeys)
+
 -- }}}
 
 -- {{{ Rules
@@ -564,3 +660,39 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- No borders if only one window on screen
+function border_adjust(c)
+    if #c.screen.clients == 1 then
+        c.border_width = 0
+    elseif #c.screen.clients > 1 then
+        c.border_width = beautiful.border_width
+        c.border_color = beautiful.border_focus
+    end
+end
+client.connect_signal("focus", border_adjust)
+
+-- Show titlebars only on floating windows
+client.connect_signal("manage", function(c)
+    if c.floating or c.first_tag.layout.name == "floating" then
+        awful.titlebar.show(c)
+    else
+        awful.titlebar.hide(c)
+    end
+end)
+
+-- Autostart
+awful.spawn.once("mullvad-vpn")
+
+-- Redshift
+awful.spawn.easy_async_with_shell(
+    "pgrep redshift-gtk",
+    function (stdout, stderr, exitreason, exitcode)
+        if stdout ~= nil and exitcode == 0 then
+            -- naughty.notify({text = "Redshift already running."})
+        elseif exitcode == 1 then
+            -- naughty.notify({text = "Redshift GTK not running. Running a new instance"})
+            awful.spawn.once("redshift-gtk -l 52.52:13.41 -t 5700:3600 -g 1.0 -m randr -v")
+        end
+    end
+)
