@@ -65,7 +65,8 @@ return require('packer').startup(function(use)
   use 'onsails/lspkind-nvim'
 
   -- Lsp UI
-  use 'glepnir/lspsaga.nvim'
+  -- use 'glepnir/lspsaga.nvim'
+  use 'tami5/lspsaga.nvim'
 
   -- Filetree
   use 'kyazdani42/nvim-tree.lua'

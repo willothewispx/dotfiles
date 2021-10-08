@@ -33,6 +33,7 @@ vim.api.nvim_set_keymap('n', '<leader>ghw', ':h <C-R>=expand("<cword>")<CR><CR>'
 -- Lspsaga
 nnoremap{'ga', require('lspsaga.codeaction').code_action, {silent = true}}
 nnoremap{'<leader>rn', require('lspsaga.rename').rename, {silent = true}}
+nnoremap{'gh', require('lspsaga.provider').lsp_finder, {silent = true}}
 nnoremap{'ge', require('lspsaga.diagnostic').show_line_diagnostics, {silent = true}}
 nnoremap{'[e', require('lspsaga.diagnostic').lsp_jump_diagnostic_prev, {silent = true}}
 nnoremap{']e', require('lspsaga.diagnostic').lsp_jump_diagnostic_next, {silent = true}}
@@ -71,7 +72,6 @@ nnoremap{'<leader>tu', function() require('harpoon.term').gotoTerminal(1) end, {
 nnoremap{'<leader>te', function() require('harpoon.term').gotoTerminal(2) end, {}}
 
 -- Nvim-compe
--- vim.api.nvim_set_keymap('i', '<CR>', 'compe#confirm("<CR>")', {noremap = true, silent = true, expr = true})
 vim.api.nvim_set_keymap('i', '<C-e>', 'compe#close("<C-e>")', {noremap = true, silent = true, expr = true})
 
 -- Neogit
@@ -82,7 +82,7 @@ vim.api.nvim_set_keymap('n', '<leader>gd', ':DiffviewOpen<CR>', {noremap = true}
 vim.api.nvim_set_keymap('n', '<leader>gc', ':DiffviewClose<CR>', {noremap = true})
 
 -- Filetree
-vim.api.nvim_set_keymap('n', '<leader>n', ':NvimTreeToggle<CR>', {noremap = true, silent = true})
+nnoremap{'<leader>n', require('nvim-tree').toggle, {silent = true}}
 
 -- Hop.nvim
 nnoremap{'<leader>hw', require'hop'.hint_words, {}}
