@@ -17,6 +17,9 @@ return require('packer').startup(function(use)
   -- THEME Moonlight
   use 'shaunsingh/moonlight.nvim'
 
+  -- THEME github
+  use 'projekt0n/github-nvim-theme'
+
   -- Tree-sitter
   use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
@@ -24,7 +27,9 @@ return require('packer').startup(function(use)
   }
 
   -- Statusline
-  use 'hoob3rt/lualine.nvim'
+  -- use 'hoob3rt/lualine.nvim'
+  -- WARNING: Fork of the original lualine.nvim
+  use 'shadmansaleh/lualine.nvim'
 
   -- Bufferline
   use 'akinsho/nvim-bufferline.lua'
