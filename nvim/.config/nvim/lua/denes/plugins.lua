@@ -77,14 +77,13 @@ return require('packer').startup(function(use)
   use 'kyazdani42/nvim-tree.lua'
 
   -- Projekt specific working directory
-  -- use 'airblade/vim-rooter'
   use 'ahmedkhalf/project.nvim'
 
   -- GIT signs
   use 'lewis6991/gitsigns.nvim'
 
   -- Comments
-  use 'b3nj5m1n/kommentary'
+  use 'numToStr/Comment.nvim'
 
   -- Surround
   use 'tpope/vim-surround'
