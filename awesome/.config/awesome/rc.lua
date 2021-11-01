@@ -166,8 +166,6 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
-local secondary_screen = screen.primary:get_next_in_direction('left')
-
   -- Each screen has its own tag table.
 local primary_tags = {
   names = {
@@ -199,15 +197,14 @@ local primary_tags = {
   }
 }
 
-awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, secondary_screen, awful.layout.layouts[1])
-local primary
-primary = awful.tag(primary_tags.names, screen.primary, primary_tags.layouts)
-for i, t in ipairs(primary) do
-      awful.tag.seticon(primary_tags.icons[i], t)
-      awful.tag.setproperty(t, "icon_only", 1)
-  end
-
 awful.screen.connect_for_each_screen(function(s)
+  -- Tags
+  local primary
+  primary = awful.tag(primary_tags.names, s, primary_tags.layouts)
+  for i, t in ipairs(primary) do
+    awful.tag.seticon(primary_tags.icons[i], t)
+    awful.tag.setproperty(t, "icon_only", 1)
+  end
     -- Wallpaper
     set_wallpaper(s)
 
@@ -246,6 +243,22 @@ awful.screen.connect_for_each_screen(function(s)
 
     local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
     local weather_widget = require("awesome-wm-widgets.weather-widget.weather")
+    local fs_widget = require("awesome-wm-widgets.fs-widget.fs-widget")
+
+
+    local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+    -- ...
+    -- Create a textclock widget
+    mytextclock = wibox.widget.textclock()
+    local cw = calendar_widget({
+        theme = 'outrun',
+        placement = 'top_center',
+        radius = 8,
+    })
+    mytextclock:connect_signal("button::press", 
+        function(_, _, _, button)
+            if button == 1 then cw.toggle() end
+        end)
 
     -- Add widgets to the wibox
     s.mywibox_top:setup {
@@ -267,6 +280,7 @@ awful.screen.connect_for_each_screen(function(s)
           volume_widget{
             widget_type = 'arc'
           },
+          fs_widget({mounts = {'/', '/home'}}),
           weather_widget({
             api_key = require("secrets").openweatherapikey,
             coordinates = {52.3127, 13.2437},
@@ -683,6 +697,7 @@ end)
 
 -- Autostart
 awful.spawn.once("mullvad-vpn")
+awful.spawn("xrandr --output HDMI-A-0 --left-of DisplayPort-2 --auto")
 
 -- Redshift
 awful.spawn.easy_async_with_shell(
