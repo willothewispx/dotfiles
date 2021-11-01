@@ -163,8 +163,8 @@ bindsym $mod+r mode "resize"
 # Custom Bindings
 ################################################################################
 
-# Firefox
-bindsym $mod+b exec /usr/bin/firefox
+# Browser
+bindsym $mod+b exec /usr/bin/brave
 
 ################################################################################
 # On Startup
@@ -174,7 +174,7 @@ bindsym $mod+b exec /usr/bin/firefox
 exec --no-startup-id exec bash $HOME/.fehbg
 
 # Redshift
-exec --no-startup-id redshift-gtk
+exec --no-startup-id redshift-gtk -l 55.7:12.6 -t 5700:3600 -g 0.8 -m randr -v
 
 ################################################################################
 # Plasma compatibility improvements
