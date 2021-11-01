@@ -4,6 +4,7 @@ require('nvim-treesitter.configs').setup{
     'go',
     'python',
     'lua',
+    'javascript',
     'typescript',
     'svelte',
     'latex',
