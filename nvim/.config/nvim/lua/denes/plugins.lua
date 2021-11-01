@@ -26,6 +26,9 @@ return require('packer').startup(function(use)
     requires = {'nvim-treesitter/nvim-treesitter-refactor'}
   }
 
+  -- Dockerfiles
+  use 'ekalinin/dockerfile.vim'
+
   -- Statusline
   -- INFO: Fork of the original lualine.nvim
   use 'nvim-lualine/lualine.nvim'
