@@ -1,7 +1,7 @@
 -- Lsp settings
 
 -- Lspinstall
-require('denes.lsp.lspinstall')
+require('denes.lsp.lsp-installer')
 
 -- Lua
 require('denes.lsp.lua-ls')
