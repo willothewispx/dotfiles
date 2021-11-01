@@ -55,7 +55,7 @@ export STOW_DIR=$DOTFILES
 if  [[ "$OSTYPE" == "darwin"* ]]; then
 	export STOW_FOLDERS="alacritty,kitty-mac,nvim,zsh"
 else
-  export STOW_FOLDERS="alacritty,awesome,i3,kitty-arch,nvim,polybar,zathura,zsh"
+  export STOW_FOLDERS="alacritty,awesome,i3,kitty-arch,nvim,polybar,tmux,zathura,zsh"
 fi
 
 ################################################################################
@@ -77,7 +77,7 @@ fi
 # END Custom Comands
 ################################################################################
 
-plugins=(git zsh-vi-mode zsh-autosuggestions fast-syntax-highlighting)
+plugins=(docker docker-compose git zsh-vi-mode zsh-autosuggestions fast-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 

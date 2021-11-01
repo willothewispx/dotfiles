@@ -4,6 +4,7 @@ require('nvim-treesitter.configs').setup{
     'go',
     'python',
     'lua',
+    'javascript',
     'typescript',
     'svelte',
     'latex',
@@ -12,6 +13,7 @@ require('nvim-treesitter.configs').setup{
     'regex',
     'toml',
     'html',
+    'dockerfile',
     'css'
   },
   highlight = {

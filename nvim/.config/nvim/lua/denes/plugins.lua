@@ -17,6 +17,9 @@ return require('packer').startup(function(use)
   -- THEME Moonlight
   use 'shaunsingh/moonlight.nvim'
 
+  -- THEME github
+  use 'projekt0n/github-nvim-theme'
+
   -- Tree-sitter
   use { 'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
@@ -24,7 +27,8 @@ return require('packer').startup(function(use)
   }
 
   -- Statusline
-  use 'hoob3rt/lualine.nvim'
+  -- INFO: Fork of the original lualine.nvim
+  use 'nvim-lualine/lualine.nvim'
 
   -- Bufferline
   use 'akinsho/nvim-bufferline.lua'
@@ -59,27 +63,26 @@ return require('packer').startup(function(use)
   use 'saadparwaiz1/cmp_luasnip'
 
   -- LSP install language server
-  use 'kabouzeid/nvim-lspinstall'
+  use 'williamboman/nvim-lsp-installer'
 
   -- VSCode-like pictograms
   use 'onsails/lspkind-nvim'
 
   -- Lsp UI
-  -- use 'glepnir/lspsaga.nvim'
-  use 'tami5/lspsaga.nvim'
+  -- TODO: Switch to main branch for neovim 0.6
+  use {'tami5/lspsaga.nvim', branch = 'nvim51'}
 
   -- Filetree
   use 'kyazdani42/nvim-tree.lua'
 
   -- Projekt specific working directory
-  -- use 'airblade/vim-rooter'
   use 'ahmedkhalf/project.nvim'
 
   -- GIT signs
   use 'lewis6991/gitsigns.nvim'
 
   -- Comments
-  use 'b3nj5m1n/kommentary'
+  use 'numToStr/Comment.nvim'
 
   -- Surround
   use 'tpope/vim-surround'
@@ -122,9 +125,11 @@ return require('packer').startup(function(use)
   use {'lervag/vimtex', ft = 'tex'}
 
   -- Orgmode.nvim
-  use {'kristijanhusak/orgmode.nvim', config = function()
-    require('orgmode').setup{}
-  end
+  use {'kristijanhusak/orgmode.nvim',
+    branch = "tree-sitter",
+    config = function()
+      require('orgmode').setup{}
+    end
   }
 
   use {'akinsho/org-bullets.nvim', config = function()
