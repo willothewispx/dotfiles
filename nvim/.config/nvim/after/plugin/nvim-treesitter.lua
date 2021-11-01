@@ -12,6 +12,7 @@ require('nvim-treesitter.configs').setup{
     'regex',
     'toml',
     'html',
+    'dockerfile',
     'css'
   },
   highlight = {

@@ -27,9 +27,8 @@ return require('packer').startup(function(use)
   }
 
   -- Statusline
-  -- use 'hoob3rt/lualine.nvim'
-  -- WARNING: Fork of the original lualine.nvim
-  use 'shadmansaleh/lualine.nvim'
+  -- INFO: Fork of the original lualine.nvim
+  use 'nvim-lualine/lualine.nvim'
 
   -- Bufferline
   use 'akinsho/nvim-bufferline.lua'
@@ -64,14 +63,14 @@ return require('packer').startup(function(use)
   use 'saadparwaiz1/cmp_luasnip'
 
   -- LSP install language server
-  use 'kabouzeid/nvim-lspinstall'
+  use 'williamboman/nvim-lsp-installer'
 
   -- VSCode-like pictograms
   use 'onsails/lspkind-nvim'
 
   -- Lsp UI
-  -- use 'glepnir/lspsaga.nvim'
-  use 'tami5/lspsaga.nvim'
+  -- TODO: Switch to main branch for neovim 0.6
+  use {'tami5/lspsaga.nvim', branch = 'nvim51'}
 
   -- Filetree
   use 'kyazdani42/nvim-tree.lua'
@@ -126,9 +125,11 @@ return require('packer').startup(function(use)
   use {'lervag/vimtex', ft = 'tex'}
 
   -- Orgmode.nvim
-  use {'kristijanhusak/orgmode.nvim', config = function()
-    require('orgmode').setup{}
-  end
+  use {'kristijanhusak/orgmode.nvim',
+    branch = "tree-sitter",
+    config = function()
+      require('orgmode').setup{}
+    end
   }
 
   use {'akinsho/org-bullets.nvim', config = function()
