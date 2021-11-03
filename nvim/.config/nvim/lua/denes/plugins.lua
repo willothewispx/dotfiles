@@ -39,7 +39,11 @@ return require('packer').startup(function(use)
   -- Devicons
   use 'kyazdani42/nvim-web-devicons'
 
+  -- ToDo Comments
   use 'folke/todo-comments.nvim'
+
+  -- Diagnostics
+  use 'folke/trouble.nvim'
 
   -- Telescope
   use {'nvim-telescope/telescope.nvim',
