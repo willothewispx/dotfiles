@@ -15,7 +15,7 @@ function M.custom_attach(client)
   buf_set_keymap('n', '<leader>k', 'vim.lsp.buf.signature_help()')
   buf_set_keymap('n', 'gtd', 'vim.lsp.buf.type_definition()')
   buf_set_keymap('n', 'gr', 'vim.lsp.buf.references()')
-  buf_set_keymap('n', '<leader>q', 'vim.lsp.diagnostic.set_loclist()')
+  buf_set_keymap('n', '<leader>q', 'vim.diagnostic.set_loclist()')
 
   -- Set by lspsaga
   -- buf_set_keymap('n', 'ga', 'vim.lsp.buf.code_action()')
