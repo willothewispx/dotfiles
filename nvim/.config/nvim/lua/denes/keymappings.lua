@@ -95,3 +95,8 @@ vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', {noremap = true
 
 -- Todo-comments
 vim.api.nvim_set_keymap('n', '<leader>tt', ':TodoTelescope<CR>', {noremap = true})
+
+-- Trouble.nvim
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
+  {silent = true, noremap = true}
+)
