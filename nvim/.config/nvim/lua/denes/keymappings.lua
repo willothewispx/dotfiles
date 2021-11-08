@@ -85,10 +85,10 @@ vim.api.nvim_set_keymap('n', '<leader>gc', ':DiffviewClose<CR>', {noremap = true
 nnoremap{'<leader>n', require('nvim-tree').toggle, {silent = true}}
 
 -- Hop.nvim
-nnoremap{'<leader>hw', require'hop'.hint_words, {}}
-nnoremap{'<leader>hl', require'hop'.hint_lines, {}}
-nnoremap{'<leader>hc', require'hop'.hint_char1, {}}
-nnoremap{'<leader>hp', require'hop'.hint_patterns, {}}
+vim.api.nvim_set_keymap('n', '<leader>hw', ':HopWord<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>hl', ':HopLine<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>hc', ':HopChar1<CR>', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<leader>hp', ':HopPattern<CR>', {noremap = true, silent = true})
 
 -- Undotree
 vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', {noremap = true})
@@ -97,6 +97,4 @@ vim.api.nvim_set_keymap('n', '<leader>u', ':UndotreeToggle<CR>', {noremap = true
 vim.api.nvim_set_keymap('n', '<leader>tt', ':TodoTelescope<CR>', {noremap = true})
 
 -- Trouble.nvim
-vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
-  {silent = true, noremap = true}
-)
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>", {silent = true, noremap = true})

@@ -116,8 +116,10 @@ return require('packer').startup(function(use)
   use 'gennaro-tedesco/nvim-peekup'
 
   -- Quickly move in document
-  use 'phaazon/hop.nvim'
-
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v1' -- optional but strongly recommended
+  }
   -- Snippets
   use 'rafamadriz/friendly-snippets'
   use 'L3MON4D3/LuaSnip'
@@ -133,7 +135,6 @@ return require('packer').startup(function(use)
 
   -- Orgmode.nvim
   use {'kristijanhusak/orgmode.nvim',
-    branch = "tree-sitter",
     config = function()
       require('orgmode').setup{}
     end
