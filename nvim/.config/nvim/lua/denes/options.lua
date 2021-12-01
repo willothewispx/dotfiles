@@ -3,13 +3,14 @@ local opt = vim.opt
 opt.number = true
 opt.relativenumber = true
 
-local indent = 2
+local indent = 4
 
 opt.expandtab = true
 opt.tabstop = indent
 opt.shiftwidth = indent
 opt.softtabstop = indent
-opt.smartindent = true
+-- TODO: smartindent not good?
+-- opt.smartindent = true
 opt.shiftround = true
 
 opt.showmode = false

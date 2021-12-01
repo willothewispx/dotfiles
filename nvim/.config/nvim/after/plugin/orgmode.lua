@@ -19,7 +19,7 @@ require'nvim-treesitter.configs'.setup {
 }
 
 require('orgmode').setup({
-  org_agenda_files = {'~/Tresors/orgmode/*'},
-  org_default_notes_file = '~/Tresors/orgmode/refile.org',
+  org_agenda_files = {'~/Nextcloud/orgmode/*'},
+  org_default_notes_file = '~/Nextcloud/orgmode/refile.org',
   org_hide_emphasis_markers = true,
 })
