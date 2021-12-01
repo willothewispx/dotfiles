@@ -13,7 +13,7 @@ cmp.setup {
       -- set a name for each source
       vim_item.menu = ({
         nvim_lsp = "[LSP]",
-        -- luasnip = "[LuaSnip]",
+        luasnip = "[Snip]",
         buffer = "[Buffer]",
         nvim_lua = "[Lua]",
         path = "[Path]"
@@ -31,19 +31,8 @@ cmp.setup {
       select = true,
     },
     ["<Tab>"] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-n>", true, true, true), "n")
-      elseif require("luasnip").expand_or_jumpable() then
+      if require("luasnip").expand_or_jumpable() then
         vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-expand-or-jump", true, true, true), "")
-      else
-        fallback()
-      end
-    end,
-    ["<S-Tab>"] = function(fallback)
-      if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<C-p>", true, true, true), "n")
-      elseif require("luasnip").jumpable(-1) then
-        vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
       else
         fallback()
       end
@@ -57,8 +46,12 @@ cmp.setup {
   sources = {
     { name = "luasnip" },
     { name = "nvim_lsp" },
-    { name = "buffer" },
     { name = "nvim_lua" },
     { name = "path" },
+    { name = "buffer", keyword_length = 5 },
+  },
+  experimental = {
+    ghost_text = true,
+    native_menu = false
   }
 }

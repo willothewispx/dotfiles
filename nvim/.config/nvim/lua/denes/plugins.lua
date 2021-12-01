@@ -1,156 +1,170 @@
 return require('packer').startup(function(use)
-  -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
+    -- Packer can manage itself
+    use 'wbthomason/packer.nvim'
 
-  -- Autoload lua/plugin/*.lua
-  use 'tjdevries/astronauta.nvim'
+    -- Autoload lua/plugin/*.lua
+    use 'tjdevries/astronauta.nvim'
 
-  -- THEME gruvbox-material
-  use 'sainnhe/gruvbox-material'
+    -- THEME gruvbox-material
+    use 'sainnhe/gruvbox-material'
 
-  -- THEME Tokyo Night
-  use 'folke/tokyonight.nvim'
+    -- THEME Tokyo Night
+    use 'folke/tokyonight.nvim'
 
-  -- THEME material
-  use 'marko-cerovac/material.nvim'
+    -- THEME material
+    use 'marko-cerovac/material.nvim'
 
-  -- THEME Moonlight
-  use 'shaunsingh/moonlight.nvim'
+    -- THEME Moonlight
+    use 'shaunsingh/moonlight.nvim'
 
-  -- THEME github
-  use 'projekt0n/github-nvim-theme'
+    -- THEME github
+    use 'projekt0n/github-nvim-theme'
 
-  -- Tree-sitter
-  use { 'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate',
-    requires = {'nvim-treesitter/nvim-treesitter-refactor'}
-  }
+    -- OneDarkPro
+    use 'olimorris/onedarkpro.nvim'
 
-  -- Dockerfiles
-  use 'ekalinin/dockerfile.vim'
+    -- Catppuccin
+    use "catppuccin/nvim"
 
-  -- Statusline
-  -- INFO: Fork of the original lualine.nvim
-  use 'nvim-lualine/lualine.nvim'
-
-  -- Bufferline
-  use 'akinsho/nvim-bufferline.lua'
-
-  -- Devicons
-  use 'kyazdani42/nvim-web-devicons'
-
-  -- ToDo Comments
-  use 'folke/todo-comments.nvim'
-
-  -- Diagnostics
-  use 'folke/trouble.nvim'
-
-  -- Telescope
-  use {'nvim-telescope/telescope.nvim',
-    requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}}
-  }
-
-  -- Harpoon
-  use 'ThePrimeagen/harpoon'
-
-  -- LSP
-  use 'neovim/nvim-lspconfig'
-
-  -- LSP Autocomletion
-  use {
-    'hrsh7th/nvim-cmp',
-    requires = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-nvim-lua',
+    -- Tree-sitter
+    use { 'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate',
+        requires = {
+            'nvim-treesitter/nvim-treesitter-refactor',
+            'nvim-treesitter/nvim-treesitter-textobjects'
+        }
     }
-  }
 
-  use 'saadparwaiz1/cmp_luasnip'
+    -- Dockerfiles
+    use 'ekalinin/dockerfile.vim'
 
-  -- LSP install language server
-  use 'williamboman/nvim-lsp-installer'
+    -- Statusline
+    -- INFO: Fork of the original lualine.nvim
+    use 'nvim-lualine/lualine.nvim'
 
-  -- VSCode-like pictograms
-  use 'onsails/lspkind-nvim'
+    -- Bufferline
+    use 'akinsho/nvim-bufferline.lua'
 
-  -- Lsp UI
-  -- TODO: Switch to main branch for neovim 0.6
-  use {'tami5/lspsaga.nvim', branch = 'nvim51'}
+    -- Devicons
+    use 'kyazdani42/nvim-web-devicons'
 
-  -- Filetree
-  use 'kyazdani42/nvim-tree.lua'
+    -- ToDo Comments
+    use 'folke/todo-comments.nvim'
 
-  -- Projekt specific working directory
-  use 'ahmedkhalf/project.nvim'
+    -- Diagnostics
+    use 'folke/trouble.nvim'
 
-  -- GIT signs
-  use 'lewis6991/gitsigns.nvim'
+    -- Telescope
+    use {'nvim-telescope/telescope.nvim',
+        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}, {'nvim-telescope/telescope-fzy-native.nvim'}}
+    }
 
-  -- Comments
-  use 'numToStr/Comment.nvim'
+    -- Harpoon
+    use 'ThePrimeagen/harpoon'
 
-  -- Surround
-  use 'tpope/vim-surround'
+    -- LSP
+    use 'neovim/nvim-lspconfig'
 
-  -- Indentlines
-  use {'lukas-reineke/indent-blankline.nvim'}
+    -- LSP Autocomletion
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-nvim-lua',
+        }
+    }
 
-  -- Colored parentheses
-  use 'p00f/nvim-ts-rainbow'
+    -- Null-Ls -> formatter, linter,...
+    use({ "jose-elias-alvarez/null-ls.nvim",
+        requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
+    })
 
-  -- Auto pairs
-  use 'windwp/nvim-autopairs'
+    use 'saadparwaiz1/cmp_luasnip'
 
-  -- Undotree
-  use 'mbbill/undotree'
+    -- LSP install language server
+    use 'williamboman/nvim-lsp-installer'
 
-  -- Git
-  use 'TimUntersberger/neogit'
+    -- VSCode-like pictograms
+    use 'onsails/lspkind-nvim'
 
-  -- Gid diffs
-  use 'sindrets/diffview.nvim'
+    -- Lsp UI
+    -- TODO: Switch to main branch for neovim 0.6
+    use {'tami5/lspsaga.nvim', branch = 'nvim51'}
 
-  -- Peek registers
-  use 'gennaro-tedesco/nvim-peekup'
+    -- Filetree
+    use 'kyazdani42/nvim-tree.lua'
 
-  -- Quickly move in document
-  use {
-    'phaazon/hop.nvim',
-    branch = 'v1' -- optional but strongly recommended
-  }
-  -- Snippets
-  use 'rafamadriz/friendly-snippets'
-  use 'L3MON4D3/LuaSnip'
+    -- Projekt specific working directory
+    use 'ahmedkhalf/project.nvim'
 
-  -- Startpage
-  use 'mhinz/vim-startify'
+    -- GIT signs
+    use 'lewis6991/gitsigns.nvim'
 
-  -- Which Key
-  use 'folke/which-key.nvim'
+    -- Comments
+    use 'numToStr/Comment.nvim'
 
-  -- LaTeX
-  use {'lervag/vimtex', ft = 'tex'}
+    -- Surround
+    use 'tpope/vim-surround'
 
-  -- Orgmode.nvim
-  use {'kristijanhusak/orgmode.nvim',
-    config = function()
-      require('orgmode').setup{}
+    -- Indentlines
+    use {'lukas-reineke/indent-blankline.nvim'}
+
+    -- Colored parentheses
+    use 'p00f/nvim-ts-rainbow'
+
+    -- Auto pairs
+    use 'windwp/nvim-autopairs'
+
+    -- Undotree
+    use 'mbbill/undotree'
+
+    -- Git
+    use 'TimUntersberger/neogit'
+
+    -- Gid diffs
+    use 'sindrets/diffview.nvim'
+
+    -- Peek registers
+    use 'gennaro-tedesco/nvim-peekup'
+
+    -- Quickly move in document
+    use {
+        'phaazon/hop.nvim',
+        branch = 'v1' -- optional but strongly recommended
+    }
+    -- Snippets
+    use 'rafamadriz/friendly-snippets'
+    use 'L3MON4D3/LuaSnip'
+
+    -- Startpage
+    use 'mhinz/vim-startify'
+
+    -- Which Key
+    use 'folke/which-key.nvim'
+
+    -- LaTeX
+    use {'lervag/vimtex', ft = 'tex'}
+
+    -- Orgmode.nvim
+    use {'kristijanhusak/orgmode.nvim',
+        config = function()
+            require('orgmode').setup{}
+        end
+    }
+
+    use {'akinsho/org-bullets.nvim', config = function()
+        require("org-bullets").setup {
+            symbols = { "◉", "○", "✸", "✿" }
+        }
     end
-  }
-
-  use {'akinsho/org-bullets.nvim', config = function()
-    require("org-bullets").setup {
-      symbols = { "◉", "○", "✸", "✿" }
     }
-  end
-  }
 
-  -- Smoonth Scrolling
-  use 'karb94/neoscroll.nvim'
+    -- Smoonth Scrolling
+    use 'karb94/neoscroll.nvim'
 
-  -- Color Highlighter
-  use 'norcalli/nvim-colorizer.lua'
+    -- Color Highlighter
+    use 'norcalli/nvim-colorizer.lua'
 
 end)
