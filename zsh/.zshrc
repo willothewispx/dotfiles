@@ -9,18 +9,18 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 
 # ssh-agent autostart
 if  [[ "$OSTYPE" == "linux-gnu"* ]]; then
-	if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-			ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
-	fi
-	if [[ ! "$SSH_AUTH_SOCK" ]]; then
-			source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-	fi
+    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+        ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+    fi
+    if [[ ! "$SSH_AUTH_SOCK" ]]; then
+        source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+    fi
 fi
 
 ################################################################################
@@ -33,9 +33,9 @@ export LC_ALL=en_US.UTF-8
 
 # PATH
 if  [[ "$OSTYPE" == "darwin"* ]]; then
-	export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+    export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 else
-	export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+    export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 fi
 
 # gopls
@@ -53,9 +53,9 @@ export DOTFILES="$HOME/.dotfiles"
 export STOW_DIR=$DOTFILES
 
 if  [[ "$OSTYPE" == "darwin"* ]]; then
-	export STOW_FOLDERS="alacritty,kitty-mac,nvim,zsh"
+    export STOW_FOLDERS="alacritty,kitty-mac,nvim,tmux,zsh"
 else
-  export STOW_FOLDERS="alacritty,awesome,i3,kitty-arch,nvim,polybar,tmux,zathura,zsh"
+    export STOW_FOLDERS="alacritty,awesome,i3,kitty-arch,nvim,polybar,tmux,zathura,zsh"
 fi
 
 ################################################################################
@@ -68,9 +68,9 @@ fi
 
 # powerlevel10k
 if  [[ "$OSTYPE" == "darwin"* ]]; then
-	ZSH_THEME="powerlevel10k/powerlevel10k"
+    ZSH_THEME="powerlevel10k/powerlevel10k"
 else
-	source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+    source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 fi
 
 ################################################################################
@@ -97,14 +97,14 @@ alias tree='exa --tree --level=2 --icons'
 
 # fzf fuzzy finder keybindings
 if  [[ "$OSTYPE" == "darwin"* ]]; then
-	[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-  # zsh-vi-mode breaks fzf keybindings
-  # see https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
-  zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+    # zsh-vi-mode breaks fzf keybindings
+    # see https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+    zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
 else
-	source /usr/share/fzf/key-bindings.zsh
-	source /usr/share/fzf/completion.zsh
-  zvm_after_init_commands+=('source /usr/share/fzf/key-bindings.zsh')
-  zvm_after_init_commands+=('source /usr/share/fzf/completion.zsh')
+    source /usr/share/fzf/key-bindings.zsh
+    source /usr/share/fzf/completion.zsh
+    zvm_after_init_commands+=('source /usr/share/fzf/key-bindings.zsh')
+    zvm_after_init_commands+=('source /usr/share/fzf/completion.zsh')
 fi
 
