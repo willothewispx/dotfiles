@@ -9,20 +9,20 @@
 -- Link:   https://gitlab.com/WillOtheWispX/nvim
 
 -- Set leader key
-vim.g.mapleader = ','
-vim.g.maplocalleader = ','
+vim.g.mapleader = ","
+vim.g.maplocalleader = ","
 
 -- Load packer.nvim files
-require('denes.plugins')
+require("denes.plugins")
 
 -- Load options
-require('denes.options')
+require("denes.options")
 
 -- Load keymappings
-require('denes.keymappings')
+require("denes.keymappings")
 
 -- Load lsp configuration
-require('denes.lsp')
+require("denes.lsp")
 
 -- THEME
-require('denes.colors')
+require("denes.colors")
