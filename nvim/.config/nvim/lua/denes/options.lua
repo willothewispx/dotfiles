@@ -9,8 +9,6 @@ opt.expandtab = true
 opt.tabstop = indent
 opt.shiftwidth = indent
 opt.softtabstop = indent
--- TODO: smartindent not good?
--- opt.smartindent = true
 opt.shiftround = true
 
 opt.showmode = false
@@ -19,7 +17,6 @@ opt.hidden = true
 
 opt.ignorecase = true
 opt.smartcase = true
-opt.hlsearch = false
 
 opt.cursorline = true
 
@@ -32,8 +29,6 @@ opt.showbreak = string.rep(" ", 3) -- Make it so that long lines wrap smartly
 opt.linebreak = true
 
 opt.scrolloff = 10
-
-opt.inccommand = "split"
 
 opt.swapfile = false
 
