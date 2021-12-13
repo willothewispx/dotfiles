@@ -12,7 +12,7 @@ lsp_installer.on_server_ready(function(server)
             Lua = {
                 diagnostics = {
                     -- Get the language server to recognize the 'vim', 'use' global
-                    globals = {'vim', 'use'},
+                    globals = { "vim", "use" },
                 },
                 workspace = {
                     -- Make the server aware of Neovim runtime files
@@ -28,42 +28,43 @@ lsp_installer.on_server_ready(function(server)
 
     -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
     server:setup(opts)
-    vim.cmd [[ do User LspAttachBuffers ]]
+    vim.cmd([[ do User LspAttachBuffers ]])
 end)
 
-lsp_installer.settings {
+lsp_installer.settings({
     ui = {
         icons = {
             server_installed = "✓",
             server_pending = "➜",
-            server_uninstalled = "✗"
-        }
-    }
-}
+            server_uninstalled = "✗",
+        },
+    },
+})
 
 -- Install servers
 local function install_server(server)
-    local lsp_installer_servers = require('nvim-lsp-installer.servers')
+    local lsp_installer_servers = require("nvim-lsp-installer.servers")
     local ok, server_analyzer = lsp_installer_servers.get_server(server)
     if ok then
         if not server_analyzer:is_installed() then
             -- server_analyzer:install(server)   -- will install in background
-            lsp_installer.install(server)     -- install window will popup
+            lsp_installer.install(server) -- install window will popup
         end
     end
 end
 
 local servers = {
-    "bashls",             -- for Bash
-    "dockerls",           -- for Dockerfiles
-    "gopls",              -- for Go
-    "intelephense",       -- for PHP
-    -- "phpactor",           -- for PHP
-    "pyright",            -- for Python
-    "sumneko_lua",        -- for Lua
-    "texlab",             -- for LaTeX
-    "tsserver",           -- for Typescript/Javascript
-    "yamlls",             -- for YAML
+    "bashls", -- for Bash
+    "dockerls", -- for Dockerfiles
+    "gopls", -- for Go
+    "html", -- for HTML
+    "emmet_ls", -- for Emmet
+    "intelephense", -- for PHP
+    "pyright", -- for Python
+    "sumneko_lua", -- for Lua
+    "texlab", -- for LaTeX
+    "tsserver", -- for Typescript/Javascript
+    "yamlls", -- for YAML
 }
 
 -- install the LS
