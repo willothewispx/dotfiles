@@ -11,9 +11,7 @@ local sources = {
     }),
 }
 
-null_ls.config({ sources = sources })
-
-require("lspconfig")["null-ls"].setup({
-    -- see the nvim-lspconfig documentation for available configuration options
+null_ls.setup({
+    sources = sources,
     on_attach = require("denes.lsp.options").custom_attach,
 })
