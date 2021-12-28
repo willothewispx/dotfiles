@@ -33,6 +33,8 @@ return require("packer").startup(function(use)
         requires = {
             "nvim-treesitter/nvim-treesitter-refactor",
             "nvim-treesitter/nvim-treesitter-textobjects",
+            "JoosepAlviste/nvim-ts-context-commentstring", -- better comments
+            "windwp/nvim-ts-autotag", -- html autoclose tags
         },
     })
 
@@ -81,6 +83,7 @@ return require("packer").startup(function(use)
             "hrsh7th/cmp-nvim-lua",
         },
     })
+    use({ "tzachar/cmp-tabnine", run = "./install.sh" })
 
     -- Null-Ls -> formatter, linter,...
     use({
@@ -152,6 +155,10 @@ return require("packer").startup(function(use)
 
     -- LaTeX
     use({ "lervag/vimtex", ft = "tex" })
+
+    -- Neorg
+    use("nvim-neorg/neorg")
+    use("nvim-neorg/neorg-telescope")
 
     -- Orgmode.nvim
     use({
