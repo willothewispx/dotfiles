@@ -1,10 +1,15 @@
 local lsp_installer = require("nvim-lsp-installer")
+local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 lsp_installer.on_server_ready(function(server)
     local opts = {}
 
     -- Use custom keybindings and options
     opts.on_attach = require("denes.lsp.options").custom_attach
+
+    -- Tell neovim that snippets are supported
+    opts.capabilities = capabilities
 
     -- Lua Settings
     if server.name == "sumneko_lua" then
@@ -24,6 +29,31 @@ lsp_installer.on_server_ready(function(server)
                 },
             },
         }
+    end
+
+    -- HTML/EMMET
+    if server.name == "emmet_ls" then
+        opts.filetypes = { "html", "twig", "css" }
+    end
+
+    -- Tsserver
+    if server.name == "tsserver" then
+        -- do not use tsserver for formatting
+        -- we use null-ls instead
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            client.resolved_capabilities.document_range_formatting = false
+        end
+    end
+
+    -- jsonls
+    if server.name == "jsonls" then
+        -- do not use tsserver for formatting
+        -- we use null-ls instead
+        opts.on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            client.resolved_capabilities.document_range_formatting = false
+        end
     end
 
     -- This setup() function is exactly the same as lspconfig's setup function (:help lspconfig-quickstart)
@@ -55,11 +85,13 @@ end
 
 local servers = {
     "bashls", -- for Bash
+    "cssls", -- for CSS
     "dockerls", -- for Dockerfiles
+    "emmet_ls", -- for Emmet
     "gopls", -- for Go
     "html", -- for HTML
-    "emmet_ls", -- for Emmet
     "intelephense", -- for PHP
+    "jsonls", -- for JSON
     "pyright", -- for Python
     "sumneko_lua", -- for Lua
     "texlab", -- for LaTeX

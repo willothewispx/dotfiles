@@ -1,11 +1,23 @@
 local null_ls = require("null-ls")
 
 local sources = {
-    -- python
+
+    -- Python
     null_ls.builtins.formatting.autopep8,
     null_ls.builtins.diagnostics.flake8,
 
-    -- lua
+    -- HTML, Javascript
+    null_ls.builtins.formatting.prettier,
+
+    -- Twig
+    null_ls.builtins.formatting.djhtml.with({
+        filetypes = { "django", "jinja.html", "htmldjango", "twig" },
+    }),
+
+    -- Javascript
+    null_ls.builtins.diagnostics.eslint_d,
+
+    -- Lua
     null_ls.builtins.formatting.stylua.with({
         extra_args = { "--indent-type", "Spaces" },
     }),
