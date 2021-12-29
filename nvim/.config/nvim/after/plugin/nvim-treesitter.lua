@@ -1,22 +1,25 @@
-require('nvim-treesitter.configs').setup{
+require("nvim-treesitter.configs").setup({
     -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     ensure_installed = {
-        'bash',
-        'css',
-        'dockerfile',
-        'go',
-        'html',
-        'javascript',
-        'jsonc',
-        'latex',
-        'lua',
-        'php',
-        'python',
-        'regex',
-        'svelte',
-        'toml',
-        'typescript',
-        'yaml',
+        "bash",
+        "css",
+        "dockerfile",
+        "go",
+        "html",
+        "javascript",
+        "jsonc",
+        "latex",
+        "lua",
+        "norg",
+        "norg_meta",
+        "norg_table",
+        "php",
+        "python",
+        "regex",
+        "svelte",
+        "toml",
+        "typescript",
+        "yaml",
     },
     highlight = {
         enable = true,
@@ -24,9 +27,15 @@ require('nvim-treesitter.configs').setup{
     indent = {
         enable = true,
     },
+    context_commentstring = {
+        enable = true,
+    },
+    autotag = {
+        enable = true,
+    },
     refactor = {
-        highlight_definitions = {enable = true},
-        highlight_current_scope = {enable = false},
+        highlight_definitions = { enable = true },
+        highlight_current_scope = { enable = false },
     },
     textobjects = {
         select = {
@@ -38,24 +47,24 @@ require('nvim-treesitter.configs').setup{
                 ["af"] = "@function.outer",
                 ["if"] = "@function.inner",
                 ["ac"] = "@class.outer",
-                ["ic"] = "@class.inner"
-            }
+                ["ic"] = "@class.inner",
+            },
         },
         move = {
             enable = true,
             set_jumps = true,
             goto_next_start = {
-                [']]'] = '@function.outer'
+                ["]]"] = "@function.outer",
             },
             goto_next_end = {
-                [']['] = '@function.outer'
+                ["]["] = "@function.outer",
             },
             goto_previous_start = {
-                ['[['] = '@function.outer'
+                ["[["] = "@function.outer",
             },
             goto_previous_end = {
-                ['[]'] = '@function.outer'
-            }
-        }
+                ["[]"] = "@function.outer",
+            },
+        },
     },
-}
+})

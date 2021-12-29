@@ -32,11 +32,11 @@ map("n", "<C-k>", ":cprev<CR>", { noremap = true })
 map("n", "<leader>ghw", ':h <C-R>=expand("<cword>")<CR><CR>', { noremap = true })
 
 -- Lspsaga
-vim.api.nvim_buf_set_keymap(0, "n", "<leader>rn", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
-vim.api.nvim_buf_set_keymap(0, "n", "ga", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
-vim.api.nvim_buf_set_keymap(0, "n", "ge", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
-vim.api.nvim_buf_set_keymap(0, "n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
-vim.api.nvim_buf_set_keymap(0, "n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
+map("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
+map("n", "ga", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
+map("n", "ge", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
+map("n", "gj", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
+map("n", "gk", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
 
 -- Telescope
 local t = require("telescope.builtin")

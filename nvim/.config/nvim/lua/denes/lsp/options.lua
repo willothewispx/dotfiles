@@ -4,7 +4,6 @@ function M.custom_attach(client)
     local buf_set_keymap = function(mode, key, result)
         vim.api.nvim_buf_set_keymap(0, mode, key, "<cmd>lua " .. result .. "<CR>", { noremap = true, silent = true })
     end
-    -- vim.api.nvim_buf_set_option(0, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings.
     buf_set_keymap("n", "gD", "vim.lsp.buf.declaration()")
@@ -15,13 +14,6 @@ function M.custom_attach(client)
     buf_set_keymap("n", "gtd", "vim.lsp.buf.type_definition()")
     buf_set_keymap("n", "gr", "vim.lsp.buf.references()")
     buf_set_keymap("n", "<leader>q", "vim.diagnostic.set_loclist()")
-
-    -- Set by lspsaga
-    -- buf_set_keymap('n', 'ga', 'vim.lsp.buf.code_action()')
-    -- buf_set_keymap('n', '<leader>rn', 'vim.lsp.buf.rename()')
-    -- buf_set_keymap('n', 'ge', 'vim.lsp.diagnostic.show_line_diagnostics()')
-    -- buf_set_keymap('n', '[e', 'vim.lsp.diagnostic.goto_prev()')
-    -- buf_set_keymap('n', ']e', 'vim.lsp.diagnostic.goto_next()<CR>')
 
     -- Set some keybinds conditional on server capabilities
     if client.resolved_capabilities.document_formatting then
