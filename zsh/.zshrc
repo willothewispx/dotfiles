@@ -52,6 +52,8 @@ export ZSH="$HOME/.oh-my-zsh"
 export DOTFILES="$HOME/.dotfiles"
 export STOW_DIR=$DOTFILES
 
+export EDITOR="nvim"
+
 if  [[ "$OSTYPE" == "darwin"* ]]; then
     export STOW_FOLDERS="alacritty,kitty-mac,nvim,tmux,zsh"
 else
