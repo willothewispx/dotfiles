@@ -55,7 +55,7 @@ export STOW_DIR=$DOTFILES
 export EDITOR="nvim"
 
 if  [[ "$OSTYPE" == "darwin"* ]]; then
-    export STOW_FOLDERS="alacritty,kitty-mac,nvim,tmux,zsh"
+    export STOW_FOLDERS="alacritty,kitty-mac,nvim,tmux,yabai,zsh"
 else
     export STOW_FOLDERS="alacritty,awesome,i3,kitty-arch,nvim,polybar,tmux,zathura,zsh"
 fi
