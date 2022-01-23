@@ -60,7 +60,8 @@ nnoremap({ "<leader>vrc", require("denes.telescope.functions").search_vimrc, { s
 nnoremap({ "<leader>pp", require("denes.telescope.functions").search_dotfiles, { silent = true } })
 
 -- Telescope/Notes
-nnoremap({ "<leader>pn", require("denes.telescope.functions").search_notes, { silent = true } })
+nnoremap({ "<leader>nn", require("denes.telescope.functions").search_personal_notes, { silent = true } })
+nnoremap({ "<leader>nw", require("denes.telescope.functions").search_work_notes, { silent = true } })
 
 -- Telescope/Project.nvim
 nnoremap({ "<leader>ps", ":Telescope projects<CR>", { silent = true } })
