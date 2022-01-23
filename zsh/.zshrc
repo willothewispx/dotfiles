@@ -33,9 +33,12 @@ export LC_ALL=en_US.UTF-8
 
 # PATH
 if  [[ "$OSTYPE" == "darwin"* ]]; then
-    export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+    export PATH=/usr/local/bin:$PATH
+    export PATH=/usr/local/sbin:$PATH
 else
-    export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+    export PATH=$HOME/bin:$PATH
+    export PATH=/usr/local/bin:$PATH
+    export PATH=$HOME/.local/bin:$PATH
 fi
 
 # gopls
