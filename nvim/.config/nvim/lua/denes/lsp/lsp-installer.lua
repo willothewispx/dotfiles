@@ -94,6 +94,7 @@ local servers = {
     "jsonls", -- for JSON
     "pyright", -- for Python
     "sumneko_lua", -- for Lua
+    "tailwindcss", -- for tailwind
     "texlab", -- for LaTeX
     "tsserver", -- for Typescript/Javascript
     "yamlls", -- for YAML
