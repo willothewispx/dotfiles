@@ -7,11 +7,10 @@ local c = {
         delete = tokyonight.git.delete,
     },
 }
+local gps = require("nvim-gps")
 
 require("lualine").setup({
     options = {
-        -- theme = 'gruvbox_material',
-        -- theme = 'tokyonight',
         seperator = { left = "", right = "" },
         icons_enabled = true,
     },
@@ -30,7 +29,11 @@ require("lualine").setup({
                 },
             },
         },
-        lualine_c = { { "filename", file_status = true }, { "diagnostics", sources = { "nvim_diagnostic" } } },
+        lualine_c = {
+            { "filename", file_status = true },
+            { "diagnostics", sources = { "nvim_diagnostic" } },
+            { gps.get_location, cond = gps.is_available },
+        },
         lualine_x = { "filetype" },
         lualine_y = { "progress" },
         lualine_z = { "location" },

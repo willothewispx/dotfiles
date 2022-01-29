@@ -1,7 +1,7 @@
 local onedarkpro = require("onedarkpro")
 
 onedarkpro.setup({
-    theme = 'onedark',
+    theme = "onedark",
     styles = {
         strings = "NONE", -- Style that is applied to strings
         comments = "italic", -- Style that is applied to comments
@@ -18,7 +18,7 @@ onedarkpro.setup({
         transparency = false, -- Use a transparent background?
         terminal_colors = true, -- Use the theme's colors for Neovim's :terminal?
         alt_normal_color = false, -- When the window is out of focus, change the normal background?
-    }
+    },
 })
 
 onedarkpro.load()

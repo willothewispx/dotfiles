@@ -66,6 +66,9 @@ nnoremap({ "<leader>nw", require("denes.telescope.functions").search_work_notes,
 -- Telescope/Project.nvim
 nnoremap({ "<leader>ps", ":Telescope projects<CR>", { silent = true } })
 
+-- Telescope file browser
+map("n", "<leader>fb", ":Telescope file_browser<CR>", { noremap = true })
+
 -- Harpoon
 nnoremap({ "<leader>m", require("harpoon.mark").add_file, {} })
 nnoremap({ "<C-e>", require("harpoon.ui").toggle_quick_menu, {} })
@@ -156,3 +159,6 @@ map("n", "<leader>tt", ":TodoTelescope<CR>", { noremap = true })
 
 -- Trouble.nvim
 map("n", "<leader>xx", "<cmd>Trouble<cr>", { silent = true, noremap = true })
+
+-- Symbols Tree
+map("n", "<leader>so", ":SymbolsOutline<CR>", { noremap = true })

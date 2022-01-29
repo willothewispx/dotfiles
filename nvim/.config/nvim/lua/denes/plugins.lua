@@ -45,6 +45,9 @@ return require("packer").startup(function(use)
     -- INFO: Fork of the original lualine.nvim
     use("nvim-lualine/lualine.nvim")
 
+    -- Current context in status bar
+    use("SmiteshP/nvim-gps")
+
     -- Bufferline
     use("akinsho/nvim-bufferline.lua")
 
@@ -66,6 +69,9 @@ return require("packer").startup(function(use)
             { "nvim-telescope/telescope-fzy-native.nvim" },
         },
     })
+
+    -- Telescope file browser extension
+    use("nvim-telescope/telescope-file-browser.nvim")
 
     -- Harpoon
     use("ThePrimeagen/harpoon")
@@ -104,6 +110,9 @@ return require("packer").startup(function(use)
 
     -- Filetree
     use("kyazdani42/nvim-tree.lua")
+
+    -- Symbol tree
+    use("simrat39/symbols-outline.nvim")
 
     -- Projekt specific working directory
     use("ahmedkhalf/project.nvim")
@@ -160,25 +169,11 @@ return require("packer").startup(function(use)
     use("nvim-neorg/neorg")
     use("nvim-neorg/neorg-telescope")
 
-    -- Orgmode.nvim
-    use({
-        "kristijanhusak/orgmode.nvim",
-        config = function()
-            require("orgmode").setup({})
-        end,
-    })
-
-    use({
-        "akinsho/org-bullets.nvim",
-        config = function()
-            require("org-bullets").setup({
-                symbols = { "◉", "○", "✸", "✿" },
-            })
-        end,
-    })
-
     -- Smoonth Scrolling
     use("karb94/neoscroll.nvim")
+
+    -- Scrollbar
+    use("petertriho/nvim-scrollbar")
 
     -- Color Highlighter
     use("norcalli/nvim-colorizer.lua")
