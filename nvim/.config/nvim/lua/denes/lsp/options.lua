@@ -17,8 +17,8 @@ function M.custom_attach(client)
 
     -- Set some keybinds conditional on server capabilities
     if client.resolved_capabilities.document_formatting then
-        vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
-        -- buf_set_keymap('n', '<leader>f', 'vim.lsp.buf.formatting()')
+        -- vim.cmd("autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()")
+        buf_set_keymap("n", "gll", "vim.lsp.buf.formatting()")
     elseif client.resolved_capabilities.document_range_formatting then
         buf_set_keymap("n", "<leader>f", "vim.lsp.buf.range_formatting()")
     end

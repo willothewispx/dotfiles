@@ -14,9 +14,6 @@ local sources = {
         filetypes = { "django", "jinja.html", "htmldjango", "twig" },
     }),
 
-    -- Javascript
-    null_ls.builtins.diagnostics.eslint_d,
-
     -- Lua
     null_ls.builtins.formatting.stylua.with({
         extra_args = { "--indent-type", "Spaces" },
