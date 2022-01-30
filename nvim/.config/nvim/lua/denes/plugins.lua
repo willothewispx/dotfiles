@@ -108,6 +108,9 @@ return require("packer").startup(function(use)
     -- Lsp UI
     use("tami5/lspsaga.nvim")
 
+    -- LSP progress
+    use("j-hui/fidget.nvim")
+
     -- Filetree
     use("kyazdani42/nvim-tree.lua")
 
