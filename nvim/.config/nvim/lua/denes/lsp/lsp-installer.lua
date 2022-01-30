@@ -36,7 +36,7 @@ lsp_installer.on_server_ready(function(server)
         opts.filetypes = { "html", "twig", "css" }
     end
 
-    -- Tsserver
+    -- tsserver
     if server.name == "tsserver" then
         -- do not use tsserver for formatting
         -- we use null-ls instead
@@ -88,6 +88,7 @@ local servers = {
     "cssls", -- for CSS
     "dockerls", -- for Dockerfiles
     "emmet_ls", -- for Emmet
+    "eslint", -- for eslint
     "gopls", -- for Go
     "html", -- for HTML
     "intelephense", -- for PHP

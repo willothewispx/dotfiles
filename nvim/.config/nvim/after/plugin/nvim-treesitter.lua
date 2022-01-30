@@ -18,6 +18,7 @@ require("nvim-treesitter.configs").setup({
         "regex",
         "svelte",
         "toml",
+        "tsx",
         "typescript",
         "yaml",
     },
