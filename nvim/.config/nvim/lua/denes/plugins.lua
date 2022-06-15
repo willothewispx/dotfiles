@@ -2,9 +2,6 @@ return require("packer").startup(function(use)
     -- Packer can manage itself
     use("wbthomason/packer.nvim")
 
-    -- Autoload lua/plugin/*.lua
-    use("tjdevries/astronauta.nvim")
-
     -- THEME gruvbox-material
     use("sainnhe/gruvbox-material")
 
@@ -61,17 +58,17 @@ return require("packer").startup(function(use)
     use("folke/trouble.nvim")
 
     -- Telescope
-    use({
-        "nvim-telescope/telescope.nvim",
-        requires = {
-            { "nvim-lua/popup.nvim" },
-            { "nvim-lua/plenary.nvim" },
-            { "nvim-telescope/telescope-fzy-native.nvim" },
-        },
-    })
+   use({
+       "nvim-telescope/telescope.nvim",
+       requires = {
+           { "nvim-lua/popup.nvim" },
+           { "nvim-lua/plenary.nvim" },
+           { "nvim-telescope/telescope-fzy-native.nvim" },
+       },
+   })
 
     -- Telescope file browser extension
-    use("nvim-telescope/telescope-file-browser.nvim")
+  use("nvim-telescope/telescope-file-browser.nvim")
 
     -- Harpoon
     use("ThePrimeagen/harpoon")
@@ -180,4 +177,6 @@ return require("packer").startup(function(use)
 
     -- Color Highlighter
     use("norcalli/nvim-colorizer.lua")
+    
+    use("vimpostor/vim-tpipeline")
 end)
