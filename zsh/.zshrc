@@ -52,13 +52,13 @@ export PATH=$HOME/.npm-global/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
 
 # Dotfiles
-export DOTFILES="$HOME/.dotfiles"
+export DOTFILES="$HOME/dotfiles"
 export STOW_DIR=$DOTFILES
 
 export EDITOR="nvim"
 
 if  [[ "$OSTYPE" == "darwin"* ]]; then
-    export STOW_FOLDERS="alacritty,kitty-mac,nvim,tmux,yabai,zsh"
+    export STOW_FOLDERS="alacritty,homebrew,kitty-mac,nvim,tmux,yabai,zsh"
 else
     export STOW_FOLDERS="alacritty,awesome,i3,kitty-arch,nvim,polybar,tmux,zathura,zsh"
 fi
