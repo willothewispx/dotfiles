@@ -1,7 +1,0 @@
-# Brewfile
-
-tap "homebrew/cask"
-
-# casks
-cask "alt-tab" # windows like alt-tab
-cask "maccy" # clipboard manager

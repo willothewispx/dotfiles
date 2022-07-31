@@ -12,17 +12,6 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-
-# ssh-agent autostart
-if  [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-        ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
-    fi
-    if [[ ! "$SSH_AUTH_SOCK" ]]; then
-        source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
-    fi
-fi
-
 ################################################################################
 # Exports
 ################################################################################
@@ -32,55 +21,18 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 # PATH
-if  [[ "$OSTYPE" == "darwin"* ]]; then
-    export PATH=/usr/local/bin:$PATH
-    export PATH=/usr/local/sbin:$PATH
-else
-    export PATH=$HOME/bin:$PATH
-    export PATH=/usr/local/bin:$PATH
-    export PATH=$HOME/.local/bin:$PATH
-fi
-
-# gopls
-export GOPATH=$HOME/go
-export PATH=$GOPATH/bin:$PATH
-
-# npm global
-export PATH=$HOME/.npm-global/bin:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Dotfiles
-export DOTFILES="$HOME/dotfiles"
-export STOW_DIR=$DOTFILES
-
 export EDITOR="nvim"
 
-if  [[ "$OSTYPE" == "darwin"* ]]; then
-    export STOW_FOLDERS="alacritty,homebrew,kitty-mac,nvim,tmux,yabai,zsh"
-else
-    export STOW_FOLDERS="alacritty,awesome,i3,kitty-arch,nvim,polybar,tmux,zathura,zsh"
-fi
-
-################################################################################
-# Custom Commands
-################################################################################
-
-#-------------------------------------------------------------------------------
-# Theme
-#-------------------------------------------------------------------------------
+export STOW_FOLDERS="homebrew,kitty,nvim,tmux,zsh"
 
 # powerlevel10k
-if  [[ "$OSTYPE" == "darwin"* ]]; then
-    ZSH_THEME="powerlevel10k/powerlevel10k"
-else
-    source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-fi
-
-################################################################################
-# END Custom Comands
-################################################################################
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(docker docker-compose git zsh-vi-mode zsh-autosuggestions fast-syntax-highlighting)
 
@@ -101,15 +53,7 @@ alias tree='exa --tree --level=2 --icons'
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # fzf fuzzy finder keybindings
-if  [[ "$OSTYPE" == "darwin"* ]]; then
-    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    # zsh-vi-mode breaks fzf keybindings
-    # see https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
-    zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
-else
-    source /usr/share/fzf/key-bindings.zsh
-    source /usr/share/fzf/completion.zsh
-    zvm_after_init_commands+=('source /usr/share/fzf/key-bindings.zsh')
-    zvm_after_init_commands+=('source /usr/share/fzf/completion.zsh')
-fi
-
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# zsh-vi-mode breaks fzf keybindings
+# see https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
+zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
