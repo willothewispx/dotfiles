@@ -4,3 +4,5 @@ awesome/.config/awesome/awesome-wm-widgets
 awesome/.config/awesome/json.lua
 # TODO: ansible-vault
 awesome/.config/awesome/secrets.lua
+
+.DS_Store
