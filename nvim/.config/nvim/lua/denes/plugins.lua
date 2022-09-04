@@ -35,15 +35,12 @@ return require("packer").startup(function(use)
         },
     })
 
-    -- Dockerfiles
-    use("ekalinin/dockerfile.vim")
-
     -- Statusline
     -- INFO: Fork of the original lualine.nvim
     use("nvim-lualine/lualine.nvim")
 
     -- Current context in status bar
-    use("SmiteshP/nvim-gps")
+    use("SmiteshP/nvim-navic")
 
     -- Bufferline
     use("akinsho/nvim-bufferline.lua")
@@ -86,7 +83,10 @@ return require("packer").startup(function(use)
             "hrsh7th/cmp-nvim-lua",
         },
     })
+
     use({ "tzachar/cmp-tabnine", run = "./install.sh" })
+
+    use("saadparwaiz1/cmp_luasnip")
 
     -- Null-Ls -> formatter, linter,...
     use({
@@ -94,10 +94,11 @@ return require("packer").startup(function(use)
         requires = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     })
 
-    use("saadparwaiz1/cmp_luasnip")
-
     -- LSP install language server
-    use("williamboman/nvim-lsp-installer")
+    use {
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+    }
 
     -- VSCode-like pictograms
     use("onsails/lspkind-nvim")
@@ -177,6 +178,6 @@ return require("packer").startup(function(use)
 
     -- Color Highlighter
     use("norcalli/nvim-colorizer.lua")
-    
-    use("vimpostor/vim-tpipeline")
+
+    -- use("vimpostor/vim-tpipeline")
 end)

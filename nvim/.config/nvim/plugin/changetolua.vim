@@ -29,12 +29,3 @@ endfunction
 nnoremap <C-q> :<C-R>=QuickFixIsOpen() ? "cclose" : "copen"<CR><CR>
 inoremap <silent><expr> <CR>      compe#confirm('<CR>')
 
-" augroup twig_ft
-"   au!
-  autocmd BufNewFile,BufRead *.html.twig   setlocal filetype=html
-  autocmd BufNewFile,BufRead *.html.twig   setlocal syntax=htmldjango
-  autocmd BufNewFile,BufRead *.html.twig   setlocal indentkeys-={
-  autocmd BufNewFile,BufRead *.html.twig   setlocal indentkeys-=}
-  autocmd BufWritePre *.html.twig   setlocal filetype=twig
-  autocmd BufWritePre *.html.twig   setlocal syntax=htmldjango
-" augroup END

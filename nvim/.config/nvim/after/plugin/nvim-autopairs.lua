@@ -46,6 +46,3 @@ npairs.add_rules({
         end)
         :use_key("]"),
 })
-
--- twig
-npairs.add_rule(Rule("{%", "%", "twig"))
