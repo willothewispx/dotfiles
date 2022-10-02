@@ -56,10 +56,6 @@ map("n", "<leader>vrc", require("denes.telescope.functions").search_vimrc, { sil
 -- Telescope/Dotfiles
 map("n", "<leader>pp", require("denes.telescope.functions").search_dotfiles, { silent = true } )
 
--- Telescope/Notes
-map("n", "<leader>nn", require("denes.telescope.functions").search_personal_notes, { silent = true } )
-map("n", "<leader>nw", require("denes.telescope.functions").search_work_notes, { silent = true } )
-
 -- Telescope/Project.nvim
 map("n", "<leader>ps", ":Telescope projects<CR>", { silent = true } )
 

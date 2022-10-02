@@ -10,7 +10,6 @@ local source_mapping = {
     buffer = "[Buffer]",
     nvim_lua = "[Lua]",
     path = "[Path]",
-    neorg = "[Neorg]",
     cmp_tabnine = "[TN]",
 }
 
@@ -57,7 +56,6 @@ cmp.setup({
         { name = "path" },
         { name = "cmp_tabnine" },
         { name = "buffer", keyword_length = 5 },
-        { name = "neorg" },
     },
     experimental = {
         ghost_text = true,

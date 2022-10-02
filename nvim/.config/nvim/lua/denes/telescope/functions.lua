@@ -16,18 +16,4 @@ M.search_dotfiles = function()
     })
 end
 
-M.search_personal_notes = function()
-    require("telescope.builtin").find_files({
-        prompt_title = "< Personal Notes >",
-        cwd = "$HOME/Nextcloud/Neorg/personal/",
-    })
-end
-
-M.search_work_notes = function()
-    require("telescope.builtin").find_files({
-        prompt_title = "< Work Notes >",
-        cwd = "$HOME/Nextcloud/Neorg/work/",
-    })
-end
-
 return M

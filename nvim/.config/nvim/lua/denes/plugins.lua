@@ -166,10 +166,6 @@ return require("packer").startup(function(use)
     -- LaTeX
     use({ "lervag/vimtex", ft = "tex" })
 
-    -- Neorg
-    use("nvim-neorg/neorg")
-    use("nvim-neorg/neorg-telescope")
-
     -- Smoonth Scrolling
     use("karb94/neoscroll.nvim")
 
