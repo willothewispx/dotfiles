@@ -1,0 +1,84 @@
+""" Map leader to space ---------------------
+let mapleader=","
+
+""" Plugins  --------------------------------
+set surround
+set multiple-cursors
+set commentary
+set argtextobj
+set easymotion
+set textobj-entire
+set ReplaceWithRegister
+set NERDTree
+
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+
+""" Common settings -------------------------
+set showmode
+set so=5
+set incsearch
+set nu
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+""" Mappings --------------------------------
+
+map <C-c> <Esc>
+
+" register
+map <leader>y \"+y
+map <C-p> \"+p
+map <leader>d \"_d
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" AceJump
+map <leader>hf :action AceAction<CR>
+map <leader>hF :action AceTargetAction<CR>
+map <leader>hl :action AceLineAction<CR>
+
+" Find
+map <leader>pp <Action>(SearchEverywhere)
+map <leader>ps <Action>(FindInPath)
+
+map <leader><Space> <Action>(RecentFiles)
+map <leader>f <Action>(RecentChangedFiles)
+
+" Format
+map <leader>l <Action>(ReformatCode)
+
+map <leader>rn <Action>(RenameElement)
+map <leader>c <Action>(Stop)
+map <leader>z <Action>(ToggleDistractionFreeMode)
+
+map <leader>s <Action>(SelectInProjectView)
+map <leader>a <Action>(Annotate)
+map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
+map <S-Space> <Action>(GotoNextError)
+
+map <leader>b <Action>(ToggleLineBreakpoint)
+map <leader>o <Action>(FileStructurePopup)
+
+" Debugging
+map <leader><leader>dr <Action>(Rerun)
+map <leader><leader>d <Action>(ContextDebug)
+
+" Windows
+map <C-s> <Action>(HideAllWindows)
+
+" Refactoring
+map <leader>rr <Action>(RefactoringMenu)
+
+" Tab navigation
+map <C-o> <Action>(Back)
+map <C-n> <Action>(Forward)
+
+" Git
+map <leader>gs <Action>(Git.Menu)
+
+map <leader>n :NERDTreeToggle<CR>
