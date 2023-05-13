@@ -84,3 +84,9 @@ require('lspconfig')['emmet_ls'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
 }
+
+-- docker
+require('lspconfig')['dockerls'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
