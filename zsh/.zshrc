@@ -43,10 +43,10 @@ export NVM_DIR="$HOME/.nvm"
 
 # Files
 unalias ll
-alias ll='exa -l --icons'
+alias ll='eza -l --icons'
 unalias la
-alias la='exa -la --icons'
-alias tree='exa --tree --level=2 --icons'
+alias la='eza -la --icons --git'
+alias tree='eza --tree --level=2 --icons'
 
 # Git
 unalias gb
