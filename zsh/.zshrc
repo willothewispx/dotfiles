@@ -22,14 +22,11 @@ export EDITOR="nvim"
 #-------------------------------------------------------------------------------
 
 # Files
-unalias ll
-# alias ll='eza -l --icons'
-unalias la
+alias ll='eza -l --icons'
 alias la='eza -la --icons --git'
 alias tree='eza --tree --level=2 --icons'
 
 # Git
-unalias gb
 alias gb='git branch | fzf-tmux -d 15'
 
 # starship prompt
