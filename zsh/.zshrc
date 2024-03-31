@@ -35,3 +35,8 @@ eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
 # zoxide
 eval "$(zoxide init zsh)"
+
+# Plugins
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+antidote load
