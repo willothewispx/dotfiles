@@ -1,65 +1,45 @@
-#  ██████╗ ██╗  ██╗    ███╗   ███╗██╗   ██╗    ███████╗███████╗██╗  ██╗
-# ██╔═══██╗██║  ██║    ████╗ ████║╚██╗ ██╔╝    ╚══███╔╝██╔════╝██║  ██║
-# ██║   ██║███████║    ██╔████╔██║ ╚████╔╝       ███╔╝ ███████╗███████║
-# ██║   ██║██╔══██║    ██║╚██╔╝██║  ╚██╔╝       ███╔╝  ╚════██║██╔══██║
-# ╚██████╔╝██║  ██║    ██║ ╚═╝ ██║   ██║       ███████╗███████║██║  ██║
-#  ╚═════╝ ╚═╝  ╚═╝    ╚═╝     ╚═╝   ╚═╝       ╚══════╝╚══════╝╚═╝  ╚═╝
+# ███████╗███████╗██╗  ██╗
+# ╚══███╔╝██╔════╝██║  ██║
+#   ███╔╝ ███████╗███████║
+#  ███╔╝  ╚════██║██╔══██║
+# ███████╗███████║██║  ██║
+# ╚══════╝╚══════╝╚═╝  ╚═╝
 
-################################################################################
+#-------------------------------------------------------------------------------
 # Exports
-################################################################################
-
-export LANGUAGE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
+#-------------------------------------------------------------------------------
 
 # PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=/opt/homebrew/bin:$PATH
+export PATH=$HOME/go/bin:$PATH
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
+# Editor
 export EDITOR="nvim"
 
-ZSH_THEME="spaceship"
-
-plugins=(docker docker-compose git zsh-vi-mode zsh-autosuggestions fast-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
-
 source $HOME/.zprofile
-
-# Dotfiles
-export DOTFILES="$HOME/dotfiles"
-
-# nvm node manager
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 #-------------------------------------------------------------------------------
 # Alias
 #-------------------------------------------------------------------------------
 
 # Files
-unalias ll
-alias ll='exa -l --icons'
-unalias la
-alias la='exa -la --icons'
-alias tree='exa --tree --level=2 --icons'
+alias ll='eza -l --icons'
+alias la='eza -la --icons --git'
+alias tree='eza --tree --level=2 --icons'
 
 # Git
-unalias gb
 alias gb='git branch | fzf-tmux -d 15'
 
-# fzf fuzzy finder keybindings
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# zsh-vi-mode breaks fzf keybindings
-# see https://github.com/jeffreytse/zsh-vi-mode#execute-extra-commands
-zvm_after_init_commands+=('[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh')
-
+# starship prompt
+eval "$(starship init zsh)"
+# fzf
+eval "$(fzf --zsh)"
 # zoxide
 eval "$(zoxide init zsh)"
 
+# Plugins
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+# initialize plugins statically with ${ZDOTDIR:-~}/.zsh_plugins.txt
+antidote load
