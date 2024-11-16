@@ -4,16 +4,20 @@ set showmode
 set scrolloff=5
 set incsearch
 set number
-set relativenumber
 
 " Don't use Ex mode, use Q for formatting.
 map Q gq
 
 " --- IntelliJ Actions
+
 map <C-o> <Action>(Back)
 map <C-n> <Action>(Forward)
+map <leader><space> <Action>(RecentFiles)
+
+map gi <Action>(GotoImplementation)
 
 map <leader>ll <Action>(ReformatCode)
+map <leader>li <Action>(OptimizeImports)
 map <leader>ls <Action>(EditorSortLines)
 map <leader>rn <Action>(RenameElement)
 
@@ -23,6 +27,12 @@ map <leader>a <Action>(Annotate)
 map <leader>b <Action>(ToggleLineBreakpoint)
 map <leader>d <Action>(Debug)
 map <leader>td <Action>(PhpListenDebugAction)
+map <leader><leader>s <Action>(Stop)
+
+" --- EasyMotion
+
+" Move to line
+map <leader><leader>l <Plug>(easymotion-bd-jk)
 
 " --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
 
