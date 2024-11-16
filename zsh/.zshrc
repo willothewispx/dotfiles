@@ -29,6 +29,8 @@ plugins=(docker docker-compose git zsh-vi-mode zsh-autosuggestions fast-syntax-h
 
 source $ZSH/oh-my-zsh.sh
 
+source $HOME/.zprofile
+
 # Dotfiles
 export DOTFILES="$HOME/dotfiles"
 
