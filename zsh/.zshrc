@@ -25,6 +25,7 @@ source $HOME/.zprofile
 #-------------------------------------------------------------------------------
 
 # Files
+alias ..='cd ..'
 alias ll='eza -l --icons'
 alias la='eza -la --icons --git'
 alias tree='eza --tree --level=2 --icons'
