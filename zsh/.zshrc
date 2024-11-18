@@ -18,7 +18,7 @@ export PATH=$HOME/go/bin:$PATH
 # Editor
 export EDITOR="nvim"
 
-source $HOME/.zprofile
+[ -f $HOME/.zprofile ] && source $HOME/.zprofile
 
 #-------------------------------------------------------------------------------
 # Alias
