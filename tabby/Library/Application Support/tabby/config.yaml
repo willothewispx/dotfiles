@@ -198,12 +198,12 @@ terminal:
       - '#f5c2e7'
       - '#94e2d5'
       - '#a6adc8'
-  font: Monaspace Neon
-  ligatures: true
+  font: PragmataPro Mono Liga
   cursorBlink: false
   fallbackFont: Symbols Nerd Font
   cursor: beam
   fontSize: 16
+  ligatures: true
 ssh: {}
 clickableLinks: {}
 accessibility: {}
