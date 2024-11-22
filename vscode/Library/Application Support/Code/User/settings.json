@@ -1,0 +1,92 @@
+{
+    "telemetry.telemetryLevel": "off",
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "editor.fontFamily": "PragmataPro Mono Liga",
+    "editor.fontLigatures": true,
+    "editor.inlineSuggest.fontFamily": "Monaspace Krypton",
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": true,
+        "markdown": false,
+        "scminput": false
+    },
+    "editor.fontSize": 15,
+    "git.confirmSync": false,
+    // vs code vim 
+    "vim.leader": ",",
+    // vim plugins
+    "vim.easymotion": true,
+    "vim.camelCaseMotion.enable": true,
+    // vim settings
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    // vim key bindings
+    "vim.insertModeKeyBindings": [],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                ":"
+            ],
+            "commands": [
+                "workbench.action.showCommands"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "r",
+                "n"
+            ],
+            "commands": [
+                "editor.action.rename"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "l",
+                "l"
+            ],
+            "commands": [
+                "editor.action.formatDocument"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "f",
+                "f"
+            ],
+            "commands": [
+                "workbench.action.quickOpen"
+            ]
+        },
+        {
+            "before": [
+                "<leader>",
+                "t"
+            ],
+            "commands": [
+                "workbench.action.toggleSidebarVisibility"
+            ]
+        },
+    ],
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false
+    },
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
+    },
+    "files.insertFinalNewline": true,
+    "terminal.external.osxExec": "Kitty.app",
+    "terminal.integrated.fontSize": 16,
+    "explorer.compactFolders": false,
+    "files.autoSave": "afterDelay",
+    "github.copilot.editor.enableAutoCompletions": true,
+    "go.toolsManagement.autoUpdate": true,
+    "workbench.iconTheme": "catppuccin-mocha",
+    "terminal.integrated.fontFamily": "monospace",
+}
