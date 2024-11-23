@@ -1,8 +1,8 @@
 {
     "telemetry.telemetryLevel": "off",
     "workbench.colorTheme": "Catppuccin Mocha",
-    "editor.fontFamily": "PragmataPro Mono Liga",
-    "editor.fontLigatures": true,
+    "editor.fontFamily": "'Monaspace Neon', monospace",
+    "editor.fontLigatures": "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'",
     "editor.inlineSuggest.fontFamily": "Monaspace Krypton",
     "github.copilot.enable": {
         "*": true,
@@ -10,7 +10,7 @@
         "markdown": false,
         "scminput": false
     },
-    "editor.fontSize": 15,
+    "editor.fontSize": 14,
     "git.confirmSync": false,
     // vs code vim 
     "vim.leader": ",",
