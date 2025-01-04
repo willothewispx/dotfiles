@@ -9,7 +9,7 @@ theme=catppuccin-mocha
 # Window
 window-padding-x=15
 window-padding-y=10
-macos-titlebar-style = tabs
+# macos-titlebar-style = tabs
 
 # Keybinds
 keybind=cmd+p=previous_tab
