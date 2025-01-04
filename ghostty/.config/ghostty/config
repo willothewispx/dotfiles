@@ -1,0 +1,18 @@
+# Font
+font-family="PragmataPro Mono Liga"
+font-size=16
+font-thicken
+
+# Theme
+theme=catppuccin-mocha
+
+# Window
+window-padding-x=15
+window-padding-y=10
+macos-titlebar-style = tabs
+
+# Keybinds
+keybind=cmd+p=previous_tab
+keybind=cmd+n=next_tab
+
+
