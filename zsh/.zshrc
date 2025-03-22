@@ -39,6 +39,8 @@ eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
 # zoxide
 eval "$(zoxide init zsh)"
+# taskfile
+eval "$(task --completion zsh)"
 
 # Plugins
 source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
