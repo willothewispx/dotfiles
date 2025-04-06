@@ -8,7 +8,6 @@
 #-------------------------------------------------------------------------------
 # Exports
 #-------------------------------------------------------------------------------
-
 # PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
@@ -32,6 +31,9 @@ alias tree='eza --tree --level=2 --icons'
 
 # Git
 alias gb='git branch | fzf-tmux -d 15'
+
+autoload -Uz compinit
+compinit
 
 # starship prompt
 eval "$(starship init zsh)"
