@@ -89,4 +89,28 @@
     "go.toolsManagement.autoUpdate": true,
     "workbench.iconTheme": "catppuccin-mocha",
     "terminal.integrated.fontFamily": "monospace",
+    "workbench.editorAssociations": {
+        "*.copilotmd": "vscode.markdown.preview.editor",
+        "*.pdf": "latex-workshop-pdf-hook"
+    },
+    "zig.zls.enabled": "on",
+    "latex-workshop.latex.tools": [
+        {
+          "name": "latexmk",
+          "command": "latexmk",
+          "args": [
+            "-synctex=1",
+            "-interaction=nonstopmode",
+            "-file-line-error",
+            "-pdf",
+            "-outdir=./",
+            "%DOCFILE%"
+          ],
+          "env": {}
+        }
+],
+"github.copilot.chat.editor.temporalContext.enabled": true,
+"github.copilot.chat.edits.temporalContext.enabled": true,
+"github.copilot.chat.languageContext.typescript.enabled": true,
+"github.copilot.chat.newWorkspaceCreation.enabled": true
 }
