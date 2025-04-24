@@ -17,6 +17,7 @@ map <leader><space> <Action>(RecentFiles)
 map gi <Action>(GotoImplementation)
 
 map <leader>ll <Action>(ReformatCode)
+map <leader>f <Action>(GotoFile)
 map <leader>li <Action>(OptimizeImports)
 map <leader>ls <Action>(EditorSortLines)
 map <leader>rn <Action>(RenameElement)
