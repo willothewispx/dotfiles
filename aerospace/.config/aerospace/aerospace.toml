@@ -127,6 +127,10 @@ automatically-unhide-macos-hidden-apps = false
     alt-b = 'workspace Browser'
     alt-t = 'workspace Terminal'
     alt-c = 'workspace Code'
+    alt-m = 'workspace Mail'
+    alt-r = 'workspace Reminders'
+    alt-g = 'workspace Calendar'
+    alt-d = 'workspace 1Password'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -142,6 +146,10 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-b = 'move-node-to-workspace Browser'
     alt-shift-t = 'move-node-to-workspace Terminal'
     alt-shift-c = 'move-node-to-workspace Code'
+    alt-shift-m = 'move-node-to-workspace Mail'
+    alt-shift-r = 'move-node-to-workspace Reminders'
+    alt-shift-g = 'move-node-to-workspace Calendar'
+    alt-shift-d = 'move-node-to-workspace 1Password'
 
     alt-shift-f = 'fullscreen'
 
@@ -166,6 +174,10 @@ automatically-unhide-macos-hidden-apps = false
     Browser = ['LG', '^built-in retina display$']
     Terminal = ['LG', '^built-in retina display$']
     Code = ['LG', '^built-in retina display$']
+    Mail = ['LG', '^built-in retina display$']
+    Reminders = ['LG', '^built-in retina display$']
+    Calendar = ['LG', '^built-in retina display$']
+    1Password = ['LG', '^built-in retina display$']
 
 
 # 'service' binding mode declaration.
@@ -200,3 +212,23 @@ run= "move-node-to-workspace Browser"
 [[on-window-detected]]
 if.app-id="com.microsoft.VSCode"
 run= "move-node-to-workspace Code"
+
+[[on-window-detected]]
+if.app-id="com.apple.reminders"
+run= "move-node-to-workspace Reminders"
+
+[[on-window-detected]]
+if.app-id="io.canarymail.mac"
+run= "move-node-to-workspace Mail"
+
+[[on-window-detected]]
+if.app-id="com.flexibits.fantastical2.mac"
+run= "move-node-to-workspace Calendar"
+
+[[on-window-detected]]
+if.app-id="com.1password.1password"
+run= "move-node-to-workspace 1Password"
+
+[[on-window-detected]]
+if.app-id="com.chabomakers.Antinote"
+run= "layout floating"
