@@ -44,6 +44,7 @@ automatically-unhide-macos-hidden-apps = false
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
     preset = 'qwerty'
+    # preset = 'dvorak'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
@@ -162,22 +163,22 @@ automatically-unhide-macos-hidden-apps = false
 
 [workspace-to-monitor-force-assignment]
     1 = '^built-in retina display$'
-    2 = ['LG', '^built-in retina display$']
+    2 = ['LG', 'DELL', '^built-in retina display$']
     3 = '^built-in retina display$'
-    4 = ['LG', '^built-in retina display$']
+    4 = ['LG', 'DELL', '^built-in retina display$']
     5 = '^built-in retina display$'
-    6 = ['LG', '^built-in retina display$']
+    6 = ['LG', 'DELL', '^built-in retina display$']
     7 = '^built-in retina display$'
-    8 = ['LG', '^built-in retina display$']
+    8 = ['LG', 'DELL', '^built-in retina display$']
     9 = '^built-in retina display$'
-    0 = ['LG', '^built-in retina display$']
-    Browser = ['LG', '^built-in retina display$']
-    Terminal = ['LG', '^built-in retina display$']
-    Code = ['LG', '^built-in retina display$']
-    Mail = ['LG', '^built-in retina display$']
-    Reminders = ['LG', '^built-in retina display$']
-    Calendar = ['LG', '^built-in retina display$']
-    1Password = ['LG', '^built-in retina display$']
+    0 = ['LG', 'DELL', '^built-in retina display$']
+    Browser = ['LG','DELL', '^built-in retina display$']
+    Terminal = ['LG', 'DELL', '^built-in retina display$']
+    Code = ['LG', 'DELL', '^built-in retina display$']
+    Mail = ['LG', 'DELL', '^built-in retina display$']
+    Reminders = ['LG', 'DELL', '^built-in retina display$']
+    Calendar = ['LG', 'DELL', '^built-in retina display$']
+    1Password = ['LG', 'DELL', '^built-in retina display$']
 
 
 # 'service' binding mode declaration.
