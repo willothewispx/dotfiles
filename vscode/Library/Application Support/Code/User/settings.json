@@ -79,7 +79,7 @@
                 "<C-o>"
             ],
             "commands": [
-                "workbench.action.previousEditor"
+                "workbench.action.navigateBack"
             ]
         },
         {
@@ -87,9 +87,18 @@
                 "<C-n>"
             ],
             "commands": [
-                "workbench.action.nextEditor"
+                "workbench.action.navigateForward"
             ]
         },
+        {
+            "before": [
+                "g",
+                "i"
+            ],
+            "commands": [
+                "editor.action.goToImplementation"
+            ]
+        }
     ],
     "vim.handleKeys": {
         "<C-a>": false,
@@ -103,7 +112,6 @@
     "terminal.integrated.fontSize": 16,
     "explorer.compactFolders": false,
     "files.autoSave": "afterDelay",
-    "github.copilot.editor.enableAutoCompletions": true,
     "go.toolsManagement.autoUpdate": true,
     "workbench.iconTheme": "catppuccin-mocha",
     "terminal.integrated.fontFamily": "Monaspace Neon Var",
@@ -114,21 +122,24 @@
     "zig.zls.enabled": "on",
     "latex-workshop.latex.tools": [
         {
-          "name": "latexmk",
-          "command": "latexmk",
-          "args": [
-            "-synctex=1",
-            "-interaction=nonstopmode",
-            "-file-line-error",
-            "-pdf",
-            "-outdir=./",
-            "%DOCFILE%"
-          ],
-          "env": {}
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=./",
+                "%DOCFILE%"
+            ],
+            "env": {}
         }
-],
-"github.copilot.chat.editor.temporalContext.enabled": true,
-"github.copilot.chat.edits.temporalContext.enabled": true,
-"github.copilot.chat.languageContext.typescript.enabled": true,
-"github.copilot.chat.newWorkspaceCreation.enabled": true
+    ],
+    "github.copilot.chat.editor.temporalContext.enabled": true,
+    "github.copilot.chat.edits.temporalContext.enabled": true,
+    "github.copilot.chat.languageContext.typescript.enabled": true,
+    "github.copilot.chat.newWorkspaceCreation.enabled": true,
+    "github.copilot.advanced": {
+        "authPermissions": "minimal"
+    }
 }
