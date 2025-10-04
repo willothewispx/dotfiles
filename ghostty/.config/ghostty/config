@@ -5,7 +5,9 @@ font-thicken
 
 theme = Catppuccin Mocha
 
-background-opacity = 0.9
+background-image = "~/.config/ghostty/backgrounds/bg.png"
+background-image-fit = stretch
+background-image-opacity = 0.25
 
 window-padding-x = 15
 window-padding-y = 10

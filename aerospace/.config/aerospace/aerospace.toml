@@ -43,8 +43,8 @@ automatically-unhide-macos-hidden-apps = false
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
-    preset = 'qwerty'
-    # preset = 'dvorak'
+    # preset = 'qwerty'
+    preset = 'dvorak'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
