@@ -1,11 +1,9 @@
 {
     "telemetry.telemetryLevel": "off",
     "workbench.colorTheme": "Catppuccin Mocha",
-    "editor.fontFamily": "'Monaspace Neon Var', monospace",
-    // "editor.fontLigatures": "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'",
-    "editor.inlineSuggest.fontFamily": "Monaspace Krypton Var",
-    "editor.fontVariations": "'wght' 450",
-    // 
+    "editor.fontFamily": "'Monaspace Neon', monospace",
+    "editor.fontLigatures": "'calt', 'liga', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'ss07', 'ss08', 'ss09'",
+    "editor.inlineSuggest.fontFamily": "'Monaspace Krypton', monospace",
     "github.copilot.enable": {
         "*": true,
         "plaintext": true,
@@ -13,6 +11,7 @@
         "scminput": false
     },
     "editor.fontSize": 14,
+    "editor.fontWeight": 500,
     "git.confirmSync": false,
     // vs code vim 
     "vim.leader": ",",
@@ -79,7 +78,7 @@
                 "<C-o>"
             ],
             "commands": [
-                "workbench.action.previousEditor"
+                "workbench.action.navigateBack"
             ]
         },
         {
@@ -87,9 +86,18 @@
                 "<C-n>"
             ],
             "commands": [
-                "workbench.action.nextEditor"
+                "workbench.action.navigateForward"
             ]
         },
+        {
+            "before": [
+                "g",
+                "i"
+            ],
+            "commands": [
+                "editor.action.goToImplementation"
+            ]
+        }
     ],
     "vim.handleKeys": {
         "<C-a>": false,
@@ -103,7 +111,6 @@
     "terminal.integrated.fontSize": 16,
     "explorer.compactFolders": false,
     "files.autoSave": "afterDelay",
-    "github.copilot.editor.enableAutoCompletions": true,
     "go.toolsManagement.autoUpdate": true,
     "workbench.iconTheme": "catppuccin-mocha",
     "terminal.integrated.fontFamily": "Monaspace Neon Var",
@@ -114,21 +121,24 @@
     "zig.zls.enabled": "on",
     "latex-workshop.latex.tools": [
         {
-          "name": "latexmk",
-          "command": "latexmk",
-          "args": [
-            "-synctex=1",
-            "-interaction=nonstopmode",
-            "-file-line-error",
-            "-pdf",
-            "-outdir=./",
-            "%DOCFILE%"
-          ],
-          "env": {}
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "-outdir=./",
+                "%DOCFILE%"
+            ],
+            "env": {}
         }
-],
-"github.copilot.chat.editor.temporalContext.enabled": true,
-"github.copilot.chat.edits.temporalContext.enabled": true,
-"github.copilot.chat.languageContext.typescript.enabled": true,
-"github.copilot.chat.newWorkspaceCreation.enabled": true
+    ],
+    "github.copilot.chat.editor.temporalContext.enabled": true,
+    "github.copilot.chat.edits.temporalContext.enabled": true,
+    "github.copilot.chat.languageContext.typescript.enabled": true,
+    "github.copilot.chat.newWorkspaceCreation.enabled": true,
+    "github.copilot.advanced": {
+        "authPermissions": "minimal"
+    }
 }
