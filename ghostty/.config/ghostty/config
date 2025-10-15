@@ -16,5 +16,3 @@ scrollback-limit = 104857600
 
 keybind = cmd+p=previous_tab
 keybind = cmd+n=next_tab
-
-
