@@ -30,6 +30,9 @@ map <leader>d <Action>(Debug)
 map <leader>td <Action>(PhpListenDebugAction)
 map <leader><leader>s <Action>(Stop)
 
+map <leader>ic <Action>(copilot.chat.inline)
+map <leader>va <Action>(ru.sadv1r.idea.plugin.ansible.vault.editor.action.OpenEditorAction)
+
 " --- EasyMotion
 
 " Move to line
