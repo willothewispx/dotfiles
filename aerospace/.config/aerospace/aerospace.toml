@@ -128,6 +128,7 @@ automatically-unhide-macos-hidden-apps = false
     alt-b = 'workspace Browser'
     alt-t = 'workspace Terminal'
     alt-c = 'workspace Code'
+    alt-w = 'workspace Cursor'
     alt-m = 'workspace Mail'
     alt-r = 'workspace Reminders'
     alt-g = 'workspace Calendar'
@@ -147,6 +148,7 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-b = 'move-node-to-workspace Browser'
     alt-shift-t = 'move-node-to-workspace Terminal'
     alt-shift-c = 'move-node-to-workspace Code'
+    alt-shift-w = 'move-node-to-workspace Cursor'
     alt-shift-m = 'move-node-to-workspace Mail'
     alt-shift-r = 'move-node-to-workspace Reminders'
     alt-shift-g = 'move-node-to-workspace Calendar'
@@ -175,6 +177,7 @@ automatically-unhide-macos-hidden-apps = false
     Browser = ['LG','DELL', '^built-in retina display$']
     Terminal = ['LG', 'DELL', '^built-in retina display$']
     Code = ['LG', 'DELL', '^built-in retina display$']
+    Cursor = ['LG', 'DELL', '^built-in retina display$']
     Mail = ['LG', 'DELL', '^built-in retina display$']
     Reminders = ['LG', 'DELL', '^built-in retina display$']
     Calendar = ['LG', 'DELL', '^built-in retina display$']
@@ -213,6 +216,10 @@ run= "move-node-to-workspace Browser"
 [[on-window-detected]]
 if.app-id="com.microsoft.VSCode"
 run= "move-node-to-workspace Code"
+
+[[on-window-detected]]
+if.app-id="com.todesktop.230313mzl4w4u92"
+run= "move-node-to-workspace Cursor"
 
 [[on-window-detected]]
 if.app-id="com.apple.reminders"
