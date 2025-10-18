@@ -47,6 +47,7 @@ vim.cmd.colorscheme('catppuccin-latte')
   - Buffers: `<leader>fb`
 - File tree: `<leader>e`
 - Format file: `<leader>ll`
+- Diff overlay: `<leader>do`
 - Diagnostics:
   - Next/prev: `]d` / `[d`
   - Show all: `<leader>d`

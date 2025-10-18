@@ -25,3 +25,8 @@ end)
 map('n', '<leader>e', function()
   require('mini.files').open()
 end)
+
+-- Diff overlay (show detailed changes)
+map('n', '<leader>do', function()
+  require('mini.diff').toggle_overlay()
+end, { desc = 'Toggle diff overlay' })

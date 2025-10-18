@@ -20,6 +20,22 @@ require('mini.files').setup({
     width_preview = 60,
   },
 })
+require('mini.diff').setup({
+  view = {
+    style = 'sign',
+    signs = {
+      add = '│',
+      change = '│',
+      delete = '│',
+    },
+  },
+  options = {
+    wrap_goto = false,
+    algorithm = 'histogram',
+    indent_heuristic = true,
+    linematch = 60,
+  },
+})
 
 -- Theme: Catppuccin Mocha
 require('catppuccin').setup({ flavour = 'mocha' })
