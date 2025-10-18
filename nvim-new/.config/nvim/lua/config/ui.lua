@@ -8,6 +8,18 @@ require('mini.pairs').setup()
 require('mini.comment').setup()
 require('mini.icons').setup()
 require('mini.pick').setup()
+require('mini.files').setup({
+  -- Show preview of file/directory under cursor
+  preview = true,
+  -- Use as default file explorer instead of netrw
+  use_as_default_explorer = true,
+  -- Customize window options
+  windows = {
+    preview = true,
+    width_focus = 60,
+    width_preview = 60,
+  },
+})
 
 -- Theme: Catppuccin Mocha
 require('catppuccin').setup({ flavour = 'mocha' })

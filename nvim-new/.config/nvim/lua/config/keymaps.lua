@@ -21,4 +21,9 @@ map('n', '<leader>fb', function()
   require('mini.pick').builtin.buffer()
 end)
 
+-- File tree
+map('n', '<leader>e', function()
+  require('mini.files').open()
+end)
+
 
