@@ -8,7 +8,6 @@ require('mini.pairs').setup()
 require('mini.comment').setup()
 require('mini.icons').setup()
 require('mini.pick').setup()
-require('mini.files').setup()
 
 -- Theme: Catppuccin Mocha
 require('catppuccin').setup({ flavour = 'mocha' })
