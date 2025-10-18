@@ -56,3 +56,8 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' }
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics' })
 vim.keymap.set('n', '<leader>D', function() vim.diagnostic.open_float(nil, { severity = vim.diagnostic.severity.ERROR }) end, { desc = 'Show errors only' })
+
+-- LSP formatting
+vim.keymap.set('n', '<leader>ll', function()
+  vim.lsp.buf.format()
+end, { desc = 'Format file' })

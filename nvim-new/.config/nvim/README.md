@@ -46,6 +46,7 @@ vim.cmd.colorscheme('catppuccin-latte')
   - Live grep: `<leader>fg`
   - Buffers: `<leader>fb`
 - File tree: `<leader>e`
+- Format file: `<leader>ll`
 - Diagnostics:
   - Next/prev: `]d` / `[d`
   - Show all: `<leader>d`
