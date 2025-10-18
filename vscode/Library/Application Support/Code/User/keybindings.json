@@ -1,0 +1,23 @@
+// Place your key bindings in this file to override the defaults
+[
+    {
+        "key": "ctrl+s",
+        "command": "workbench.explorer.fileView.focus",
+        "when": "!filesExplorerFocus"
+     },
+     {
+         "key": "ctrl+s",
+         "command": "workbench.action.focusActiveEditorGroup",
+         "when": "!editorTextFocus"
+     },
+     {
+         "key": "ctrl+n",
+         "command": "explorer.newFile",
+         "when": "filesExplorerFocus"
+     },
+     {
+         "key": "ctrl+p",
+         "command": "explorer.newFolder",
+         "when": "filesExplorerFocus"
+     }
+]
