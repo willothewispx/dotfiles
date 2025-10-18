@@ -4,7 +4,7 @@ vim.g.maplocalleader = ','
 -- Bootstrap mini.deps (bundled in mini.nvim)
 local path_package = vim.fn.stdpath('data') .. '/site'
 local mini_path = path_package .. '/pack/deps/start/mini.nvim'
-if not vim.loop.fs_stat(mini_path) then
+if not vim.uv.fs_stat(mini_path) then
   vim.fn.system({ 'git', 'clone', '--filter=blob:none', 'https://github.com/nvim-mini/mini.nvim', mini_path })
 end
 vim.opt.rtp:prepend(mini_path)

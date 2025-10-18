@@ -16,11 +16,15 @@ vim.lsp.config['lua_ls'] = {
   settings = {
     Lua = {
       runtime = { version = 'LuaJIT' },
-      diagnostics = { 
+      diagnostics = {
         globals = { 'vim' },
+        disable = { 'undefined-field' }
       },
       workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
+        library = vim.list_extend(
+          vim.api.nvim_get_runtime_file('', true),
+          { "${3rd}/luv/library" }
+        ),
         checkThirdParty = false
       },
       telemetry = { enable = false }
@@ -55,7 +59,9 @@ vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'LSP: Hover' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics' })
-vim.keymap.set('n', '<leader>D', function() vim.diagnostic.open_float(nil, { severity = vim.diagnostic.severity.ERROR }) end, { desc = 'Show errors only' })
+vim.keymap.set('n', '<leader>D',
+  function() vim.diagnostic.open_float(nil, { severity = vim.diagnostic.severity.ERROR }) end,
+  { desc = 'Show errors only' })
 
 -- LSP formatting
 vim.keymap.set('n', '<leader>ll', function()
