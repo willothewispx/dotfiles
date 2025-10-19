@@ -28,5 +28,10 @@ end)
 
 -- Diff overlay (show detailed changes)
 map('n', '<leader>do', function()
-  require('mini.diff').toggle_overlay()
+  require('mini.diff').toggle_overlay(0)
 end, { desc = 'Toggle diff overlay' })
+
+-- Code minimap
+map('n', '<leader>m', function()
+  require('mini.map').toggle()
+end, { desc = 'Toggle minimap' })

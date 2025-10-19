@@ -36,6 +36,21 @@ require('mini.diff').setup({
     linematch = 60,
   },
 })
+require('mini.map').setup({
+  integrations = {
+    require('mini.map').gen_integration.builtin_search(),
+    require('mini.map').gen_integration.diagnostic(),
+    require('mini.map').gen_integration.diff(),
+  },
+  symbols = {
+    encode = require('mini.map').gen_encode_symbols.dot('4x2'),
+  },
+  window = {
+    side = 'right',
+    width = 15,
+    winblend = 0,
+  },
+})
 
 -- Theme: Catppuccin Mocha with transparency
 require('catppuccin').setup({

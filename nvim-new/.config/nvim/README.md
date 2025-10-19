@@ -48,6 +48,7 @@ vim.cmd.colorscheme('catppuccin-latte')
 - File tree: `<leader>e`
 - Format file: `<leader>ll`
 - Diff overlay: `<leader>do`
+- Code minimap: `<leader>m`
 - Diagnostics:
   - Next/prev: `]d` / `[d`
   - Show all: `<leader>d`
