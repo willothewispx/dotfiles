@@ -1,7 +1,16 @@
 -- mini.nvim modules
 require('mini.basics').setup()
 require('mini.statusline').setup()
-require('mini.tabline').setup()
+require('mini.tabline').setup({
+  format = function(buf_id, label)
+    -- Get default suffix
+    local suffix = vim.bo[buf_id].modified and '+ ' or ''
+    return MiniTabline.default_format(buf_id, label .. suffix)
+  end,
+  set_vim_settings = false,
+})
+-- Add left padding to tabline to account for Neo-tree
+vim.o.tabline = '%#TabLineFill#%35( %)' .. '%{%v:lua.MiniTabline.make_tabline_string()%}'
 require('mini.surround').setup()
 require('mini.ai').setup()
 require('mini.pairs').setup()
