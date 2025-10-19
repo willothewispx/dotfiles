@@ -19,6 +19,10 @@ add({ source = 'williamboman/mason.nvim' })
 add({ source = 'williamboman/mason-lspconfig.nvim' })
 add({ source = 'nvim-treesitter/nvim-treesitter' })
 add({ source = 'catppuccin/nvim' })
+add({ source = 'nvim-neo-tree/neo-tree.nvim' })
+add({ source = 'nvim-lua/plenary.nvim' })
+add({ source = 'MunifTanjim/nui.nvim' })
+add({ source = 'akinsho/toggleterm.nvim' })
 
 -- Load config modules
 require('config.options')

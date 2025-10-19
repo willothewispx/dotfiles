@@ -45,10 +45,11 @@ vim.cmd.colorscheme('catppuccin-latte')
   - Files: `<leader>ff`
   - Live grep: `<leader>fg`
   - Buffers: `<leader>fb`
-- File tree: `<leader>e`
+- File tree sidebar (neo-tree): `<leader>n`
 - Format file: `<leader>ll`
 - Diff overlay: `<leader>do`
 - Code minimap: `<leader>m`
+- Terminal: `<leader>t` or `<C-\>` (press `<C-\>` again or type `exit` to close)
 - Diagnostics:
   - Next/prev: `]d` / `[d`
   - Show all: `<leader>d`

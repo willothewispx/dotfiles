@@ -8,18 +8,6 @@ require('mini.pairs').setup()
 require('mini.comment').setup()
 require('mini.icons').setup()
 require('mini.pick').setup()
-require('mini.files').setup({
-  -- Show preview of file/directory under cursor
-  preview = true,
-  -- Use as default file explorer instead of netrw
-  use_as_default_explorer = true,
-  -- Customize window options
-  windows = {
-    preview = true,
-    width_focus = 60,
-    width_preview = 60,
-  },
-})
 require('mini.diff').setup({
   view = {
     style = 'sign',
@@ -52,6 +40,48 @@ require('mini.map').setup({
   },
 })
 
+-- Neo-tree file explorer (VS Code-like sidebar)
+require('neo-tree').setup({
+  close_if_last_window = false,
+  popup_border_style = 'rounded',
+  enable_git_status = true,
+  enable_diagnostics = true,
+  window = {
+    position = 'left',
+    width = 35,
+  },
+  filesystem = {
+    filtered_items = {
+      visible = false,
+      hide_dotfiles = false,
+      hide_gitignored = false,
+    },
+    follow_current_file = {
+      enabled = true,
+    },
+  },
+})
+
+-- Toggleterm for terminal access
+require('toggleterm').setup({
+  size = 20,
+  open_mapping = [[<c-\>]],
+  hide_numbers = true,
+  shade_terminals = true,
+  shading_factor = 2,
+  start_in_insert = true,
+  insert_mappings = true,
+  terminal_mappings = true,
+  persist_size = true,
+  direction = 'float',
+  close_on_exit = true,
+  shell = vim.o.shell,
+  float_opts = {
+    border = 'curved',
+    winblend = 0,
+  },
+})
+
 -- Theme: Catppuccin Mocha with transparency
 require('catppuccin').setup({
   flavour = 'mocha',
@@ -68,5 +98,12 @@ vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#89b4fa', bg = 'none', bold = tru
 
 -- Always show tabline (buffer list)
 vim.opt.showtabline = 2
+
+-- Auto-open minimap on startup
+vim.api.nvim_create_autocmd('VimEnter', {
+  callback = function()
+    require('mini.map').open()
+  end,
+})
 
 

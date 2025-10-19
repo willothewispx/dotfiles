@@ -21,10 +21,8 @@ map('n', '<leader>fb', function()
   require('mini.pick').builtin.buffer()
 end)
 
--- File tree
-map('n', '<leader>e', function()
-  require('mini.files').open()
-end)
+-- File tree (neo-tree - sidebar)
+map('n', '<leader>n', '<cmd>Neotree toggle<cr>', { desc = 'Toggle Neo-tree sidebar' })
 
 -- Diff overlay (show detailed changes)
 map('n', '<leader>do', function()
@@ -35,3 +33,6 @@ end, { desc = 'Toggle diff overlay' })
 map('n', '<leader>m', function()
   require('mini.map').toggle()
 end, { desc = 'Toggle minimap' })
+
+-- Terminal (also <C-\> in any mode)
+map('n', '<leader>t', '<cmd>ToggleTerm<cr>', { desc = 'Toggle terminal' })
