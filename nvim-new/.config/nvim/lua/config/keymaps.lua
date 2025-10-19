@@ -18,7 +18,7 @@ map('n', '<leader>fg', function()
   require('mini.pick').builtin.grep_live()
 end)
 map('n', '<leader>fb', function()
-  require('mini.pick').builtin.buffer()
+  require('mini.pick').builtin.buffers()
 end)
 
 -- File tree (neo-tree - sidebar)
