@@ -17,5 +17,8 @@ o.ignorecase = true
 o.smartcase = true
 o.updatetime = 200
 o.timeoutlen = 400
+o.winblend = 0
+o.pumblend = 0
+o.termguicolors = true
 
 

@@ -37,9 +37,19 @@ require('mini.diff').setup({
   },
 })
 
--- Theme: Catppuccin Mocha
-require('catppuccin').setup({ flavour = 'mocha' })
+-- Theme: Catppuccin Mocha with transparency
+require('catppuccin').setup({
+  flavour = 'mocha',
+  transparent_background = true,
+})
 vim.cmd.colorscheme('catppuccin-mocha')
+
+-- Additional transparency settings
+vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'none' })
+vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#89b4fa', bg = 'none', bold = true })
 
 -- Always show tabline (buffer list)
 vim.opt.showtabline = 2
