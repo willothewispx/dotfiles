@@ -23,6 +23,7 @@ end)
 
 -- File tree (neo-tree - sidebar)
 map('n', '<leader>n', '<cmd>Neotree toggle<cr>', { desc = 'Toggle Neo-tree sidebar' })
+map('n', '<leader>nf', '<cmd>Neotree reveal<cr>', { desc = 'Reveal current file in Neo-tree' })
 
 -- Diff overlay (show detailed changes)
 map('n', '<leader>do', function()
