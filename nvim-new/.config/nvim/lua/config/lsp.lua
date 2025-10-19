@@ -56,8 +56,8 @@ vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = 'LSP: References' })
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'LSP: Hover' })
 
 -- Diagnostic navigation and display (using built-in vim.diagnostic)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Prev diagnostic' })
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 }) end, { desc = 'Next diagnostic' })
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 }) end, { desc = 'Prev diagnostic' })
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = 'Show diagnostics' })
 vim.keymap.set('n', '<leader>D',
   function() vim.diagnostic.open_float(nil, { severity = vim.diagnostic.severity.ERROR }) end,
