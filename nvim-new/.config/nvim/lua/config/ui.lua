@@ -67,6 +67,20 @@ require('neo-tree').setup({
     },
     follow_current_file = {
       enabled = true,
+      leave_dirs_open = false,
+    },
+    use_libuv_file_watcher = true,
+  },
+  default_component_configs = {
+    indent = {
+      with_markers = true,
+      indent_marker = "│",
+      last_indent_marker = "└",
+      with_expanders = true,
+    },
+    name = {
+      use_git_status_colors = true,
+      highlight_opened_files = true,
     },
   },
 })
@@ -104,6 +118,10 @@ vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'NormalNC', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = 'none' })
 vim.api.nvim_set_hl(0, 'CursorLineNr', { fg = '#89b4fa', bg = 'none', bold = true })
+
+-- Neo-tree highlight for current file
+vim.api.nvim_set_hl(0, 'NeoTreeFileNameOpened', { fg = '#89b4fa', bold = true })
+vim.api.nvim_set_hl(0, 'NeoTreeCursorLine', { bg = '#313244' })
 
 -- Always show tabline (buffer list)
 vim.opt.showtabline = 2
