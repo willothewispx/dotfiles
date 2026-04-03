@@ -23,5 +23,10 @@
          "key": "ctrl+p",
          "command": "explorer.newFolder",
          "when": "filesExplorerFocus"
-     }
+    },
+    {
+        "key": "alt+cmd+s",
+        "command": "workbench.action.toggleUnifiedSidebarFromKeyboard",
+        "when": "cursor.agentIdeUnification.enabled == true && !isAuxiliaryWindowFocusedContext"
+    }
 ]
