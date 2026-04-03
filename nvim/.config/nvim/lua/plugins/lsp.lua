@@ -20,7 +20,7 @@ local function on_attach(_, bufnr)
   map("n", "gr", vim.lsp.buf.references, "LSP: References")
   map("n", "<leader>cr", vim.lsp.buf.rename, "LSP: Rename")
   map("n", "<leader>ca", vim.lsp.buf.code_action, "LSP: Code action")
-  map("n", "<leader>cf", function()
+  map("n", "<leader>ll", function()
     vim.lsp.buf.format({ async = true })
   end, "LSP: Format buffer")
 end
@@ -55,6 +55,19 @@ return {
   },
   config = function()
     local caps = require("cmp_nvim_lsp").default_capabilities()
+
+    vim.diagnostic.config({
+      virtual_text = false,
+      virtual_lines = {
+        current_line = true,
+      },
+      float = {
+        border = "rounded",
+      },
+      severity_sort = true,
+      signs = true,
+      underline = true,
+    })
 
     vim.lsp.config("*", {
       capabilities = caps,

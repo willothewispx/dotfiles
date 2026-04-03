@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **neo-tree.nvim** (explorer), **telescope.nvim** (search), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **snacks.nvim** (dashboard), **neo-tree.nvim** (explorer), **telescope.nvim** (search), **toggleterm.nvim** (Codex CLI sidebar), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **todo-comments.nvim**, **Treesitter**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -23,15 +23,35 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 |------------|-------------------------|
 | Explorer   | `lua/plugins/neo-tree.lua` (`<leader>e`) |
 | Search     | `lua/plugins/telescope.lua` (`<leader>ff`, `<leader>fg`) |
+| AI         | `lua/plugins/ai.lua` (`<leader>a`) |
+| Terminal   | `lua/plugins/toggleterm.lua` |
 | Git        | `lua/plugins/git.lua` (`<leader>g`) |
+| Todo       | `lua/plugins/todo-comments.lua` (`<leader>t`) |
+| Dashboard  | `lua/plugins/snacks.lua` |
+| Treesitter | `lua/plugins/treesitter.lua` |
 | LSP / diag | `lua/plugins/lsp.lua`   |
 | File ops   | `lua/plugins/lsp-file-operations.lua` |
 | Completion | `lua/plugins/completion.lua` |
 | Which-key  | `lua/plugins/which-key.lua` (`<leader>?`) |
 
-`nvim-tree` and `snacks.nvim` are currently disabled, not removed, so they are easy to restore later.
+`nvim-tree` is currently disabled, not removed, so it is easy to restore later.
 
 Plugin-local `keys = { ... }` in each file keeps bindings next to the feature.
+
+## Codex CLI
+
+There is a toggleterm-powered sidebar integration for the local `codex` CLI:
+
+- `<leader>ai` toggle Codex terminal
+- `<leader>aI` focus Codex terminal
+- `<leader>ab` focus the previous code window
+- `<leader>al` open/focus Codex terminal and send the current file path as context
+
+Inside the Codex terminal:
+
+- `<Esc>` or `jk` leaves terminal-input mode
+- `<C-h>` jumps back to the previous code window
+- `<C-w>` enters normal window-navigation from terminal mode
 
 ## Optional: Mason
 
