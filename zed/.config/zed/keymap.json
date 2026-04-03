@@ -12,6 +12,7 @@
       ", f": "file_finder::Toggle",
       ", s": "project_panel::ToggleFocus",
       ", g": "git_panel::ToggleFocus",
+      ", t": "workspace::ToggleBottomDock",
     },
   },
   {

@@ -7,14 +7,22 @@
 // custom settings, run the `open default settings` command
 // from the command palette or from `Zed` application menu.
 {
+  "colorize_brackets": true,
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
+  "disable_ai": false,
   "project_panel": {
     "folder_icons": true,
     "bold_folder_labels": true,
     "hide_root": false,
-    "auto_fold_dirs": true
+    "auto_fold_dirs": false,
+    "auto_reveal_entries": true,
   },
-  "buffer_font_size": 15.0,
-  "buffer_font_weight": 400.0,
+  "buffer_font_size": 14.0,
+  "buffer_font_weight": 500.0,
   "buffer_font_family": "Monaspace Neon",
   "buffer_font_features": {
     "calt": false,
