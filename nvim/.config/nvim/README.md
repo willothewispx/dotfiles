@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **nvim-tree**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **neo-tree.nvim** (explorer), **telescope.nvim** (search), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -21,10 +21,15 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 
 | Area        | File                    |
 |------------|-------------------------|
-| File tree  | `lua/plugins/file-tree.lua` (`<leader>e`) |
+| Explorer   | `lua/plugins/neo-tree.lua` (`<leader>e`) |
+| Search     | `lua/plugins/telescope.lua` (`<leader>ff`, `<leader>fg`) |
+| Git        | `lua/plugins/git.lua` (`<leader>g`) |
 | LSP / diag | `lua/plugins/lsp.lua`   |
+| File ops   | `lua/plugins/lsp-file-operations.lua` |
 | Completion | `lua/plugins/completion.lua` |
 | Which-key  | `lua/plugins/which-key.lua` (`<leader>?`) |
+
+`nvim-tree` and `snacks.nvim` are currently disabled, not removed, so they are easy to restore later.
 
 Plugin-local `keys = { ... }` in each file keeps bindings next to the feature.
 

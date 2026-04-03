@@ -5,6 +5,7 @@ return {
     preset = "modern",
     spec = {
       { "<leader>", group = "leader" },
+      { "<leader>g", group = "git" },
     },
   },
   keys = {
