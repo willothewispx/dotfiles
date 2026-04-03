@@ -3,10 +3,34 @@ return {
   cmd = "Telescope",
   dependencies = {
     "nvim-lua/plenary.nvim",
+    {
+      "nvim-telescope/telescope-fzf-native.nvim",
+      build = "make",
+    },
+    {
+      "nvim-telescope/telescope-live-grep-args.nvim",
+      version = "^1.0.0",
+    },
   },
   config = function(_, opts)
     local telescope = require("telescope")
+    local lga_actions = require("telescope-live-grep-args.actions")
+    local actions = require("telescope.actions")
+
+    opts.extensions = opts.extensions or {}
+    opts.extensions.live_grep_args = vim.tbl_deep_extend("force", opts.extensions.live_grep_args or {}, {
+      mappings = {
+        i = {
+          ["<C-k>"] = lga_actions.quote_prompt(),
+          ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+          ["<C-f>"] = actions.to_fuzzy_refine,
+        },
+      },
+    })
+
     telescope.setup(opts)
+    telescope.load_extension("fzf")
+    telescope.load_extension("live_grep_args")
   end,
   keys = {
     {
@@ -21,9 +45,9 @@ return {
     {
       "<leader>fg",
       function()
-        require("telescope.builtin").live_grep()
+        require("telescope").extensions.live_grep_args.live_grep_args()
       end,
-      desc = "Grep in files",
+      desc = "Grep in files with args",
     },
     {
       "<leader>fb",
@@ -59,18 +83,20 @@ return {
         "!.git/*",
       },
     },
+    extensions = {
+      fzf = {
+        fuzzy = true,
+        override_generic_sorter = true,
+        override_file_sorter = true,
+        case_mode = "smart_case",
+      },
+      live_grep_args = {
+        auto_quoting = true,
+      },
+    },
     pickers = {
       find_files = {
         hidden = true,
-      },
-      live_grep = {
-        additional_args = function()
-          return {
-            "--hidden",
-            "--glob",
-            "!.git/*",
-          }
-        end,
       },
     },
   },

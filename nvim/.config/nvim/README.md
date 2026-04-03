@@ -22,11 +22,11 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | Area        | File                    |
 |------------|-------------------------|
 | Explorer   | `lua/plugins/neo-tree.lua` (`<leader>e`) |
-| Search     | `lua/plugins/telescope.lua` (`<leader>ff`, `<leader>fg`) |
+| Search     | `lua/plugins/telescope.lua` (`<leader>ff`, `<leader>fg`, `<leader>ft`) |
 | AI         | `lua/plugins/ai.lua` (`<leader>a`) |
 | Terminal   | `lua/plugins/toggleterm.lua` |
 | Git        | `lua/plugins/git.lua` (`<leader>g`) |
-| Todo       | `lua/plugins/todo-comments.lua` (`<leader>t`) |
+| Todo       | `lua/plugins/todo-comments.lua` (`<leader>ft`, `<leader>tq`) |
 | Dashboard  | `lua/plugins/snacks.lua` |
 | Treesitter | `lua/plugins/treesitter.lua` |
 | LSP / diag | `lua/plugins/lsp.lua`   |
@@ -48,6 +48,20 @@ There is a toggleterm-powered sidebar integration for the local `codex` CLI:
 - `<leader>al` open/focus Codex terminal and send the current file path as context
 
 Inside the Codex terminal:
+
+- `<Esc>` or `jk` leaves terminal-input mode
+- `<C-h>` jumps back to the previous code window
+- `<C-w>` enters normal window-navigation from terminal mode
+
+## Floating Terminal
+
+There is also a general floating shell terminal:
+
+- `<leader>tt` toggle floating terminal
+- `<leader>tT` toggle second floating terminal
+- `<leader>tb` focus the previous code window
+
+Inside the floating terminal:
 
 - `<Esc>` or `jk` leaves terminal-input mode
 - `<C-h>` jumps back to the previous code window

@@ -19,8 +19,7 @@ return {
       end,
       desc = "Previous todo comment",
     },
-    { "<leader>tt", "<cmd>TodoTelescope<cr>", desc = "Todo comments" },
-    { "<leader>tq", "<cmd>TodoQuickFix<cr>", desc = "Todo quickfix" },
+    { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Find todo comments" },
   },
   opts = {
     signs = true,

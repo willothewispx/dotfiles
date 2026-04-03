@@ -6,8 +6,9 @@ return {
     spec = {
       { "<leader>", group = "leader" },
       { "<leader>a", group = "ai" },
+      { "<leader>f", group = "find" },
       { "<leader>g", group = "git" },
-      { "<leader>t", group = "todo" },
+      { "<leader>t", group = "terminal / todo" },
     },
   },
   keys = {
