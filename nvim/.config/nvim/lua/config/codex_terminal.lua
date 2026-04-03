@@ -15,6 +15,7 @@ end
 local codex = Terminal:new({
   cmd = "codex",
   hidden = true,
+  count = 99,
   direction = "vertical",
   close_on_exit = false,
   dir = project_root(),

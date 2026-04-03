@@ -19,6 +19,18 @@ return {
       end,
       desc = "Toggle file tree",
     },
+    {
+      "<leader>E",
+      function()
+        require("neo-tree.command").execute({
+          reveal = true,
+          source = "filesystem",
+          position = "left",
+          focus = true,
+        })
+      end,
+      desc = "Focus file tree",
+    },
   },
   opts = {
     close_if_last_window = true,
