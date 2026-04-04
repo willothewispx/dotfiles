@@ -1,12 +1,13 @@
 local servers = {
-  "lua_ls",
-  "ts_ls",
-  "pyright",
   "bashls",
-  "html",
   "cssls",
+  "dockerls",
+  "html",
   "jsonls",
   "kulala_ls",
+  "lua_ls",
+  "pyright",
+  "ts_ls",
 }
 
 local function format_buffer(bufnr)

@@ -7,6 +7,7 @@ return {
       "bash",
       "css",
       "diff",
+      "dockerfile",
       "go",
       "html",
       "http",
