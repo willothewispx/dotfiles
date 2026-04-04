@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **snacks.nvim** (dashboard), **neo-tree.nvim** (explorer), **telescope.nvim** (search), **toggleterm.nvim** (Codex CLI sidebar), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **todo-comments.nvim**, **Treesitter**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **snacks.nvim** (dashboard), **neo-tree.nvim** (explorer), **telescope.nvim** (search), **sidekick.nvim** (Codex CLI sidebar), **toggleterm.nvim** (floating terminals), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **todo-comments.nvim**, **Treesitter**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -40,18 +40,17 @@ Plugin-local `keys = { ... }` in each file keeps bindings next to the feature.
 
 ## Codex CLI
 
-There is a toggleterm-powered sidebar integration for the local `codex` CLI:
+There is a Sidekick-powered sidebar integration for the local `codex` CLI:
 
 - `<leader>ai` toggle Codex terminal
 - `<leader>aI` focus Codex terminal
-- `<leader>ab` focus the previous code window
+- `<leader>ab` focus the previous window
 - `<leader>al` open/focus Codex terminal and send the current file path as context
+- `<leader>as` select an installed AI CLI
 
-Inside the Codex terminal:
+Sidekick is configured in CLI-only mode. Next Edit Suggestions (NES) are disabled.
 
-- `<Esc>` or `jk` leaves terminal-input mode
-- `<C-h>` jumps back to the previous code window
-- `<C-w>` enters normal window-navigation from terminal mode
+Codex session persistence is enabled through `tmux`, so hiding and reopening the sidebar should reconnect to the same Codex session.
 
 ## Floating Terminal
 

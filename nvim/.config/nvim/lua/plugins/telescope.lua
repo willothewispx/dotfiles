@@ -57,6 +57,13 @@ return {
       desc = "Find buffers",
     },
     {
+      "<leader>fs",
+      function()
+        require("telescope.builtin").current_buffer_fuzzy_find()
+      end,
+      desc = "Find in current file",
+    },
+    {
       "<leader>fh",
       function()
         require("telescope.builtin").help_tags()
@@ -66,7 +73,7 @@ return {
   },
   opts = {
     defaults = {
-      path_display = { "smart" },
+      path_display = { "full" },
       file_ignore_patterns = {
         "%.git/",
       },

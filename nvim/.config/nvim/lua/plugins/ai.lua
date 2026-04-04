@@ -1,54 +1,62 @@
 return {
-  "nvim-lua/plenary.nvim",
-  keys = {
-    {
-      "<leader>tt",
-      function()
-        require("config.float_terminal").toggle()
-      end,
-      desc = "Floating terminal",
+  "folke/sidekick.nvim",
+  dependencies = {
+    "folke/snacks.nvim",
+  },
+  opts = {
+    nes = {
+      enabled = false,
     },
+    cli = {
+      watch = true,
+      mux = {
+        enabled = true,
+        backend = "tmux",
+        create = "terminal",
+      },
+      win = {
+        layout = "right",
+        split = {
+          width = 0.42,
+        },
+      },
+    },
+  },
+  keys = {
     {
       "<leader>ai",
       function()
-        require("config.codex_terminal").toggle()
+        require("sidekick.cli").toggle({ name = "codex", focus = true })
       end,
       desc = "Codex terminal",
     },
     {
       "<leader>aI",
       function()
-        require("config.codex_terminal").focus()
+        require("sidekick.cli").focus({ name = "codex" })
       end,
       desc = "Focus Codex terminal",
     },
     {
       "<leader>ab",
       function()
-        require("config.codex_terminal").focus_code()
+        vim.cmd("wincmd p")
       end,
-      desc = "Focus code window",
-    },
-    {
-      "<leader>tb",
-      function()
-        require("config.float_terminal").focus_code()
-      end,
-      desc = "Focus code from terminal",
-    },
-    {
-      "<leader>tT",
-      function()
-        require("config.float_terminal").toggle_second()
-      end,
-      desc = "Second floating terminal",
+      desc = "Focus previous window",
     },
     {
       "<leader>al",
       function()
-        require("config.codex_terminal").run_here()
+        require("sidekick.cli").send({ name = "codex", msg = "{file}" })
       end,
       desc = "Ask Codex about file",
+    },
+    {
+      "<leader>as",
+      function()
+        require("sidekick.cli").select({ filter = { installed = true }, focus = true })
+      end,
+      desc = "Select AI CLI",
     },
   },
 }
