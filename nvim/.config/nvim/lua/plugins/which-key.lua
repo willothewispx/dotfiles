@@ -8,6 +8,8 @@ return {
       { "<leader>a", group = "ai" },
       { "<leader>f", group = "find" },
       { "<leader>g", group = "git" },
+      { "<leader>l", group = "lines / lsp" },
+      { "<leader>R", group = "rest" },
       { "<leader>t", group = "terminal / todo" },
     },
   },

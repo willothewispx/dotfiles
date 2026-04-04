@@ -6,7 +6,31 @@ local servers = {
   "html",
   "cssls",
   "jsonls",
+  "kulala_ls",
 }
+
+local function format_buffer(bufnr)
+  local ft = vim.bo[bufnr].filetype
+  if (ft == "http" or ft == "rest") and vim.fn.executable("kulala-fmt") == 1 then
+    local file = vim.api.nvim_buf_get_name(bufnr)
+    if file == "" then
+      vim.notify("Save the HTTP file before formatting with kulala-fmt.", vim.log.levels.WARN)
+      return
+    end
+
+    vim.cmd.write()
+    local result = vim.system({ "kulala-fmt", "format", file }, { text = true }):wait()
+    if result.code ~= 0 then
+      vim.notify(result.stderr ~= "" and result.stderr or "kulala-fmt failed", vim.log.levels.ERROR)
+      return
+    end
+
+    vim.cmd.edit()
+    return
+  end
+
+  vim.lsp.buf.format({ async = true, bufnr = bufnr })
+end
 
 local function on_attach(_, bufnr)
   local function map(mode, lhs, rhs, desc)
@@ -21,7 +45,7 @@ local function on_attach(_, bufnr)
   map("n", "<leader>cr", vim.lsp.buf.rename, "LSP: Rename")
   map("n", "<leader>ca", vim.lsp.buf.code_action, "LSP: Code action")
   map("n", "<leader>ll", function()
-    vim.lsp.buf.format({ async = true })
+    format_buffer(bufnr)
   end, "LSP: Format buffer")
 end
 

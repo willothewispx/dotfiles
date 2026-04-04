@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **snacks.nvim** (dashboard), **neo-tree.nvim** (explorer), **telescope.nvim** (search), **sidekick.nvim** (Codex CLI sidebar), **toggleterm.nvim** (floating terminals), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **todo-comments.nvim**, **Treesitter**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **lualine.nvim**, **snacks.nvim** (dashboard), **neo-tree.nvim** (explorer), **telescope.nvim** (search), **sidekick.nvim** (Codex CLI sidebar), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **todo-comments.nvim**, **Treesitter**, **nvim-autopairs**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -25,6 +25,10 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | Search     | `lua/plugins/telescope.lua` (`<leader>ff`, `<leader>fg`, `<leader>ft`) |
 | AI         | `lua/plugins/ai.lua` (`<leader>a`) |
 | Terminal   | `lua/plugins/toggleterm.lua` |
+| Statusline | `lua/plugins/lualine.lua` |
+| HTTP       | `lua/plugins/kulala.lua` (`<leader>R`) |
+| Sorting    | `lua/plugins/sort.lua` (`<leader>ls`) |
+| Editing    | `lua/plugins/autopairs.lua`, `lua/plugins/rainbow-delimiters.lua` |
 | Git        | `lua/plugins/git.lua` (`<leader>g`) |
 | Todo       | `lua/plugins/todo-comments.lua` (`<leader>ft`, `<leader>tq`) |
 | Dashboard  | `lua/plugins/snacks.lua` |
@@ -65,6 +69,15 @@ Inside the floating terminal:
 - `<Esc>` or `jk` leaves terminal-input mode
 - `<C-h>` jumps back to the previous code window
 - `<C-w>` enters normal window-navigation from terminal mode
+
+## HTTP Requests
+
+For `.http` and `.rest` files, Kulala is configured with:
+
+- `<leader>Rs` send request under cursor
+- `<leader>Ra` send all requests
+- `<leader>Rb` open scratchpad
+- `<leader>Re` select environment
 
 ## Optional: Mason
 
