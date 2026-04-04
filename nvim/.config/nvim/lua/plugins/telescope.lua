@@ -16,6 +16,7 @@ return {
     local telescope = require("telescope")
     local lga_actions = require("telescope-live-grep-args.actions")
     local actions = require("telescope.actions")
+    local open_with_trouble = require("trouble.sources.telescope").open
 
     opts.extensions = opts.extensions or {}
     opts.extensions.live_grep_args = vim.tbl_deep_extend("force", opts.extensions.live_grep_args or {}, {
@@ -25,6 +26,15 @@ return {
           ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
           ["<C-f>"] = actions.to_fuzzy_refine,
         },
+      },
+    })
+    opts.defaults = opts.defaults or {}
+    opts.defaults.mappings = vim.tbl_deep_extend("force", opts.defaults.mappings or {}, {
+      i = {
+        ["<C-t>"] = open_with_trouble,
+      },
+      n = {
+        ["<C-t>"] = open_with_trouble,
       },
     })
 

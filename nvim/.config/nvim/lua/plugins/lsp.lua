@@ -49,6 +49,16 @@ local function on_attach(_, bufnr)
   end, "LSP: Format buffer")
 end
 
+local lua_workspace_library = {
+  vim.env.VIMRUNTIME,
+  "${3rd}/luv/library",
+}
+
+local snacks_library = vim.fn.stdpath("data") .. "/lazy/snacks.nvim"
+if vim.uv.fs_stat(snacks_library) then
+  table.insert(lua_workspace_library, snacks_library)
+end
+
 return {
   "neovim/nvim-lspconfig",
   lazy = false,
@@ -65,14 +75,14 @@ return {
     {
       "[d",
       function()
-        vim.diagnostic.goto_prev({ float = true })
+        vim.diagnostic.jump({ count = -1, float = true })
       end,
       desc = "Previous diagnostic",
     },
     {
       "]d",
       function()
-        vim.diagnostic.goto_next({ float = true })
+        vim.diagnostic.jump({ count = 1, float = true })
       end,
       desc = "Next diagnostic",
     },
@@ -104,10 +114,7 @@ return {
           runtime = { version = "LuaJIT" },
           workspace = {
             checkThirdParty = false,
-            library = {
-              vim.env.VIMRUNTIME,
-              "${3rd}/luv/library",
-            },
+            library = lua_workspace_library,
           },
         },
       },

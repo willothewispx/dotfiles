@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard), **neo-tree.nvim** (explorer), **telescope.nvim** (search), **sidekick.nvim** (Codex CLI sidebar), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **todo-comments.nvim**, **Treesitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard), **neo-tree.nvim** (explorer), **telescope.nvim** (search), **sidekick.nvim** (Codex CLI sidebar), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **trouble.nvim**, **todo-comments.nvim**, **Treesitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -28,6 +28,7 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | Terminal   | `lua/plugins/toggleterm.lua` |
 | Statusline | `lua/plugins/lualine.lua` |
 | HTTP       | `lua/plugins/kulala.lua` (`<leader>R`) |
+| Trouble    | `lua/plugins/trouble.lua` (`<leader>x`) |
 | Sorting    | `lua/plugins/sort.lua` (`<leader>ls`) |
 | Editing    | `lua/plugins/autopairs.lua`, `lua/plugins/surround.lua`, `lua/plugins/rainbow-delimiters.lua` |
 | Git        | `lua/plugins/git.lua` (`<leader>g`) |

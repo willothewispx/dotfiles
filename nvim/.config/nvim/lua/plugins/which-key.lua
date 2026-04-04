@@ -12,6 +12,7 @@ return {
       { "<leader>l", group = "lines / lsp" },
       { "<leader>R", group = "rest" },
       { "<leader>t", group = "terminal / todo" },
+      { "<leader>x", group = "trouble" },
     },
   },
   keys = {
