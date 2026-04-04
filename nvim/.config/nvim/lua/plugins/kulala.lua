@@ -4,6 +4,7 @@ return {
   opts = {
     global_keymaps = false,
     kulala_keymaps_prefix = "",
+    environment_scope = "g",
   },
   keys = {
     { "<leader>Rs", desc = "HTTP send request" },

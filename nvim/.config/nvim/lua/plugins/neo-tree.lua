@@ -42,6 +42,7 @@ return {
       "Trouble",
       "qf",
       "edgy",
+      "nofile",
       "text.kulala_ui",
       "json.kulala_ui",
       "http.kulala_ui",
