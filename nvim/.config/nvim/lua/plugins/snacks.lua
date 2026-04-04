@@ -7,6 +7,32 @@ return {
   },
   ---@type snacks.Config
   opts = {
+    input = {
+      enabled = true,
+    },
+    notifier = {
+      enabled = true,
+      timeout = 3000,
+      style = "compact",
+    },
+    scroll = {
+      enabled = true,
+    },
+    scope = {
+      enabled = true,
+    },
+    statuscolumn = {
+      enabled = true,
+      left = { "mark", "sign" },
+      right = { "fold", "git" },
+      folds = {
+        open = false,
+        git_hl = false,
+      },
+      git = {
+        patterns = { "GitSign", "MiniDiffSign" },
+      },
+    },
     dashboard = {
       enabled = true,
       width = 72,

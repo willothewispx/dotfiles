@@ -6,6 +6,7 @@ return {
     spec = {
       { "<leader>", group = "leader" },
       { "<leader>a", group = "ai" },
+      { "<leader>b", group = "buffers" },
       { "<leader>f", group = "find" },
       { "<leader>g", group = "git" },
       { "<leader>l", group = "lines / lsp" },

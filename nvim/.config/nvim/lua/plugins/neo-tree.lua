@@ -37,6 +37,15 @@ return {
     popup_border_style = "rounded",
     enable_git_status = true,
     enable_diagnostics = true,
+    open_files_do_not_replace_types = {
+      "terminal",
+      "Trouble",
+      "qf",
+      "edgy",
+      "text.kulala_ui",
+      "json.kulala_ui",
+      "http.kulala_ui",
+    },
     filesystem = {
       hijack_netrw_behavior = "open_default",
       filtered_items = {
