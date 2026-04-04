@@ -88,4 +88,20 @@ return {
       },
     },
   },
+  keys = {
+    {
+      "<leader>un",
+      function()
+        Snacks.notifier.show_history()
+      end,
+      desc = "Notification history",
+    },
+    {
+      "<leader>uN",
+      function()
+        Snacks.notifier.hide()
+      end,
+      desc = "Dismiss notifications",
+    },
+  },
 }
