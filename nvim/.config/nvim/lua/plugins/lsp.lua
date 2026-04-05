@@ -3,6 +3,7 @@ local servers = {
   "cssls",
   "dockerls",
   "html",
+  "gopls",
   "jsonls",
   "kulala_ls",
   "lua_ls",
@@ -42,7 +43,20 @@ local function on_attach(_, bufnr)
   map("n", "gD", vim.lsp.buf.declaration, "LSP: Goto declaration")
   map("n", "K", vim.lsp.buf.hover, "LSP: Hover")
   map("n", "gi", vim.lsp.buf.implementation, "LSP: Goto implementation")
-  map("n", "gr", vim.lsp.buf.references, "LSP: References")
+  map("n", "gr", function()
+    vim.cmd("Trouble lsp_references toggle focus=false win.position=bottom")
+  end, "LSP: References (Trouble)")
+  map("n", "gR", function()
+    require("trouble").focus("lsp_references")
+  end, "LSP: Focus references (Trouble)")
+  map("n", "<leader>qr", function()
+    vim.lsp.buf.references({ on_list = function(opts) vim.fn.setqflist({}, " ", opts) end })
+    vim.cmd("copen")
+  end, "LSP: References (quickfix)")
+  map("n", "<leader>qi", function()
+    vim.lsp.buf.implementation({ on_list = function(opts) vim.fn.setqflist({}, " ", opts) end })
+    vim.cmd("copen")
+  end, "LSP: Implementations (quickfix)")
   map("n", "<leader>cr", vim.lsp.buf.rename, "LSP: Rename")
   map("n", "<leader>ca", vim.lsp.buf.code_action, "LSP: Code action")
   map("n", "<leader>ll", function()
