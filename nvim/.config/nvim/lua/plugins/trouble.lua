@@ -4,6 +4,24 @@ return {
   dependencies = {
     "nvim-tree/nvim-web-devicons",
   },
+  specs = {
+    {
+      "folke/snacks.nvim",
+      opts = function(_, opts)
+        opts = opts or {}
+        opts.picker = opts.picker or {}
+        opts.picker.actions = require("trouble.sources.snacks").actions
+        opts.picker.win = opts.picker.win or {}
+        opts.picker.win.input = opts.picker.win.input or {}
+        opts.picker.win.input.keys = vim.tbl_deep_extend("force", opts.picker.win.input.keys or {}, {
+          ["<c-t>"] = {
+            "trouble_open",
+            mode = { "n", "i" },
+          },
+        })
+      end,
+    },
+  },
   keys = {
     { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
     { "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer diagnostics (Trouble)" },

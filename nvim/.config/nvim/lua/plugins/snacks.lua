@@ -7,6 +7,18 @@ return {
   },
   ---@type snacks.Config
   opts = {
+    picker = {
+      sources = {
+        files = {
+          hidden = true,
+          exclude = { ".git" },
+        },
+        grep = {
+          hidden = true,
+          exclude = { ".git" },
+        },
+      },
+    },
     input = {
       enabled = true,
     },
@@ -89,6 +101,46 @@ return {
     },
   },
   keys = {
+    {
+      "<leader>ff",
+      function()
+        Snacks.picker.files()
+      end,
+      desc = "Find files",
+    },
+    {
+      "<leader>fg",
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = "Grep in files",
+    },
+    {
+      "<leader>fb",
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = "Find buffers",
+    },
+    {
+      "<leader>fs",
+      function()
+        Snacks.picker.lines()
+      end,
+      desc = "Find in current file",
+    },
+    {
+      "<leader>fh",
+      function()
+        Snacks.picker.help()
+      end,
+      desc = "Find help",
+    },
+    -- Extension/filetype one-off grep mappings are no longer needed.
+    -- Useful picker syntax:
+    --   `file:lua$ 'function` -> match exact `function` in lua files
+    --   `!node_modules file:ts$ render` -> exclude node_modules, narrow to ts files
+    --   `needle -- -e=lua` or `needle -- -g=*.ts` -> pass picker/rg args after `--`
     {
       "<leader>un",
       function()

@@ -1,3 +1,29 @@
+local function node_search_dir(state)
+  local node = state.tree and state.tree:get_node()
+  if not node then
+    return nil
+  end
+
+  local path = node.path or node:get_id()
+  if node.type == "directory" then
+    return path
+  end
+
+  return vim.fs.dirname(path)
+end
+
+local function search_in_node_dir(state, picker)
+  local dir = node_search_dir(state)
+  if not dir or dir == "" then
+    vim.notify("No folder selected in Neo-tree", vim.log.levels.WARN)
+    return
+  end
+
+  Snacks.picker[picker]({
+    cwd = dir,
+  })
+end
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
@@ -48,6 +74,14 @@ return {
       "http.kulala_ui",
     },
     filesystem = {
+      commands = {
+        search_files = function(state)
+          search_in_node_dir(state, "files")
+        end,
+        search_grep = function(state)
+          search_in_node_dir(state, "grep")
+        end,
+      },
       hijack_netrw_behavior = "open_default",
       filtered_items = {
         visible = true,
@@ -63,6 +97,8 @@ return {
         mappings = {
           ["."] = "set_root",
           ["H"] = "toggle_hidden",
+          ["F"] = "search_files",
+          ["G"] = "search_grep",
         },
       },
     },

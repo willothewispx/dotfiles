@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard), **neo-tree.nvim** (explorer), **telescope.nvim** (search), **sidekick.nvim** (Codex CLI sidebar), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **trouble.nvim**, **todo-comments.nvim**, **Treesitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker), **neo-tree.nvim** (explorer), **sidekick.nvim** (Codex CLI sidebar), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **trouble.nvim**, **todo-comments.nvim**, **Treesitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -22,7 +22,7 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | Area        | File                    |
 |------------|-------------------------|
 | Explorer   | `lua/plugins/neo-tree.lua` (`<leader>e`) |
-| Search     | `lua/plugins/telescope.lua` (`<leader>ff`, `<leader>fg`, `<leader>ft`) |
+| Search     | `lua/plugins/snacks.lua` (`<leader>ff`, `<leader>fg`, `<leader>fb`, `<leader>fs`, `<leader>fh`) |
 | AI         | `lua/plugins/ai.lua` (`<leader>a`) |
 | Buffers    | `lua/plugins/bufferline.lua` (`[b`, `]b`, `<leader>bp`) |
 | Terminal   | `lua/plugins/toggleterm.lua` |
@@ -43,6 +43,46 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 `nvim-tree` is currently disabled, not removed, so it is easy to restore later.
 
 Plugin-local `keys = { ... }` in each file keeps bindings next to the feature.
+
+## Search
+
+Search now uses `snacks.nvim` picker instead of Telescope:
+
+- `<leader>ff` find files
+- `<leader>fg` grep in files
+- `<leader>fb` find buffers
+- `<leader>fs` search lines in the current buffer
+- `<leader>fh` search help tags
+- `<leader>ft` search todo comments
+
+The picker supports fzf search syntax, field searches, and picker arguments after `--`.
+
+- `foo` fuzzy match
+- `foo bar` both terms must match
+- `'foo` exact match
+- `'foo'` exact word-boundary match
+- `^foo` prefix match
+- `foo$` suffix match
+- `!foo` exclude matches containing `foo`
+- `!^foo` exclude matches starting with `foo`
+- `!foo$` exclude matches ending with `foo`
+- `foo | bar` OR query
+- `file:lua$ 'function` match exact `function` in files ending in `lua`
+- `file:README ^install` match entries in files whose path contains `README`, with text starting with `install`
+- `main.ts:120` or `main.ts:120:8` jump directly to file position
+- `foo -- -e=lua` grep only Lua files
+- `foo -- -g=*.ts` grep only TypeScript files
+- `foo -- -g=*.{ts,tsx}` grep only TS/TSX files
+- `init -- -e=lua` in `<leader>ff` narrows file search to Lua files
+
+## Explorer Search
+
+Inside Neo-tree:
+
+- `F` search files in the hovered folder
+- `G` grep in the hovered folder
+
+If the cursor is on a file, both mappings use that file's parent folder.
 
 ## Codex CLI
 
