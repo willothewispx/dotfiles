@@ -14,7 +14,6 @@ return {
       "http",
       "javascript",
       "json",
-      "jsonc",
       "lua",
       "markdown",
       "markdown_inline",
@@ -31,9 +30,10 @@ return {
     local ts = require("nvim-treesitter")
     ts.setup()
     ts.install(languages)
+    vim.treesitter.language.register("json", "jsonc")
 
     vim.api.nvim_create_autocmd("FileType", {
-      pattern = languages,
+      pattern = vim.list_extend(vim.deepcopy(languages), { "jsonc" }),
       callback = function(args)
         pcall(vim.treesitter.start, args.buf)
         vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
