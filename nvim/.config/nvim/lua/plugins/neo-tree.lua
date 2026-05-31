@@ -24,6 +24,31 @@ local function search_in_node_dir(state, picker)
   })
 end
 
+local tree_width = 36
+
+local function reset_tree_width(state)
+  if state.window.position == "float" or not state.winid then
+    return
+  end
+
+  state.window.auto_expand_width = false
+  state.window.last_user_width = tree_width
+  state.window.width = tree_width
+  state.win_width = tree_width
+  vim.api.nvim_win_set_width(state.winid, tree_width)
+end
+
+local function open_and_reset_width(state)
+  local node = state.tree and state.tree:get_node()
+  require("neo-tree.sources.filesystem.commands").open(state)
+
+  if node and node.type == "file" then
+    vim.schedule(function()
+      reset_tree_width(state)
+    end)
+  end
+end
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
@@ -81,6 +106,7 @@ return {
         search_grep = function(state)
           search_in_node_dir(state, "grep")
         end,
+        open_and_reset_width = open_and_reset_width,
       },
       hijack_netrw_behavior = "open_default",
       filtered_items = {
@@ -96,6 +122,7 @@ return {
       window = {
         mappings = {
           ["."] = "set_root",
+          ["<cr>"] = "open_and_reset_width",
           ["H"] = "toggle_hidden",
           ["F"] = "search_files",
           ["G"] = "search_grep",
@@ -104,7 +131,7 @@ return {
     },
     window = {
       position = "left",
-      width = 36,
+      width = tree_width,
     },
   },
 }
