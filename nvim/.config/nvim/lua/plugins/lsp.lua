@@ -34,6 +34,11 @@ local function format_buffer(bufnr)
   vim.lsp.buf.format({ async = true, bufnr = bufnr })
 end
 
+local function open_in_quickfix(list)
+  vim.fn.setqflist({}, " ", list)
+  vim.cmd("botright copen")
+end
+
 local function on_attach(_, bufnr)
   local function map(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
@@ -44,18 +49,12 @@ local function on_attach(_, bufnr)
   map("n", "K", vim.lsp.buf.hover, "LSP: Hover")
   map("n", "gi", function()
     vim.lsp.buf.implementation({
-      on_list = function(opts)
-        vim.fn.setqflist({}, " ", opts)
-        vim.cmd("copen")
-      end,
+      on_list = open_in_quickfix,
     })
   end, "LSP: Implementations (quickfix)")
   map("n", "gr", function()
-    vim.lsp.buf.references({
-      on_list = function(opts)
-        vim.fn.setqflist({}, " ", opts)
-        vim.cmd("copen")
-      end,
+    vim.lsp.buf.references(nil, {
+      on_list = open_in_quickfix,
     })
   end, "LSP: References (quickfix)")
   map("n", "gR", function()
