@@ -23,7 +23,24 @@ return {
           path = 1,
         },
       },
-      lualine_x = { "encoding", "fileformat", "filetype" },
+      lualine_x = {
+        function()
+          local ft = vim.bo.filetype
+          if ft ~= "http" and ft ~= "rest" and ft ~= "kulala_ui" then
+            return ""
+          end
+
+          local ok, kulala = pcall(require, "kulala")
+          if not ok then
+            return ""
+          end
+
+          return "Kulala " .. kulala.get_selected_env()
+        end,
+        "encoding",
+        "fileformat",
+        "filetype",
+      },
       lualine_y = { "progress" },
       lualine_z = { "location" },
     },
