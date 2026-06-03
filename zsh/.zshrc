@@ -17,6 +17,14 @@ export PATH=$HOME/go/bin:$PATH
 # Editor
 export EDITOR="nvim"
 
+# History
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+
 [ -f $HOME/.zprofile ] && source $HOME/.zprofile
 
 #-------------------------------------------------------------------------------
