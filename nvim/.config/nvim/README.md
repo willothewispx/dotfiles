@@ -51,13 +51,17 @@ Plugin-local `keys = { ... }` in each file keeps bindings next to the feature.
 Search now uses `snacks.nvim` picker instead of Telescope:
 
 - `<leader>ff` find files
+- `<leader>fF` find files, including `.gitignore`d files
 - `<leader>fg` grep in files
+- `<leader>fG` grep in files, including `.gitignore`d files
 - `<leader>fb` find buffers
 - `<leader>fs` search lines in the current buffer
 - `<leader>fh` search help tags
 - `<leader>ft` search todo comments
+- `<leader>gl` search git log
 
 The picker supports fzf search syntax, field searches, and picker arguments after `--`.
+The ignored-file variants use Snacks' `ignored = true`; `.git` itself stays excluded by the shared picker config.
 
 - `foo` fuzzy match
 - `foo bar` both terms must match

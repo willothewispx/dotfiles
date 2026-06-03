@@ -109,11 +109,25 @@ return {
       desc = "Find files",
     },
     {
+      "<leader>fF",
+      function()
+        Snacks.picker.files({ ignored = true })
+      end,
+      desc = "Find ignored files",
+    },
+    {
       "<leader>fg",
       function()
         Snacks.picker.grep()
       end,
       desc = "Grep in files",
+    },
+    {
+      "<leader>fG",
+      function()
+        Snacks.picker.grep({ ignored = true })
+      end,
+      desc = "Grep ignored files",
     },
     {
       "<leader>fb",
@@ -135,6 +149,13 @@ return {
         Snacks.picker.help()
       end,
       desc = "Find help",
+    },
+    {
+      "<leader>gl",
+      function()
+        Snacks.picker.git_log()
+      end,
+      desc = "Git log",
     },
     -- Extension/filetype one-off grep mappings are no longer needed.
     -- Useful picker syntax:
