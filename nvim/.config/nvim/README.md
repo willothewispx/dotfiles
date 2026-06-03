@@ -34,6 +34,7 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | Sorting    | `lua/plugins/sort.lua` (`<leader>ls`) |
 | Editing    | `lua/plugins/autopairs.lua`, `lua/plugins/surround.lua`, `lua/plugins/rainbow-delimiters.lua` |
 | Git        | `lua/plugins/git.lua` (`<leader>g`) |
+| Lazygit    | `lua/plugins/snacks.lua` (`<leader>Gg`, `<leader>Gl`, `<leader>Gf`, `<leader>Gb`, `<leader>Gs`) |
 | Todo       | `lua/plugins/todo-comments.lua` (`<leader>ft`, `<leader>tq`) |
 | Dashboard  | `lua/plugins/snacks.lua` |
 | Treesitter | `lua/plugins/treesitter.lua` |

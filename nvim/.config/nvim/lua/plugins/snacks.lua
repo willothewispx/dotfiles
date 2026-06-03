@@ -19,6 +19,9 @@ return {
         },
       },
     },
+    lazygit = {
+      configure = true,
+    },
     input = {
       enabled = true,
     },
@@ -101,6 +104,41 @@ return {
     },
   },
   keys = {
+    {
+      "<leader>Gg",
+      function()
+        Snacks.lazygit()
+      end,
+      desc = "Lazygit",
+    },
+    {
+      "<leader>Gl",
+      function()
+        Snacks.lazygit.log()
+      end,
+      desc = "Lazygit log",
+    },
+    {
+      "<leader>Gf",
+      function()
+        Snacks.lazygit.log_file()
+      end,
+      desc = "Lazygit file log",
+    },
+    {
+      "<leader>Gb",
+      function()
+        Snacks.lazygit.open({ args = { "branch" } })
+      end,
+      desc = "Lazygit branches",
+    },
+    {
+      "<leader>Gs",
+      function()
+        Snacks.lazygit.open({ args = { "stash" } })
+      end,
+      desc = "Lazygit stash",
+    },
     {
       "<leader>ff",
       function()
