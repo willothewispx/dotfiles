@@ -34,11 +34,6 @@ local function format_buffer(bufnr)
   vim.lsp.buf.format({ async = true, bufnr = bufnr })
 end
 
-local function open_in_quickfix(list)
-  vim.fn.setqflist({}, " ", list)
-  vim.cmd("botright copen")
-end
-
 local function on_attach(_, bufnr)
   local function map(mode, lhs, rhs, desc)
     vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
@@ -48,24 +43,14 @@ local function on_attach(_, bufnr)
   map("n", "gD", vim.lsp.buf.declaration, "LSP: Goto declaration")
   map("n", "K", vim.lsp.buf.hover, "LSP: Hover")
   map("n", "gi", function()
-    vim.lsp.buf.implementation({
-      on_list = open_in_quickfix,
-    })
-  end, "LSP: Implementations (quickfix)")
+    Snacks.picker.lsp_implementations()
+  end, "LSP: Implementations")
   map("n", "gr", function()
-    vim.lsp.buf.references(nil, {
-      on_list = open_in_quickfix,
-    })
-  end, "LSP: References (quickfix)")
+    Snacks.picker.lsp_references()
+  end, "LSP: References")
   map("n", "gR", function()
     require("trouble").focus("lsp_references")
   end, "LSP: Focus references (Trouble)")
-  map("n", "<leader>gr", function()
-    vim.cmd("Trouble lsp_references toggle focus=false win.position=bottom")
-  end, "LSP: References (Trouble)")
-  map("n", "<leader>gi", function()
-    vim.cmd("Trouble lsp_implementations toggle focus=false win.position=bottom")
-  end, "LSP: Implementations (Trouble)")
   map("n", "<leader>cr", vim.lsp.buf.rename, "LSP: Rename")
   map("n", "<leader>ca", vim.lsp.buf.code_action, "LSP: Code action")
   map("n", "<leader>ll", function()
