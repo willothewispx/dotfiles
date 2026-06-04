@@ -65,7 +65,7 @@ return {
           { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
           { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
           { icon = " ", key = "e", desc = "Explorer", action = ":Neotree toggle reveal left" },
-          { icon = "󰊢 ", key = "n", desc = "Neogit", action = ":lua require('neogit').open()" },
+          { icon = "󰊢 ", key = "n", desc = "Lazygit", action = ":lua Snacks.lazygit()" },
           { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
           { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', { cwd = vim.fn.stdpath('config') })" },
           { icon = " ", key = "d", desc = "Diff View", action = ":DiffviewOpen" },
@@ -105,35 +105,35 @@ return {
   },
   keys = {
     {
-      "<leader>Gg",
+      "<leader>gg",
       function()
         Snacks.lazygit()
       end,
       desc = "Lazygit",
     },
     {
-      "<leader>Gl",
+      "<leader>gl",
       function()
         Snacks.lazygit.log()
       end,
       desc = "Lazygit log",
     },
     {
-      "<leader>Gf",
+      "<leader>gf",
       function()
         Snacks.lazygit.log_file()
       end,
       desc = "Lazygit file log",
     },
     {
-      "<leader>Gb",
+      "<leader>gb",
       function()
         Snacks.lazygit.open({ args = { "branch" } })
       end,
       desc = "Lazygit branches",
     },
     {
-      "<leader>Gs",
+      "<leader>gs",
       function()
         Snacks.lazygit.open({ args = { "stash" } })
       end,
@@ -187,13 +187,6 @@ return {
         Snacks.picker.help()
       end,
       desc = "Find help",
-    },
-    {
-      "<leader>gl",
-      function()
-        Snacks.picker.git_log()
-      end,
-      desc = "Git log",
     },
     -- Extension/filetype one-off grep mappings are no longer needed.
     -- Useful picker syntax:

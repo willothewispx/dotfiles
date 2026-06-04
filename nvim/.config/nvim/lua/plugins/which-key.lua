@@ -9,7 +9,6 @@ return {
       { "<leader>b", group = "buffers" },
       { "<leader>f", group = "find" },
       { "<leader>g", group = "git" },
-      { "<leader>G", group = "lazygit" },
       { "<leader>l", group = "lines / lsp" },
       { "<leader>R", group = "rest" },
       { "<leader>t", group = "terminal / todo" },

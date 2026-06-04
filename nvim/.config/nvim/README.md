@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker), **neo-tree.nvim** (explorer), **sidekick.nvim** (Codex CLI sidebar), **supermaven-nvim** (AI completion), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **Neogit**, **diffview.nvim**, **trouble.nvim**, **todo-comments.nvim**, **Treesitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **neo-tree.nvim** (explorer), **supermaven-nvim** (AI completion), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **diffview.nvim**, **trouble.nvim**, **todo-comments.nvim**, **Treesitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -24,7 +24,6 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 |------------|-------------------------|
 | Explorer   | `lua/plugins/neo-tree.lua` (`<leader>e`) |
 | Search     | `lua/plugins/snacks.lua` (`<leader>ff`, `<leader>fg`, `<leader>fb`, `<leader>fs`, `<leader>fh`) |
-| AI         | `lua/plugins/ai.lua` (`<leader>a`) |
 | AI completion | `lua/plugins/supermaven.lua` (`<Tab>`, `<C-j>`, `<C-]>`) |
 | Buffers    | `lua/plugins/bufferline.lua` (`[b`, `]b`, `<leader>bp`) |
 | Terminal   | `lua/plugins/toggleterm.lua` |
@@ -33,8 +32,7 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | Trouble    | `lua/plugins/trouble.lua` (`<leader>x`) |
 | Sorting    | `lua/plugins/sort.lua` (`<leader>ls`) |
 | Editing    | `lua/plugins/autopairs.lua`, `lua/plugins/surround.lua`, `lua/plugins/rainbow-delimiters.lua` |
-| Git        | `lua/plugins/git.lua` (`<leader>g`) |
-| Lazygit    | `lua/plugins/snacks.lua` (`<leader>Gg`, `<leader>Gl`, `<leader>Gf`, `<leader>Gb`, `<leader>Gs`) |
+| Git        | `lua/plugins/git.lua`, `lua/plugins/snacks.lua` (`<leader>g`) |
 | Todo       | `lua/plugins/todo-comments.lua` (`<leader>ft`, `<leader>tq`) |
 | Dashboard  | `lua/plugins/snacks.lua` |
 | Treesitter | `lua/plugins/treesitter.lua` |
@@ -59,7 +57,11 @@ Search now uses `snacks.nvim` picker instead of Telescope:
 - `<leader>fs` search lines in the current buffer
 - `<leader>fh` search help tags
 - `<leader>ft` search todo comments
-- `<leader>gl` search git log
+- `<leader>gg` lazygit
+- `<leader>gl` lazygit log
+- `<leader>gf` lazygit file log
+- `<leader>gb` lazygit branches
+- `<leader>gs` lazygit stash
 
 The picker supports fzf search syntax, field searches, and picker arguments after `--`.
 The ignored-file variants use Snacks' `ignored = true`; `.git` itself stays excluded by the shared picker config.
@@ -90,20 +92,6 @@ Inside Neo-tree:
 - `G` grep in the hovered folder
 
 If the cursor is on a file, both mappings use that file's parent folder.
-
-## Codex CLI
-
-There is a Sidekick-powered sidebar integration for the local `codex` CLI:
-
-- `<leader>ai` toggle Codex terminal
-- `<leader>aI` focus Codex terminal
-- `<leader>ab` focus the previous window
-- `<leader>al` open/focus Codex terminal and send the current file path as context
-- `<leader>as` select an installed AI CLI
-
-Sidekick is configured in CLI-only mode. Next Edit Suggestions (NES) are disabled.
-
-Codex session persistence is enabled through `tmux`, so hiding and reopening the sidebar should reconnect to the same Codex session.
 
 ## Floating Terminal
 
