@@ -16,8 +16,13 @@ opt.smartcase = true
 opt.splitbelow = true
 opt.splitright = true
 
+local undodir = vim.fn.stdpath("state") .. "/undo"
+
 opt.undofile = true
+opt.undodir = undodir
 opt.swapfile = false
+
+vim.fn.mkdir(undodir, "p")
 
 opt.timeoutlen = 300
 
