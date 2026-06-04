@@ -49,9 +49,28 @@ local function open_and_reset_width(state)
   end
 end
 
+local function copy_node_path(state)
+  local node = state.tree and state.tree:get_node()
+  if not node then
+    return
+  end
+
+  local path = node.path or node:get_id()
+  vim.fn.setreg("+", path)
+  vim.notify("Copied path: " .. path)
+end
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
+  init = function()
+    vim.api.nvim_create_autocmd("TermClose", {
+      group = vim.api.nvim_create_augroup("neotree_refresh_on_term_close", { clear = true }),
+      callback = function()
+        pcall(vim.cmd, "Neotree refresh")
+      end,
+    })
+  end,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
@@ -126,6 +145,7 @@ return {
           ["H"] = "toggle_hidden",
           ["F"] = "search_files",
           ["G"] = "search_grep",
+          ["Y"] = copy_node_path,
         },
       },
     },
