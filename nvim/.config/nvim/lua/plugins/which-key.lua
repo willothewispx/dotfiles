@@ -13,6 +13,7 @@ return {
       { "<leader>t", group = "terminal / todo" },
       { "<leader>u", group = "ui" },
       { "<leader>x", group = "trouble" },
+      { "<leader>y", group = "yank" },
     },
   },
   keys = {

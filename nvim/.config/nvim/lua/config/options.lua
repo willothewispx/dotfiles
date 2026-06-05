@@ -28,6 +28,19 @@ opt.timeoutlen = 300
 
 opt.clipboard:append("unnamedplus")
 
+local function copy_relative_path()
+  local path = vim.fn.expand("%:.")
+
+  if path == "" then
+    vim.notify("No file path for current buffer", vim.log.levels.WARN)
+    return
+  end
+
+  vim.fn.setreg("+", path)
+  vim.notify("Copied " .. path)
+end
+
 vim.keymap.set("n", "<C-n>", "<C-i>", { desc = "Jump forward" })
+vim.keymap.set("n", "<leader>yp", copy_relative_path, { desc = "Yank relative file path" })
 vim.keymap.set("n", "q:", "<Nop>", { desc = "Disable command-line window" })
 vim.keymap.set("c", "<C-f>", "<Nop>", { desc = "Disable command-line window" })
