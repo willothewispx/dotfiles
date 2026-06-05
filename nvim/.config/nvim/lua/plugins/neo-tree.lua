@@ -63,14 +63,6 @@ end
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
-  init = function()
-    vim.api.nvim_create_autocmd("TermClose", {
-      group = vim.api.nvim_create_augroup("neotree_refresh_on_term_close", { clear = true }),
-      callback = function()
-        pcall(vim.cmd, "Neotree refresh")
-      end,
-    })
-  end,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
