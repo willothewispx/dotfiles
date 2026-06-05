@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **neo-tree.nvim** (explorer), **supermaven-nvim** (AI completion), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **diffview.nvim**, **trouble.nvim**, **todo-comments.nvim**, **Treesitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **neo-tree.nvim** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **diffview.nvim**, **trouble.nvim**, **todo-comments.nvim**, **Treesitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -24,6 +24,7 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 |------------|-------------------------|
 | Explorer   | `lua/plugins/neo-tree.lua` (`<leader>e`) |
 | Search     | `lua/plugins/snacks.lua` (`<leader>ff`, `<leader>fg`, `<leader>fb`, `<leader>fs`, `<leader>fh`) |
+| Replace    | `lua/plugins/grug-far.lua` (`<leader>fr`, `<leader>fR`) |
 | AI completion | `lua/plugins/supermaven.lua` (`<Tab>`, `<C-j>`, `<C-]>`) |
 | Buffers    | `lua/plugins/bufferline.lua` (`[b`, `]b`, `<leader>bp`) |
 | Terminal   | `lua/plugins/toggleterm.lua` |
@@ -57,6 +58,8 @@ Search now uses `snacks.nvim` picker instead of Telescope:
 - `<leader>fs` search lines in the current buffer
 - `<leader>fh` search help tags
 - `<leader>ft` search todo comments
+- `<leader>fr` find and replace across the current project
+- `<leader>fR` find and replace in the current file
 - `<leader>gg` lazygit
 - `<leader>gl` lazygit log
 - `<leader>gf` lazygit file log
@@ -83,6 +86,34 @@ The ignored-file variants use Snacks' `ignored = true`; `.git` itself stays excl
 - `foo -- -g=*.ts` grep only TypeScript files
 - `foo -- -g=*.{ts,tsx}` grep only TS/TSX files
 - `init -- -e=lua` in `<leader>ff` narrows file search to Lua files
+
+## Find and Replace
+
+Find and replace uses [grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim). It opens an editable search buffer backed by `rg`; searches update as you type, and replacements are only written when you run the replace action.
+
+Inside one file:
+
+1. Open the file you want to edit.
+2. Press `<leader>fR`.
+3. Fill in `Search:` with the text or regex to find.
+4. Fill in `Replace:` with the replacement text.
+5. Review the diff in the results area.
+6. In normal mode inside the grug-far buffer, press `<localleader>r` to apply the replacement. With this config, that is `,r`.
+
+Project-wide:
+
+1. Press `<leader>fr`.
+2. Fill in `Search:` and `Replace:`.
+3. Leave `Paths:` empty to search from the current working directory, or set it to a narrower path like `lua/`, `README.md`, or multiple paths on separate lines.
+4. Optionally set `Files Filter:` to a glob like `*.lua` or `*.md`.
+5. Optionally add `Flags:` such as `--fixed-strings` for literal text or `--case-sensitive` for exact casing.
+6. Review the diff, delete result lines you do not want to apply, then press `<localleader>r` (`,r`) to replace.
+
+Useful commands:
+
+- `:GrugFar` open project find and replace
+- `:GrugFarWithin` search and replace within a visual selection range
+- `:checkhealth grug-far` diagnose missing `rg` or plugin issues
 
 ## Explorer Search
 
