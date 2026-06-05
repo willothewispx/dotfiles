@@ -6,7 +6,7 @@ return {
   },
   opts = {
     options = {
-      theme = "tokyonight",
+      theme = "catppuccin",
       globalstatus = true,
       section_separators = "",
       component_separators = "",
