@@ -64,6 +64,15 @@ return {
     scroll = {
       enabled = true,
     },
+    zen = {
+      center = true,
+      toggles = {
+        dim = false,
+      },
+      win = {
+        width = 110,
+      },
+    },
     scope = {
       enabled = true,
     },
@@ -176,6 +185,20 @@ return {
         open_lazygit({ args = { "stash" } })
       end,
       desc = "Lazygit stash",
+    },
+    {
+      "<leader>z",
+      function()
+        Snacks.zen()
+      end,
+      desc = "Toggle Zen Mode",
+    },
+    {
+      "<leader>Z",
+      function()
+        Snacks.zen.zoom()
+      end,
+      desc = "Toggle Zoom",
     },
     {
       "<leader>ff",
