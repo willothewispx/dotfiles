@@ -24,18 +24,30 @@ local function search_in_node_dir(state, picker)
   })
 end
 
-local tree_width = 36
+local function tree_width()
+  local columns = vim.o.columns
+
+  if columns >= 180 then
+    return 48
+  elseif columns >= 140 then
+    return 42
+  end
+
+  return 36
+end
 
 local function reset_tree_width(state)
   if state.window.position == "float" or not state.winid then
     return
   end
 
+  local width = tree_width()
+
   state.window.auto_expand_width = false
-  state.window.last_user_width = tree_width
-  state.window.width = tree_width
-  state.win_width = tree_width
-  vim.api.nvim_win_set_width(state.winid, tree_width)
+  state.window.last_user_width = width
+  state.window.width = width
+  state.win_width = width
+  vim.api.nvim_win_set_width(state.winid, width)
 end
 
 local function open_and_reset_width(state)
