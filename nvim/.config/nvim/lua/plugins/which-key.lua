@@ -6,11 +6,12 @@ return {
     spec = {
       { "<leader>", group = "leader" },
       { "<leader>b", group = "buffers" },
+      { "<leader>c", group = "code / quickfix" },
       { "<leader>f", group = "find" },
       { "<leader>g", group = "git" },
       { "<leader>l", group = "lines / lsp" },
       { "<leader>R", group = "rest" },
-      { "<leader>t", group = "terminal / todo" },
+      { "<leader>t", group = "terminal" },
       { "<leader>u", group = "ui" },
       { "<leader>x", group = "trouble" },
       { "<leader>y", group = "yank" },
