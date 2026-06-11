@@ -41,6 +41,8 @@ local function copy_relative_path()
 end
 
 vim.keymap.set("n", "<C-n>", "<C-i>", { desc = "Jump forward" })
+vim.keymap.set("n", "<leader>cn", "<cmd>cnext<cr>", { desc = "Next quickfix item" })
+vim.keymap.set("n", "<leader>cp", "<cmd>cprev<cr>", { desc = "Previous quickfix item" })
 vim.keymap.set("n", "<leader>yp", copy_relative_path, { desc = "Yank relative file path" })
 vim.keymap.set("n", "q:", "<Nop>", { desc = "Disable command-line window" })
 vim.keymap.set("c", "<C-f>", "<Nop>", { desc = "Disable command-line window" })
