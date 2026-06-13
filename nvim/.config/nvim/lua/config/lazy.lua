@@ -17,6 +17,8 @@ require("lazy").setup({
   },
   install = { colorscheme = {} },
   checker = { enabled = true },
+  -- Tree-sitter rocks are managed by config.rocks/rocks.nvim.
+  rocks = { enabled = false },
   performance = {
     reset_packpath = false,
   },
