@@ -4,6 +4,7 @@ opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes"
 opt.cursorline = true
+opt.scrolloff = 8
 
 opt.expandtab = true
 opt.shiftwidth = 2
