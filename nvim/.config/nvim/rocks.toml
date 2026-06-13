@@ -1,0 +1,26 @@
+[plugins]
+"rocks.nvim" = {}
+"rocks-treesitter.nvim" = {}
+"tree-sitter-bash" = {}
+"tree-sitter-css" = {}
+"tree-sitter-diff" = {}
+"tree-sitter-dockerfile" = {}
+"tree-sitter-ecma" = {}
+"tree-sitter-go" = {}
+"tree-sitter-html" = {}
+"tree-sitter-html_tags" = {}
+"tree-sitter-http" = {}
+"tree-sitter-javascript" = {}
+"tree-sitter-json" = {}
+"tree-sitter-jsx" = {}
+"tree-sitter-lua" = {}
+"tree-sitter-markdown" = {}
+"tree-sitter-markdown_inline" = {}
+"tree-sitter-python" = {}
+"tree-sitter-query" = {}
+"tree-sitter-regex" = {}
+"tree-sitter-tsx" = {}
+"tree-sitter-typescript" = {}
+"tree-sitter-vim" = {}
+"tree-sitter-vimdoc" = {}
+"tree-sitter-yaml" = {}

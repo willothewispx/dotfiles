@@ -1,18 +1,19 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **neo-tree.nvim** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **diffview.nvim**, **trouble.nvim**, **todo-comments.nvim**, **Treesitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **neo-tree.nvim** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **diffview.nvim**, **trouble.nvim**, **todo-comments.nvim**, **rocks.nvim Tree-sitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
 1. Symlink or copy this directory to `~/.config/nvim` (or point your dotfiles manager here).
-2. Start Neovim; **lazy.nvim** will bootstrap on first launch.
+2. Start Neovim; **lazy.nvim** and **rocks.nvim** will bootstrap on first launch.
 3. Run `:Lazy sync` to install plugins.
-4. For Supermaven, run `:SupermavenUseFree` the first time it prompts for an account tier.
-5. Install language servers so they are on your `$PATH` (this config does not install binaries). Examples:
+4. Run `:Rocks sync` once to install `rocks-treesitter.nvim` and the configured parser/query rocks.
+5. For Supermaven, run `:SupermavenUseFree` the first time it prompts for an account tier.
+6. Install language servers so they are on your `$PATH` (this config does not install binaries). Examples:
    - `npm install -g typescript-language-server` (for `ts_ls`)
    - `npm install -g pyright`
    - Others: see each server’s install docs in `:help lspconfig-all` or the [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) server list.
-6. Open a source file and check `:checkhealth vim.lsp` if something does not attach.
+7. Open a source file and check `:checkhealth vim.lsp` if something does not attach.
 
 ## Changing enabled servers
 
@@ -37,7 +38,7 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | Quickfix   | `lua/config/options.lua` (`<leader>cn`, `<leader>cp`) |
 | Todo       | `lua/plugins/todo-comments.lua` (`<leader>ft`, `]t`, `[t`) |
 | Dashboard  | `lua/plugins/snacks.lua` |
-| Treesitter | `lua/plugins/treesitter.lua` |
+| Treesitter | `lua/config/rocks.lua`, `rocks.toml` |
 | LSP / diag | `lua/plugins/lsp.lua`   |
 | File ops   | `lua/plugins/lsp-file-operations.lua` |
 | Completion | `lua/plugins/completion.lua` |
@@ -46,6 +47,17 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 `nvim-tree` is currently disabled, not removed, so it is easy to restore later.
 
 Plugin-local `keys = { ... }` in each file keeps bindings next to the feature.
+
+## Treesitter
+
+Treesitter parser/query management is handled by `rocks.nvim` and `rocks-treesitter.nvim`; regular plugins remain managed by `lazy.nvim`.
+
+- Parser rocks live in `rocks.toml`
+- `:Rocks sync` installs the committed parser/query set
+- `:Rocks update` updates all rocks-managed parser packages
+- `:Rocks update tree-sitter-<lang>` updates one parser package
+
+`rocks-treesitter.nvim` owns auto-highlighting for the configured language list. It is configured with `treesitter.auto_install = "prompt"` so opening a file will not silently perform network installs.
 
 ## Search
 

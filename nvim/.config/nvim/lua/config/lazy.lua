@@ -17,4 +17,7 @@ require("lazy").setup({
   },
   install = { colorscheme = {} },
   checker = { enabled = true },
+  performance = {
+    reset_packpath = false,
+  },
 })
