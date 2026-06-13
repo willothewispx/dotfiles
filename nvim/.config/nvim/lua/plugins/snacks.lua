@@ -115,7 +115,7 @@ return {
           },
           { icon = " ", key = "r", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" },
           { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', { cwd = vim.fn.stdpath('config') })" },
-          { icon = " ", key = "d", desc = "Diff View", action = ":DiffviewOpen" },
+          { icon = " ", key = "d", desc = "Code Diff", action = ":CodeDiff" },
           { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },

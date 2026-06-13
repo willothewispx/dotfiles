@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **neo-tree.nvim** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **toggleterm.nvim** (floating terminals), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **diffview.nvim**, **trouble.nvim**, **todo-comments.nvim**, **rocks.nvim Tree-sitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **neo-tree.nvim** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **tabterm.nvim** (tab-scoped terminal workspace), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **codediff.nvim**, **trouble.nvim**, **todo-comments.nvim**, **rocks.nvim Tree-sitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -28,7 +28,7 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | Replace    | `lua/plugins/grug-far.lua` (`<leader>fr`, `<leader>fR`) |
 | AI completion | `lua/plugins/supermaven.lua` (`<Tab>`, `<C-j>`, `<C-]>`) |
 | Buffers    | `lua/plugins/bufferline.lua` (`[b`, `]b`, `<leader>bp`) |
-| Terminal   | `lua/plugins/toggleterm.lua` |
+| Terminal   | `lua/plugins/tabterm.lua` |
 | Statusline | `lua/plugins/lualine.lua` |
 | HTTP       | `lua/plugins/kulala.lua` (`<leader>R`) |
 | Trouble    | `lua/plugins/trouble.lua` (`<leader>x`) |
@@ -137,19 +137,23 @@ Inside Neo-tree:
 
 If the cursor is on a file, both mappings use that file's parent folder.
 
-## Floating Terminal
+## Terminal Workspace
 
-There is also a general floating shell terminal:
+There is also a tab-scoped floating terminal workspace:
 
-- `<leader>tt` toggle floating terminal
-- `<leader>tT` toggle second floating terminal
-- `<leader>tb` focus the previous code window
+- `<leader>tt` toggle the current tab's terminal workspace
+- `<leader>tT` create a new shell in the workspace
+- `<leader>tc` create a one-shot command terminal
 
-Inside the floating terminal:
+Inside the terminal workspace:
 
-- `<Esc>` or `jk` leaves terminal-input mode
-- `<C-h>` jumps back to the previous code window
-- `<C-w>` enters normal window-navigation from terminal mode
+- `q` hides the workspace and restores editor focus
+- `<C-h>` focuses the terminal sidebar from the panel
+- `l` or `<C-l>` focuses the panel from the sidebar
+- `i` / `a` insert a shell before / after the selected terminal
+- `ci` / `ca` insert a command terminal before / after the selected terminal
+- `r` renames the selected terminal
+- `d` deletes the selected terminal
 
 ## HTTP Requests
 

@@ -1,3 +1,19 @@
+local function setup_codediff(_, opts)
+  require("codediff").setup(opts)
+
+  local navigation = require("codediff.ui.view.navigation")
+  local next_hunk = navigation.next_hunk
+  local prev_hunk = navigation.prev_hunk
+
+  navigation.next_hunk = function()
+    return next_hunk() or navigation.next_file()
+  end
+
+  navigation.prev_hunk = function()
+    return prev_hunk() or navigation.prev_file()
+  end
+end
+
 return {
   {
     "lewis6991/gitsigns.nvim",
@@ -47,23 +63,23 @@ return {
     },
   },
   {
-    "sindrets/diffview.nvim",
-    cmd = {
-      "DiffviewOpen",
-      "DiffviewClose",
-      "DiffviewFileHistory",
-    },
+    "esmuellert/codediff.nvim",
+    cmd = "CodeDiff",
+    config = setup_codediff,
     keys = {
-      { "<leader>go", "<cmd>DiffviewOpen<cr>", desc = "Open diff view" },
-      { "<leader>gc", "<cmd>DiffviewClose<cr>", desc = "Close diff view" },
-      { "<leader>gH", "<cmd>DiffviewFileHistory %<cr>", desc = "File history" },
-      { "<leader>gD", "<cmd>DiffviewFileHistory<cr>", desc = "Repo history" },
+      { "<leader>go", "<cmd>CodeDiff<cr>", desc = "Open code diff" },
+      { "<leader>gH", "<cmd>CodeDiff history %<cr>", desc = "File history" },
+      { "<leader>gD", "<cmd>CodeDiff history<cr>", desc = "Repo history" },
     },
     opts = {
-      enhanced_diff_hl = true,
-      view = {
-        merge_tool = {
-          layout = "diff3_mixed",
+      diff = {
+        cycle_hunks_across_files = true,
+        layout = "side-by-side",
+      },
+      keymaps = {
+        view = {
+          next_hunk = "<Tab>",
+          prev_hunk = "<S-Tab>",
         },
       },
     },

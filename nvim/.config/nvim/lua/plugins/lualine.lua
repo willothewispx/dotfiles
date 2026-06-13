@@ -47,7 +47,6 @@ return {
     extensions = {
       "neo-tree",
       "quickfix",
-      "toggleterm",
       "lazy",
     },
   },
