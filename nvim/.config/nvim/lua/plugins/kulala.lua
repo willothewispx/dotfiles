@@ -22,6 +22,8 @@ return {
       vim.g.kulala_selected_env = saved_env
     end
 
+    vim.fn.mkdir(vim.fn.stdpath("data") .. "/site/queries/kulala_http", "p")
+
     require("kulala").setup(opts)
 
     vim.api.nvim_create_autocmd("VimLeavePre", {
