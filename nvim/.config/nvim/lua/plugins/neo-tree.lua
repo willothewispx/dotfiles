@@ -72,6 +72,17 @@ local function copy_node_path(state)
   vim.notify("Copied path: " .. path)
 end
 
+local function copy_node_relative_path(state)
+  local node = state.tree and state.tree:get_node()
+  if not node then
+    return
+  end
+
+  local path = vim.fn.fnamemodify(node.path or node:get_id(), ":.")
+  vim.fn.setreg("+", path)
+  vim.notify("Copied " .. path)
+end
+
 return {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
@@ -149,6 +160,7 @@ return {
           ["H"] = "toggle_hidden",
           ["F"] = "search_files",
           ["G"] = "search_grep",
+          ["<leader>yp"] = copy_node_relative_path,
           ["Y"] = copy_node_path,
         },
       },
