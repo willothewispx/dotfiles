@@ -8,6 +8,7 @@ local servers = {
   "kulala_ls",
   "lua_ls",
   "pyright",
+  "texlab",
   "ts_ls",
 }
 
@@ -114,7 +115,12 @@ return {
 
     vim.lsp.config("*", {
       capabilities = caps,
-      on_attach = on_attach,
+    })
+
+    vim.api.nvim_create_autocmd("LspAttach", {
+      callback = function(args)
+        on_attach(vim.lsp.get_client_by_id(args.data.client_id), args.buf)
+      end,
     })
 
     vim.lsp.config("lua_ls", {
@@ -126,6 +132,12 @@ return {
             library = lua_workspace_library,
           },
         },
+      },
+    })
+
+    vim.lsp.config("texlab", {
+      cmd_env = {
+        PATH = "/opt/homebrew/bin:" .. vim.env.PATH,
       },
     })
 

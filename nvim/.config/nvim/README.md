@@ -12,6 +12,7 @@ Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim*
 6. Install language servers so they are on your `$PATH` (this config does not install binaries). Examples:
    - `npm install -g typescript-language-server` (for `ts_ls`)
    - `npm install -g pyright`
+   - `brew install texlab latexindent` (for LaTeX)
    - Others: see each server’s install docs in `:help lspconfig-all` or the [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) server list.
 7. Open a source file and check `:checkhealth vim.lsp` if something does not attach.
 
@@ -31,6 +32,7 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | Terminal   | `lua/plugins/tabterm.lua` |
 | Statusline | `lua/plugins/lualine.lua` |
 | HTTP       | `lua/plugins/kulala.lua` (`<leader>R`) |
+| LaTeX      | `lua/plugins/latex.lua` (`<leader>L`) |
 | Trouble    | `lua/plugins/trouble.lua` (`<leader>x`) |
 | Sorting    | `lua/plugins/sort.lua` (`<leader>ls`) |
 | Editing    | `lua/plugins/autopairs.lua`, `lua/plugins/surround.lua`, `lua/plugins/rainbow-delimiters.lua` |
@@ -58,6 +60,18 @@ Treesitter parser/query management is handled by `rocks.nvim` and `rocks-treesit
 - `:Rocks update tree-sitter-<lang>` updates one parser package
 
 `rocks-treesitter.nvim` owns auto-highlighting for the configured language list. It is configured with `treesitter.auto_install = "prompt"` so opening a file will not silently perform network installs.
+
+## LaTeX
+
+LaTeX editing uses VimTeX with MacTeX's `latexmk`, PDF Expert for PDF viewing, Texlab for LSP features, and Tree-sitter parsers for LaTeX and BibTeX.
+
+- `<leader>Lb` compile
+- `<leader>Lv` view PDF
+- `<leader>Lt` open table of contents
+- `<leader>Lo` open compiler output
+- `<leader>Ls` show status
+- `<leader>Lk` stop compiler
+- `<leader>Lc` clean build artifacts
 
 ## Search
 

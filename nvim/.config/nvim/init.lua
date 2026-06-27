@@ -5,5 +5,6 @@ vim.g.maplocalleader = ","
 
 require("config.options")
 require("config.filetypes")
-require("config.rocks")
+local rocks = require("config.rocks")
 require("config.lazy")
+rocks.refresh_runtimepath()

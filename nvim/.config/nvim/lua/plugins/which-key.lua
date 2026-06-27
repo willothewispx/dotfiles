@@ -10,6 +10,7 @@ return {
       { "<leader>f", group = "find" },
       { "<leader>g", group = "git" },
       { "<leader>l", group = "lines / lsp" },
+      { "<leader>L", group = "LaTeX" },
       { "<leader>R", group = "rest" },
       { "<leader>t", group = "terminal" },
       { "<leader>u", group = "ui" },

@@ -81,6 +81,7 @@ configure_luajit_bootstrap()
 
 local parser_names = {
   "bash",
+  "bibtex",
   "css",
   "diff",
   "dockerfile",
@@ -89,6 +90,7 @@ local parser_names = {
   "http",
   "javascript",
   "json",
+  "latex",
   "lua",
   "markdown",
   "markdown_inline",
@@ -110,6 +112,7 @@ local rocks_config = {
     auto_highlight = parser_names,
     auto_install = "prompt",
     parser_map = {
+      bib = "bibtex",
       ecma = "javascript",
       ecmascript = "javascript",
       gitdiff = "diff",
@@ -119,8 +122,10 @@ local rocks_config = {
       jsonc = "json",
       jsx = "javascript",
       pandoc = "markdown",
+      plaintex = "latex",
       py = "python",
       sh = "bash",
+      tex = "latex",
       ts = "typescript",
       ["typescript.tsx"] = "tsx",
       typescriptreact = "tsx",
@@ -145,9 +150,12 @@ package.cpath = package.cpath .. ";" .. table.concat(luarocks_cpath, ";")
 local function add_rocks_runtimepath()
   local paths = vim.opt.runtimepath:get()
 
-  for _, path in ipairs(vim.fn.glob(vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", "rocks.nvim", "*"), false, true)) do
-    if not vim.list_contains(paths, path) then
-      vim.opt.runtimepath:append(path)
+  for _, rock in ipairs({ "rocks.nvim", "rocks-treesitter.nvim", "tree-sitter-*" }) do
+    local pattern = vim.fs.joinpath(rocks_config.rocks_path, "lib", "luarocks", "rocks-5.1", rock, "*")
+    for _, path in ipairs(vim.fn.glob(pattern, false, true)) do
+      if not vim.list_contains(paths, path) then
+        vim.opt.runtimepath:append(path)
+      end
     end
   end
 end
@@ -174,3 +182,8 @@ if not pcall(require, "rocks") then
 end
 
 vim.cmd.runtime("plugin/rocks.lua")
+vim.cmd.runtime("plugin/rocks-treesitter.lua")
+
+return {
+  refresh_runtimepath = add_rocks_runtimepath,
+}
