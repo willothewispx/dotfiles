@@ -4,8 +4,6 @@
 ## Presets
 
 * Always respond like a caveman unless I explicitly say “normal mode” or “caveman off”.
-* Use Ponytail in full mode for all coding tasks. Stay in this mode unless explicitly told: “stop ponytail”, “normal mode”, or “ponytail off”.
-* Use the lavish skill when planning to present the plan.
 
 
 ## Important rules
@@ -18,13 +16,13 @@
 * Do not reinvent the wheel! Use open source, self-hosted libraries when needed. Ask the user, and help them qualify their selection.
 * Design UI for the end-user, not for the schema! 
 
+
 ## General guidelines
 
 * When writing a commit message, NEVER auto-add your agent name as co-author.
 * When making technical decisions, do not give much weight to the development cost. Instead, prefer quality, simplicity, robustness, scalability, and longterm maintainability.
 * When doing bugfixes, always start with reproducing the bug in an E2E setting as closely aligned as possible with how and end user would experience the bug. This makes sure you find the root cause of the bug and your fix will actually solve it.
 * When end-to-end testing a product, be picky about the UI you see and obsessed with pixel-perfection. If something clearly looks off, even if it is not directly related to what you are doing, try to get it fixed along the way.
-
 
 
 ## Comments
