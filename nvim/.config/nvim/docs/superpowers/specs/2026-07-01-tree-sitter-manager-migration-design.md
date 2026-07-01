@@ -28,8 +28,13 @@ require("tree-sitter-manager").setup({
 })
 ```
 
-There is no `ensure_installed` list. Parser availability follows actual file
-usage instead of maintaining a duplicate inventory.
+`noauto_install` does not disable these languages. Neovim 0.12 already ships
+their parsers and highlighting queries, so installing second copies would be
+redundant. The current Neovim 0.12.3 installation confirms all seven bundled
+parsers are present.
+
+There is no `ensure_installed` list. Other parser availability follows actual
+file usage instead of maintaining a duplicate inventory.
 
 ## Changes
 
