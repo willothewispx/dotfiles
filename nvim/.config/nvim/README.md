@@ -1,20 +1,21 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **neo-tree.nvim** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **tabterm.nvim** (tab-scoped terminal workspace), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **codediff.nvim**, **trouble.nvim**, **todo-comments.nvim**, **rocks.nvim Tree-sitter**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **neo-tree.nvim** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **tabterm.nvim** (tab-scoped terminal workspace), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **codediff.nvim**, **trouble.nvim**, **todo-comments.nvim**, **tree-sitter-manager.nvim**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
 1. Symlink or copy this directory to `~/.config/nvim` (or point your dotfiles manager here).
-2. Start Neovim; **lazy.nvim** and **rocks.nvim** will bootstrap on first launch.
-3. Run `:Lazy sync` to install plugins.
-4. Run `:Rocks sync` once to install `rocks-treesitter.nvim` and the configured parser/query rocks.
-5. For Supermaven, run `:SupermavenUseFree` the first time it prompts for an account tier.
-6. Install language servers so they are on your `$PATH` (this config does not install binaries). Examples:
+2. Install `tree-sitter`, `git`, and a working C compiler so parser builds can succeed.
+3. Start Neovim; **lazy.nvim** will bootstrap on first launch.
+4. Run `:Lazy sync` to install plugins.
+5. Open files normally. Neovim 0.12 uses its bundled Tree-sitter parsers for `c`, `lua`, `markdown`, `markdown_inline`, `query`, `vim`, and `vimdoc`; `tree-sitter-manager.nvim` installs other missing parsers the first time you open a supported filetype.
+6. For Supermaven, run `:SupermavenUseFree` the first time it prompts for an account tier.
+7. Install language servers so they are on your `$PATH` (this config does not install binaries). Examples:
    - `npm install -g typescript-language-server` (for `ts_ls`)
    - `npm install -g pyright`
    - `brew install texlab latexindent` (for LaTeX)
    - Others: see each server’s install docs in `:help lspconfig-all` or the [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) server list.
-7. Open a source file and check `:checkhealth vim.lsp` if something does not attach.
+8. Open a source file and check `:checkhealth vim.lsp` if something does not attach.
 
 ## Changing enabled servers
 
@@ -40,7 +41,7 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | Quickfix   | `lua/config/options.lua` (`<leader>cn`, `<leader>cp`) |
 | Todo       | `lua/plugins/todo-comments.lua` (`<leader>ft`, `]t`, `[t`) |
 | Dashboard  | `lua/plugins/snacks.lua` |
-| Treesitter | `lua/config/rocks.lua`, `rocks.toml` |
+| Treesitter | `lua/plugins/treesitter.lua` |
 | LSP / diag | `lua/plugins/lsp.lua`   |
 | File ops   | `lua/plugins/lsp-file-operations.lua` |
 | Completion | `lua/plugins/completion.lua` |
@@ -52,14 +53,14 @@ Plugin-local `keys = { ... }` in each file keeps bindings next to the feature.
 
 ## Treesitter
 
-Treesitter parser/query management is handled by `rocks.nvim` and `rocks-treesitter.nvim`; regular plugins remain managed by `lazy.nvim`.
+Tree-sitter parser and query management is handled by [tree-sitter-manager.nvim](https://github.com/romus204/tree-sitter-manager.nvim), loaded by `lazy.nvim`.
 
-- Parser rocks live in `rocks.toml`
-- `:Rocks sync` installs the committed parser/query set
-- `:Rocks update` updates all rocks-managed parser packages
-- `:Rocks update tree-sitter-<lang>` updates one parser package
+- `:TSManager` opens the manager UI
+- `:TSInstall <lang>` installs one parser
+- `:TSUninstall <lang>` removes one parser
+- `:TSUpdate` updates installed parsers and queries
 
-`rocks-treesitter.nvim` owns auto-highlighting for the configured language list. It is configured with `treesitter.auto_install = "prompt"` so opening a file will not silently perform network installs.
+This config enables automatic installation for supported languages that are not already bundled with Neovim 0.12. The bundled parsers for `c`, `lua`, `markdown`, `markdown_inline`, `query`, `vim`, and `vimdoc` are excluded from manager installs to avoid duplicate parser copies.
 
 ## LaTeX
 
