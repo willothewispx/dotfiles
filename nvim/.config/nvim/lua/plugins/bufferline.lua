@@ -20,7 +20,7 @@ return {
       separator_style = "thin",
       offsets = {
         {
-          filetype = "neo-tree",
+          filetype = "NvimTree",
           text = "Explorer",
           highlight = "Directory",
           text_align = "left",

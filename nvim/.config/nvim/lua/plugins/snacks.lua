@@ -1,32 +1,5 @@
-local function refresh_neotree_after_lazygit()
-  vim.defer_fn(function()
-    local ok, manager = pcall(require, "neo-tree.sources.manager")
-    if not ok then
-      return
-    end
-
-    pcall(manager.refresh, "filesystem")
-    pcall(manager.refresh, "git_status")
-  end, 150)
-end
-
-local function with_neotree_lazygit_refresh(opts)
-  opts = opts or {}
-  opts.win = opts.win or {}
-
-  local on_close = opts.win.on_close
-  opts.win.on_close = function(win)
-    if on_close then
-      pcall(on_close, win)
-    end
-    refresh_neotree_after_lazygit()
-  end
-
-  return opts
-end
-
 local function open_lazygit(opts)
-  Snacks.lazygit.open(with_neotree_lazygit_refresh(opts))
+  Snacks.lazygit.open(opts)
 end
 
 return {
@@ -104,7 +77,7 @@ return {
         keys = {
           { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
           { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
-          { icon = " ", key = "e", desc = "Explorer", action = ":Neotree toggle reveal left" },
+          { icon = " ", key = "e", desc = "Explorer", action = ":NvimTreeFindFileToggle!" },
           {
             icon = "󰊢 ",
             key = "n",
@@ -161,14 +134,14 @@ return {
     {
       "<leader>gl",
       function()
-        Snacks.lazygit.log(with_neotree_lazygit_refresh())
+        Snacks.lazygit.log()
       end,
       desc = "Lazygit log",
     },
     {
       "<leader>gf",
       function()
-        Snacks.lazygit.log_file(with_neotree_lazygit_refresh())
+        Snacks.lazygit.log_file()
       end,
       desc = "Lazygit file log",
     },

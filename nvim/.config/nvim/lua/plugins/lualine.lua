@@ -45,7 +45,7 @@ return {
       lualine_z = { "location" },
     },
     extensions = {
-      "neo-tree",
+      "nvim-tree",
       "quickfix",
       "lazy",
     },

@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **neo-tree.nvim** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **tabterm.nvim** (tab-scoped terminal workspace), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **codediff.nvim**, **trouble.nvim**, **todo-comments.nvim**, **tree-sitter-manager.nvim**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **nvim-tree.lua** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **tabterm.nvim** (tab-scoped terminal workspace), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **codediff.nvim**, **trouble.nvim**, **todo-comments.nvim**, **tree-sitter-manager.nvim**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -25,7 +25,7 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 
 | Area        | File                    |
 |------------|-------------------------|
-| Explorer   | `lua/plugins/neo-tree.lua` (`<leader>e`) |
+| Explorer   | `lua/plugins/file-tree.lua` (`<leader>e`, `<leader>E`) |
 | Search     | `lua/plugins/snacks.lua` (`<leader>ff`, `<leader>fg`, `<leader>fb`, `<leader>fs`, `<leader>fh`) |
 | Replace    | `lua/plugins/grug-far.lua` (`<leader>fr`, `<leader>fR`) |
 | AI completion | `lua/plugins/supermaven.lua` (`<Tab>`, `<C-j>`, `<C-]>`) |
@@ -46,8 +46,6 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | File ops   | `lua/plugins/lsp-file-operations.lua` |
 | Completion | `lua/plugins/completion.lua` |
 | Which-key  | `lua/plugins/which-key.lua` (`<leader>?`) |
-
-`nvim-tree` is currently disabled, not removed, so it is easy to restore later.
 
 Plugin-local `keys = { ... }` in each file keeps bindings next to the feature.
 
@@ -143,14 +141,20 @@ Useful commands:
 - `:GrugFarWithin` search and replace within a visual selection range
 - `:checkhealth grug-far` diagnose missing `rg` or plugin issues
 
-## Explorer Search
+## Explorer
 
-Inside Neo-tree:
+`nvim-tree` uses its defaults plus two global mappings:
 
-- `F` search files in the hovered folder
-- `G` grep in the hovered folder
+- `<leader>e` toggle tree and reveal current file
+- `<leader>E` focus tree and reveal current file
 
-If the cursor is on a file, both mappings use that file's parent folder.
+Inside `nvim-tree`, notable defaults include:
+
+- `r` rename file or folder
+- `Y` copy relative path
+- `gy` copy absolute path
+- `H` toggle dotfiles
+- `I` toggle gitignored files
 
 ## Terminal Workspace
 
