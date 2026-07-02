@@ -28,6 +28,12 @@ return {
   opts = {
     sync_root_with_cwd = true,
     respect_buf_cwd = true,
+    renderer = {
+      highlight_git = "name",
+      indent_markers = {
+        enable = true,
+      },
+    },
     view = {
       width = {
         min = 40,
