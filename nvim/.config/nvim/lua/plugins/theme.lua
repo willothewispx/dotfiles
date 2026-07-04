@@ -6,6 +6,15 @@ return {
   opts = {
     flavour = "mocha",
     transparent_background = true,
+    custom_highlights = function(palette)
+      return {
+        FlashLabel = {
+          fg = palette.base,
+          bg = palette.red,
+          bold = true,
+        },
+      }
+    end,
   },
   config = function(_, opts)
     require("catppuccin").setup(opts)
