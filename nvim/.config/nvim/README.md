@@ -1,6 +1,6 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Tokyo Night**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **nvim-tree.lua** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **tabterm.nvim** (tab-scoped terminal workspace), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **codediff.nvim**, **trouble.nvim**, **todo-comments.nvim**, **tree-sitter-manager.nvim**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Catppuccin**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **nvim-tree.lua** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **tabterm.nvim** (tab-scoped terminal workspace), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **codediff.nvim**, **trouble.nvim**, **todo-comments.nvim**, **tree-sitter-manager.nvim**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **flash.nvim**, **nvim-dap** with **nvim-dap-ui** and **nvim-dap-go**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
@@ -45,9 +45,42 @@ Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then r
 | LSP / diag | `lua/plugins/lsp.lua`   |
 | File ops   | `lua/plugins/lsp-file-operations.lua` |
 | Completion | `lua/plugins/completion.lua` |
+| Navigation | `lua/plugins/flash.lua` (`s`, `S`) |
+| Debugging  | `lua/plugins/dap.lua` (`F7`, `F8`, `F9`, `<leader>d`) |
 | Which-key  | `lua/plugins/which-key.lua` (`<leader>?`) |
 
 Plugin-local `keys = { ... }` in each file keeps bindings next to the feature.
+
+## Navigation
+
+Flash provides labeled jumps and Tree-sitter-aware selections:
+
+- `s` jump to a visible target
+- `S` select a Tree-sitter target
+- `r` use a remote Flash target from operator-pending mode
+- `R` search Tree-sitter targets from operator-pending or visual mode
+- `<C-s>` toggle Flash while searching on the command line
+
+## Go Debugging
+
+Go debugging uses nvim-dap with Delve, nvim-dap-go, and nvim-dap-ui. Install `dlv` on your `PATH` before starting a session.
+
+- `F7` step into
+- `F8` step over
+- `F9` start or continue
+- `<leader>db` toggle a breakpoint
+- `<leader>dB` set a conditional breakpoint
+- `<leader>do` step out
+- `<leader>dp` pause
+- `<leader>dx` terminate
+- `<leader>du` toggle the debugger UI
+- `<leader>de` evaluate the word or visual selection
+- `<leader>dr` toggle the REPL
+- `<leader>dl` rerun the previous session
+- `<leader>dt` debug the nearest Go test
+- `<leader>dT` debug the previous Go test
+
+The debugger UI opens when a session launches or attaches and closes when the session exits.
 
 ## Treesitter
 

@@ -7,6 +7,7 @@ return {
       { "<leader>", group = "leader" },
       { "<leader>b", group = "buffers" },
       { "<leader>c", group = "code / quickfix" },
+      { "<leader>d", group = "debug" },
       { "<leader>f", group = "find" },
       { "<leader>g", group = "git" },
       { "<leader>l", group = "lines / lsp" },

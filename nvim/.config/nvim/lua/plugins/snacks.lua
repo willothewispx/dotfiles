@@ -35,7 +35,7 @@ return {
       style = "compact",
     },
     scroll = {
-      enabled = true,
+      enabled = false,
     },
     zen = {
       center = true,
