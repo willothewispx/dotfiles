@@ -125,8 +125,30 @@ Search now uses `snacks.nvim` picker instead of Telescope:
 - `<leader>gb` lazygit branches
 - `<leader>gs` lazygit stash
 
-The picker supports fzf search syntax, field searches, and picker arguments after `--`.
+### Live vs non-live
+
+Grep/files have two input fields; only one is active at a time:
+
+| Mode | Default for | What you type | Engine |
+|------|-------------|----------------|--------|
+| **live** | `<leader>fg` / `<leader>fG` | search + ripgrep args | `rg` (regex) |
+| **non-live** | after `<C-g>` | filter on current results | fzf fuzzy matcher |
+
+- **`<C-g>`** toggles live on/off inside the picker.
+- The `>` / `` icon is only the prompt — not a mode switch.
+- When you leave live, the previous live search stays frozen **left** of the prompt; the active field is **right** of it (e.g. `mykeyword -- -g=*.ts  file:src/`).
+- Args after `--` (e.g. `-g`, `-e`) only work in **live** mode.
+
 The ignored-file variants use Snacks' `ignored = true`; `.git` itself stays excluded by the shared picker config.
+
+### Live mode (`rg` args after `--`)
+
+- `foo -- -e=lua` grep only Lua files
+- `foo -- -g=*.ts` grep only TypeScript files
+- `foo -- -g=*.{ts,tsx}` grep only TS/TSX files
+- `init -- -e=lua` in `<leader>ff` (live) narrows file search to Lua files
+
+### Non-live mode (fzf / field filter)
 
 - `foo` fuzzy match
 - `foo bar` both terms must match
@@ -141,10 +163,6 @@ The ignored-file variants use Snacks' `ignored = true`; `.git` itself stays excl
 - `file:lua$ 'function` match exact `function` in files ending in `lua`
 - `file:README ^install` match entries in files whose path contains `README`, with text starting with `install`
 - `main.ts:120` or `main.ts:120:8` jump directly to file position
-- `foo -- -e=lua` grep only Lua files
-- `foo -- -g=*.ts` grep only TypeScript files
-- `foo -- -g=*.{ts,tsx}` grep only TS/TSX files
-- `init -- -e=lua` in `<leader>ff` narrows file search to Lua files
 
 ## Find and Replace
 
