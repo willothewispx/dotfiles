@@ -5,6 +5,7 @@ return {
     preset = "modern",
     spec = {
       { "<leader>", group = "leader" },
+      { "<leader>a", group = "agent / herdr" },
       { "<leader>b", group = "buffers" },
       { "<leader>c", group = "code / quickfix" },
       { "<leader>d", group = "debug" },
