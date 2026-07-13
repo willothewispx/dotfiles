@@ -8,10 +8,14 @@ tabs_json=$(
   "$HERDR_BIN_PATH" tab list --workspace "$HERDR_ACTIVE_WORKSPACE_ID"
 )
 
+picker_input=$(
+  printf '%s\n' "$tabs_json" |
+    jq -r '.result.tabs | sort_by(.number)[] | [.number, .label, .agent_status, .tab_id] | @tsv'
+)
+
 picker_status=0
 selection=$(
-  printf '%s\n' "$tabs_json" |
-    jq -r '.result.tabs | sort_by(.number)[] | [.number, .label, .agent_status, .tab_id] | @tsv' |
+  printf '%s\n' "$picker_input" |
     fzf \
       --delimiter=$'\t' \
       --with-nth=1,2,3 \

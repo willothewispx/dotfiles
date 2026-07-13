@@ -13,6 +13,10 @@ printf '%s\n' "$*" >> "$HERDR_CALL_LOG"
 if [[ "$1 $2" == "tab list" ]]; then
   [[ "$3" == "--workspace" ]]
   [[ "$4" == "$EXPECTED_WORKSPACE_ID" ]]
+  if [[ "${MALFORMED_JSON:-0}" == "1" ]]; then
+    printf '%s\n' '{malformed'
+    exit 0
+  fi
   printf '%s\n' '{"result":{"tabs":[{"number":2,"label":"server","agent_status":"working","tab_id":"w3:t4","workspace_id":"w3"},{"number":1,"label":"editor","agent_status":"unknown","tab_id":"w3:t1","workspace_id":"w3"}],"type":"tab_list"}}'
 elif [[ "$1 $2" == "tab focus" ]]; then
   printf '%s\n' "$3" > "$FOCUS_LOG"
@@ -55,6 +59,18 @@ export FZF_CANCEL=1
 
 "$picker"
 
+[[ ! -e "$FOCUS_LOG" ]]
+[[ "$(cat "$HERDR_CALL_LOG")" == "tab list --workspace w3" ]]
+
+: > "$HERDR_CALL_LOG"
+export MALFORMED_JSON=1
+if "$picker"; then
+  malformed_status=0
+else
+  malformed_status=$?
+fi
+
+(( malformed_status != 0 ))
 [[ ! -e "$FOCUS_LOG" ]]
 [[ "$(cat "$HERDR_CALL_LOG")" == "tab list --workspace w3" ]]
 
