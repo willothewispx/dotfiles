@@ -121,6 +121,11 @@ name = "catppuccin"
 # key = "prefix+alt+g"
 # type = "pane"
 # command = "lazygit"
+[[keys.command]]
+key = "prefix+f"
+type = "pane"
+command = "$HOME/.config/herdr/bin/current-workspace-tab-picker"
+description = "pick tab in current workspace"
 
 # Legacy indexed shortcut config is still parsed for compatibility.
 # Prefer switch_tab, switch_workspace, and focus_agent for new configs.
