@@ -9,7 +9,9 @@ panes_json=$("$HERDR_BIN_PATH" pane list --workspace "$HERDR_ACTIVE_WORKSPACE_ID
 nvim_panes_file=$(mktemp)
 nvim_tabs_file=$(mktemp)
 rows_file=$(mktemp)
-trap 'rm -f "$nvim_panes_file" "$nvim_tabs_file" "$rows_file"' EXIT
+aligned_file=$(mktemp)
+tab_ids_file=$(mktemp)
+trap 'rm -f "$nvim_panes_file" "$nvim_tabs_file" "$rows_file" "$aligned_file" "$tab_ids_file"' EXIT
 
 printf '%s\n' "$panes_json" | jq -r '.result.panes[] | [.tab_id, .pane_id] | @tsv' > "$nvim_panes_file"
 
@@ -37,6 +39,6 @@ printf '%s\n' "$tabs_json" |
     [$icon, .label, .agent_status, .tab_id] | @tsv
   ' > "$rows_file"
 
-paste -d $'\x1f' \
-  <(cut -f1-3 "$rows_file" | column -t -s $'\t') \
-  <(cut -f4 "$rows_file")
+cut -f1-3 "$rows_file" | column -t -s $'\t' > "$aligned_file"
+cut -f4 "$rows_file" > "$tab_ids_file"
+paste -d $'\x1f' "$aligned_file" "$tab_ids_file"
