@@ -4,21 +4,14 @@ set -euo pipefail
 : "${HERDR_BIN_PATH:?}"
 : "${HERDR_ACTIVE_WORKSPACE_ID:?}"
 
-tabs_json=$(
-  "$HERDR_BIN_PATH" tab list --workspace "$HERDR_ACTIVE_WORKSPACE_ID"
-)
-
-picker_input=$(
-  printf '%s\n' "$tabs_json" |
-    jq -r '.result.tabs | sort_by(.number)[] | [.number, .label, .agent_status, .tab_id] | @tsv'
-)
+picker_input=$("${0:A:h}/current-workspace-tab-picker-rows")
 
 picker_status=0
 selection=$(
   printf '%s\n' "$picker_input" |
     fzf \
-      --delimiter=$'\t' \
-      --with-nth=1,2,3 \
+      --delimiter=$'\x1f' \
+      --with-nth=1 \
       --layout=reverse \
       --border \
       --prompt='tabs> ' \
@@ -32,5 +25,5 @@ fi
 (( picker_status == 0 )) || exit "$picker_status"
 [[ -n "$selection" ]] || exit 0
 
-tab_id=$(printf '%s\n' "$selection" | cut -f4)
+tab_id=${selection#*$'\x1f'}
 "$HERDR_BIN_PATH" tab focus "$tab_id" >/dev/null

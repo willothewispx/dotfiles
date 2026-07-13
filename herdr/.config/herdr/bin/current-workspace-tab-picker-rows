@@ -1,0 +1,38 @@
+#!/bin/zsh
+set -euo pipefail
+
+: "${HERDR_BIN_PATH:?}"
+: "${HERDR_ACTIVE_WORKSPACE_ID:?}"
+
+tabs_json=$("$HERDR_BIN_PATH" tab list --workspace "$HERDR_ACTIVE_WORKSPACE_ID")
+panes_json=$("$HERDR_BIN_PATH" pane list --workspace "$HERDR_ACTIVE_WORKSPACE_ID")
+nvim_tabs_file=$(mktemp)
+rows_file=$(mktemp)
+trap 'rm -f "$nvim_tabs_file" "$rows_file"' EXIT
+
+while IFS=$'\t' read -r tab_id pane_id; do
+  process_json=$("$HERDR_BIN_PATH" pane process-info --pane "$pane_id")
+  if printf '%s\n' "$process_json" | jq -e '[.result.process_info.foreground_processes[]?.name] | any(. == "nvim" or . == "vim")' >/dev/null; then
+    print -r -- "$tab_id" >> "$nvim_tabs_file"
+  fi
+done < <(printf '%s\n' "$panes_json" | jq -r '.result.panes[] | [.tab_id, .pane_id] | @tsv')
+
+nvim_tabs=$(jq -Rsc 'split("\n") | map(select(length > 0))' "$nvim_tabs_file")
+
+printf '%s\n' "$tabs_json" |
+  jq -r --argjson nvim_tabs "$nvim_tabs" '
+    .result.tabs | sort_by(.number)[] |
+    (.tab_id) as $tab_id |
+    (.label | ascii_downcase) as $label |
+    (if $nvim_tabs | index($tab_id) then ""
+     elif $label == "codex" or $label == "chatgpt" then "󰚩"
+     elif $label == "grok" then "󰧑"
+     elif $label == "opencode" then "󰗖"
+     else ""
+     end) as $icon |
+    [$icon, .label, .agent_status, .tab_id] | @tsv
+  ' > "$rows_file"
+
+paste -d $'\x1f' \
+  <(cut -f1-3 "$rows_file" | column -t -s $'\t') \
+  <(cut -f4 "$rows_file")
