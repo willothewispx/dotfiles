@@ -15,7 +15,7 @@ selection=$(
       --layout=reverse \
       --border \
       --prompt='tabs> ' \
-      --header='number  tab  status'
+      --header='icon  tab  status'
 ) || picker_status=$?
 
 if (( picker_status == 130 )); then

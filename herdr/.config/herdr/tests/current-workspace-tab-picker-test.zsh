@@ -19,8 +19,16 @@ if [[ "$1 $2" == "tab list" ]]; then
   fi
   printf '%s\n' '{"result":{"tabs":[{"number":3,"label":"grok","agent_status":"idle","tab_id":"w3:t7"},{"number":1,"label":"editor","agent_status":"unknown","tab_id":"w3:t1"},{"number":2,"label":"codex","agent_status":"working","tab_id":"w3:t4"}],"type":"tab_list"}}'
 elif [[ "$1 $2" == "pane list" ]]; then
+  if [[ "${MALFORMED_PANE_JSON:-0}" == "1" ]]; then
+    printf '%s\n' '{malformed'
+    exit 0
+  fi
   printf '%s\n' '{"result":{"panes":[{"pane_id":"w3:p1","tab_id":"w3:t1"},{"pane_id":"w3:p4","tab_id":"w3:t4"},{"pane_id":"w3:p7","tab_id":"w3:t7"}],"type":"pane_list"}}'
 elif [[ "$1 $2 $3" == "pane process-info --pane" ]]; then
+  if [[ "${MALFORMED_PROCESS_JSON:-0}" == "1" ]]; then
+    printf '%s\n' '{malformed'
+    exit 0
+  fi
   case "$4" in
     w3:p1) printf '%s\n' '{"result":{"process_info":{"foreground_processes":[{"name":"nvim"}]}}}' ;;
     *) printf '%s\n' '{"result":{"process_info":{"foreground_processes":[{"name":"zsh"}]}}}' ;;
@@ -86,5 +94,34 @@ fi
 [[ "$(sed -n '1p' "$HERDR_CALL_LOG")" == "tab list --workspace w3" ]]
 [[ "$(sed -n '2p' "$HERDR_CALL_LOG")" == "pane list --workspace w3" ]]
 [[ "$(rg -c '^pane process-info --pane ' "$HERDR_CALL_LOG")" == "3" ]]
+
+unset MALFORMED_JSON FZF_CANCEL
+export MALFORMED_PANE_JSON=1
+: > "$HERDR_CALL_LOG"
+if "$picker"; then
+  malformed_pane_status=0
+else
+  malformed_pane_status=$?
+fi
+
+(( malformed_pane_status != 0 ))
+[[ ! -e "$FOCUS_LOG" ]]
+[[ "$(sed -n '1p' "$HERDR_CALL_LOG")" == "tab list --workspace w3" ]]
+[[ "$(sed -n '2p' "$HERDR_CALL_LOG")" == "pane list --workspace w3" ]]
+
+: > "$HERDR_CALL_LOG"
+unset MALFORMED_PANE_JSON
+export MALFORMED_PROCESS_JSON=1
+if "$picker"; then
+  malformed_process_status=0
+else
+  malformed_process_status=$?
+fi
+
+(( malformed_process_status != 0 ))
+[[ ! -e "$FOCUS_LOG" ]]
+[[ "$(sed -n '1p' "$HERDR_CALL_LOG")" == "tab list --workspace w3" ]]
+[[ "$(sed -n '2p' "$HERDR_CALL_LOG")" == "pane list --workspace w3" ]]
+[[ "$(rg -c '^pane process-info --pane ' "$HERDR_CALL_LOG")" == "1" ]]
 
 printf '%s\n' 'current-workspace-tab-picker tests passed'

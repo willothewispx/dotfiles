@@ -6,16 +6,20 @@ set -euo pipefail
 
 tabs_json=$("$HERDR_BIN_PATH" tab list --workspace "$HERDR_ACTIVE_WORKSPACE_ID")
 panes_json=$("$HERDR_BIN_PATH" pane list --workspace "$HERDR_ACTIVE_WORKSPACE_ID")
+nvim_panes_file=$(mktemp)
 nvim_tabs_file=$(mktemp)
 rows_file=$(mktemp)
-trap 'rm -f "$nvim_tabs_file" "$rows_file"' EXIT
+trap 'rm -f "$nvim_panes_file" "$nvim_tabs_file" "$rows_file"' EXIT
+
+printf '%s\n' "$panes_json" | jq -r '.result.panes[] | [.tab_id, .pane_id] | @tsv' > "$nvim_panes_file"
 
 while IFS=$'\t' read -r tab_id pane_id; do
   process_json=$("$HERDR_BIN_PATH" pane process-info --pane "$pane_id")
-  if printf '%s\n' "$process_json" | jq -e '[.result.process_info.foreground_processes[]?.name] | any(. == "nvim" or . == "vim")' >/dev/null; then
+  foreground_processes=$(printf '%s\n' "$process_json" | jq -e '[.result.process_info.foreground_processes[]?.name]')
+  if printf '%s\n' "$foreground_processes" | jq -e 'any(. == "nvim" or . == "vim")' >/dev/null; then
     print -r -- "$tab_id" >> "$nvim_tabs_file"
   fi
-done < <(printf '%s\n' "$panes_json" | jq -r '.result.panes[] | [.tab_id, .pane_id] | @tsv')
+done < "$nvim_panes_file"
 
 nvim_tabs=$(jq -Rsc 'split("\n") | map(select(length > 0))' "$nvim_tabs_file")
 
