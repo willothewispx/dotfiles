@@ -31,10 +31,10 @@ printf '%s\n' "$tabs_json" |
     (.tab_id) as $tab_id |
     (.label | ascii_downcase) as $label |
     (if $nvim_tabs | index($tab_id) then ""
-     elif $label == "codex" or $label == "chatgpt" then "󰚩"
-     elif $label == "grok" then "󰧑"
-     elif $label == "opencode" then "󰗖"
-     else ""
+     elif $label == "codex" or $label == "chatgpt" then "✦"
+     elif $label == "grok" then "𝕏"
+     elif $label == "opencode" then "⌘"
+     else "▸"
      end) as $icon |
     [$icon, .label, .agent_status, .tab_id] | @tsv
   ' > "$rows_file"

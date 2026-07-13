@@ -83,11 +83,11 @@ export FZF_SELECT_LABEL=codex
 [[ "$(sed -n '2p' "$HERDR_CALL_LOG")" == "pane list --workspace w3" ]]
 [[ "$(rg -c '^pane process-info --pane ' "$HERDR_CALL_LOG")" == "6" ]]
 [[ "$(sed -n '9p' "$HERDR_CALL_LOG")" == "tab focus w3:t4" ]]
-expected_picker_input=$'  editor    unknown\x1fw3:t1\n󰚩  codex     working\x1fw3:t4\n󰧑  grok      idle\x1fw3:t7\n󰚩  chatgpt   waiting\x1fw3:t8\n󰗖  opencode  active\x1fw3:t9\n  terminal  ready\x1fw3:t10'
+expected_picker_input=$'  editor    unknown\x1fw3:t1\n✦  codex     working\x1fw3:t4\n𝕏  grok      idle\x1fw3:t7\n✦  chatgpt   waiting\x1fw3:t8\n⌘  opencode  active\x1fw3:t9\n▸  terminal  ready\x1fw3:t10'
 [[ "$(cat "$FZF_INPUT_LOG")" == "$expected_picker_input" ]]
-[[ "$(rg -c '󰚩.*chatgpt' "$FZF_INPUT_LOG")" == "1" ]]
-[[ "$(rg -c '󰗖.*opencode' "$FZF_INPUT_LOG")" == "1" ]]
-[[ "$(rg -c '.*terminal' "$FZF_INPUT_LOG")" == "1" ]]
+[[ "$(rg -c '✦.*chatgpt' "$FZF_INPUT_LOG")" == "1" ]]
+[[ "$(rg -c '⌘.*opencode' "$FZF_INPUT_LOG")" == "1" ]]
+[[ "$(rg -c '▸.*terminal' "$FZF_INPUT_LOG")" == "1" ]]
 
 rm -f "$FOCUS_LOG"
 : > "$HERDR_CALL_LOG"
@@ -123,9 +123,9 @@ export EMPTY_PANE_LIST=1 FZF_SELECT_LABEL=chatgpt
 [[ "$(cat "$FOCUS_LOG")" == "w3:t8" ]]
 [[ "$(rg -c '^pane process-info --pane ' "$HERDR_CALL_LOG" || echo 0)" == "0" ]]
 [[ "$(rg -c '' "$FZF_INPUT_LOG" || echo 0)" == "0" ]]
-[[ "$(rg -c '󰚩.*chatgpt' "$FZF_INPUT_LOG")" == "1" ]]
-[[ "$(rg -c '󰗖.*opencode' "$FZF_INPUT_LOG")" == "1" ]]
-[[ "$(rg -c '.*terminal' "$FZF_INPUT_LOG")" == "1" ]]
+[[ "$(rg -c '✦.*chatgpt' "$FZF_INPUT_LOG")" == "1" ]]
+[[ "$(rg -c '⌘.*opencode' "$FZF_INPUT_LOG")" == "1" ]]
+[[ "$(rg -c '▸.*terminal' "$FZF_INPUT_LOG")" == "1" ]]
 
 : > "$HERDR_CALL_LOG"
 rm -f "$FOCUS_LOG"
