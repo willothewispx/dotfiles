@@ -26,9 +26,9 @@
 - Create `lua/config/treesitter_policy.lua`: pure parser inventory and installation/attachment state machine.
 - Create `lua/config/treesitter.lua`: production adapter for Neovim and `nvim-treesitter` APIs.
 - Modify `lua/plugins/treesitter.lua`: eager lazy.nvim plugin spec and `:TSUpdate` build hook.
-- Create `tests/treesitter_policy_spec.lua`: dependency-free policy behavior tests run inside headless Neovim.
-- Create `tests/treesitter_plugin_spec.lua`: plugin-spec regression test.
-- Create `tests/treesitter_e2e.lua`: isolated real-parser installation and highlighting test.
+- Temporarily create `tests/treesitter_policy_spec.lua`: dependency-free policy behavior tests run inside headless Neovim, then delete before final commit.
+- Temporarily create `tests/treesitter_plugin_spec.lua`: plugin-spec regression test, then delete before final commit.
+- Temporarily create `tests/treesitter_e2e.lua`: isolated real-parser installation and highlighting test, then delete before final commit.
 - Modify `README.md`: new ownership, lifecycle, commands, and prerequisites.
 - Modify `lazy-lock.json`: replace manager lock entry through `:Lazy sync`.
 
@@ -281,7 +281,7 @@ Expected: exit 0 and `treesitter policy tests passed`.
 - [ ] **Step 5: Commit parser policy**
 
 ```bash
-git add lua/config/treesitter_policy.lua tests/treesitter_policy_spec.lua
+git add lua/config/treesitter_policy.lua
 git commit -m "feat(nvim): add treesitter parser policy"
 ```
 
@@ -438,7 +438,7 @@ Expected: all commands exit 0.
 - [ ] **Step 8: Commit plugin migration**
 
 ```bash
-git add lua/config/treesitter.lua lua/plugins/treesitter.lua tests/treesitter_plugin_spec.lua lazy-lock.json
+git add lua/config/treesitter.lua lua/plugins/treesitter.lua lazy-lock.json
 git commit -m "feat(nvim): restore nvim-treesitter"
 ```
 
@@ -528,40 +528,52 @@ NVIM_TS_PLUGIN_DIR="$treesitter_plugin_dir" NVIM_TS_INSTALL_DIR="$treesitter_tes
 nvim --headless "+checkhealth nvim-treesitter" +qa
 ```
 
-Expected: unit tests pass; Lua buffer gains an active Tree-sitter highlighter; isolated TOML open installs one supported non-core parser and prints `treesitter end-to-end test passed`; health output contains no errors caused by this configuration. Keep the printed `$treesitter_test_root` available for inspection until verification finishes.
+Expected: unit tests pass; Lua buffer gains an active Tree-sitter highlighter; isolated TOML open installs one supported non-core parser and prints `treesitter end-to-end test passed`; health output contains no errors caused by this configuration.
 
-- [ ] **Step 6: Inspect final scope**
+- [ ] **Step 6: Delete temporary test files**
+
+Delete these exact files with `apply_patch` after every test has passed:
+
+- `tests/treesitter_policy_spec.lua`
+- `tests/treesitter_plugin_spec.lua`
+- `tests/treesitter_e2e.lua`
+
+Run:
+
+```bash
+if test -e tests/treesitter_policy_spec.lua || test -e tests/treesitter_plugin_spec.lua || test -e tests/treesitter_e2e.lua; then exit 1; fi
+```
+
+Expected: exit 0. No test files remain in final repository state.
+
+- [ ] **Step 7: Inspect final scope**
 
 Run:
 
 ```bash
 git status --short
 git diff --stat HEAD
-git diff -- lua/config/treesitter.lua lua/config/treesitter_policy.lua lua/plugins/treesitter.lua tests/treesitter_policy_spec.lua tests/treesitter_plugin_spec.lua tests/treesitter_e2e.lua README.md lazy-lock.json
+git diff -- lua/config/treesitter.lua lua/config/treesitter_policy.lua lua/plugins/treesitter.lua README.md lazy-lock.json
 ```
 
-Expected: only task-owned files are part of this migration. Pre-existing changes in `lua/config/options.lua`, Ghostty config, and Zsh config remain unstaged and unchanged by this work.
+Expected: only config, README, and lockfile changes are part of this migration. No `tests/` files remain. Pre-existing changes in `lua/config/options.lua`, Ghostty config, and Zsh config remain unstaged and unchanged by this work.
 
-- [ ] **Step 7: Commit documentation and end-to-end test**
+- [ ] **Step 8: Commit documentation**
 
 ```bash
-git add README.md tests/treesitter_e2e.lua
+git add README.md
 git commit -m "docs(nvim): document nvim-treesitter"
 ```
 
 ## Final Verification
 
-- [ ] Run every local test and startup check once more:
+- [ ] Run final startup checks without recreating test files:
 
 ```bash
-nvim --headless -u NONE -l tests/treesitter_policy_spec.lua
-nvim --headless -u NONE -l tests/treesitter_plugin_spec.lua
 nvim --headless "+lua assert(vim.fn.exists(':TSInstall') == 2)" "+lua assert(vim.fn.exists(':TSUninstall') == 2)" "+lua assert(vim.fn.exists(':TSUpdate') == 2)" "+lua assert(vim.fn.exists(':TSManager') == 0)" +qa
 nvim --headless "+enew" "+setfiletype lua" "+lua vim.wait(300000, function() return vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] ~= nil end, 100)" "+lua assert(vim.treesitter.highlighter.active[vim.api.nvim_get_current_buf()] ~= nil)" +qa
-treesitter_plugin_dir="$(nvim --headless -u NONE "+lua io.write(vim.fn.stdpath('data') .. '/lazy/nvim-treesitter')" +qa 2>/dev/null)"
-treesitter_test_root="$(mktemp -d)"
-NVIM_TS_PLUGIN_DIR="$treesitter_plugin_dir" NVIM_TS_INSTALL_DIR="$treesitter_test_root/site" nvim --headless -u NONE -l tests/treesitter_e2e.lua
+if test -e tests/treesitter_policy_spec.lua || test -e tests/treesitter_plugin_spec.lua || test -e tests/treesitter_e2e.lua; then exit 1; fi
 git diff --check HEAD~3
 ```
 
-Expected: every command exits 0, no whitespace errors, and no manager references remain in runtime files or README.
+Expected: every command exits 0, no test files or whitespace errors remain, and no manager references remain in runtime files or README.
