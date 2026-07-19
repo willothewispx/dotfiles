@@ -47,3 +47,4 @@ vim.keymap.set("n", "<leader>cp", "<cmd>cprev<cr>", { desc = "Previous quickfix 
 vim.keymap.set("n", "<leader>yp", copy_relative_path, { desc = "Yank relative file path" })
 vim.keymap.set("n", "q:", "<Nop>", { desc = "Disable command-line window" })
 vim.keymap.set("c", "<C-f>", "<Nop>", { desc = "Disable command-line window" })
+vim.keymap.set({ "x", "s" }, "<C-c>", '"+y', { desc = "Copy selection" })
