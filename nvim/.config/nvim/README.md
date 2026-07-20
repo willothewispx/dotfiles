@@ -1,14 +1,14 @@
 # Neovim config (lazy.nvim)
 
-Minimal Lua configuration: **Catppuccin**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **nvim-tree.lua** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **tabterm.nvim** (tab-scoped terminal workspace), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **codediff.nvim**, **trouble.nvim**, **todo-comments.nvim**, **tree-sitter-manager.nvim**, **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **flash.nvim**, **nvim-dap** with **nvim-dap-ui** and **nvim-dap-go**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
+Minimal Lua configuration: **Catppuccin**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **nvim-tree.lua** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **tabterm.nvim** (tab-scoped terminal workspace), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **codediff.nvim**, **trouble.nvim**, **todo-comments.nvim**, [**nvim-treesitter**](https://github.com/nvim-treesitter/nvim-treesitter), **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **flash.nvim**, **nvim-dap** with **nvim-dap-ui** and **nvim-dap-go**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
 ## First run
 
 1. Symlink or copy this directory to `~/.config/nvim` (or point your dotfiles manager here).
-2. Install `tree-sitter`, `git`, and a working C compiler so parser builds can succeed.
+2. Install Neovim 0.12+, the Tree-sitter CLI 0.26.1+ outside npm, `curl`, `tar`, and a working C compiler so parser builds can succeed.
 3. Start Neovim; **lazy.nvim** will bootstrap on first launch.
 4. Run `:Lazy sync` to install plugins.
-5. Open files normally. Neovim 0.12 uses its bundled Tree-sitter parsers for `c`, `lua`, `markdown`, `markdown_inline`, `query`, `vim`, and `vimdoc`; `tree-sitter-manager.nvim` installs other missing parsers the first time you open a supported filetype.
+5. Open files normally. Configured core parsers install proactively; other supported parsers install automatically the first time their filetype opens.
 6. For Supermaven, run `:SupermavenUseFree` the first time it prompts for an account tier.
 7. Install language servers so they are on your `$PATH` (this config does not install binaries). Examples:
    - `npm install -g typescript-language-server` (for `ts_ls`)
@@ -84,14 +84,15 @@ The debugger UI opens when a session launches or attaches and closes when the se
 
 ## Treesitter
 
-Tree-sitter parser and query management is handled by [tree-sitter-manager.nvim](https://github.com/romus204/tree-sitter-manager.nvim), loaded by `lazy.nvim`.
+Tree-sitter parser and query management is handled by [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter), loaded by `lazy.nvim`.
 
-- `:TSManager` opens the manager UI
 - `:TSInstall <lang>` installs one parser
 - `:TSUninstall <lang>` removes one parser
 - `:TSUpdate` updates installed parsers and queries
 
-This config enables automatic installation for supported languages that are not already bundled with Neovim 0.12. The bundled parsers for `c`, `lua`, `markdown`, `markdown_inline`, `query`, `vim`, and `vimdoc` are excluded from manager installs to avoid duplicate parser copies.
+Configured core parsers install proactively. Other supported parsers install automatically when their filetype opens. `lazy.nvim` runs `:TSUpdate` after nvim-treesitter updates.
+
+Highlighting and injections are enabled. Tree-sitter folds and experimental indentation remain off.
 
 ## LaTeX
 
