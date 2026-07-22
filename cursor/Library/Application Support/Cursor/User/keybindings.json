@@ -23,5 +23,5 @@
          "key": "ctrl+p",
          "command": "explorer.newFolder",
          "when": "filesExplorerFocus"
-     }
+    }
 ]

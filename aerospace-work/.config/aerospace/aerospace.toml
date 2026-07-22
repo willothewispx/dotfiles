@@ -133,8 +133,9 @@ automatically-unhide-macos-hidden-apps = false
     alt-m = 'workspace Mail'
     alt-g = 'workspace Calendar'
     alt-d = 'workspace 1Password'
-    alt-o = 'workspace Obsidian'
+    alt-o = 'workspace OrbStack'
     alt-p = 'workspace p'
+    alt-x = 'workspace Codex'
     alt-y = 'workspace y'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -157,8 +158,9 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-m = 'move-node-to-workspace Mail'
     alt-shift-g = 'move-node-to-workspace Calendar'
     alt-shift-d = 'move-node-to-workspace 1Password'
-    alt-shift-o = 'move-node-to-workspace Obsidian'
+    alt-shift-o = 'move-node-to-workspace OrbStack'
     alt-shift-p = 'move-node-to-workspace p'
+    alt-shift-x = 'move-node-to-workspace Codex'
     alt-shift-y = 'move-node-to-workspace y'
 
     alt-shift-f = 'fullscreen'
@@ -191,8 +193,9 @@ automatically-unhide-macos-hidden-apps = false
     Mail = ['LG', '^built-in retina display$']
     Calendar = ['LG', '^built-in retina display$']
     1Password = ['LG', '^built-in retina display$']
-    Obsidian = ['LG', '^built-in retina display$']
     Cursor = ['LG', '^built-in retina display$']
+    OrbStack = ['LG', '^built-in retina display$']
+    Codex = ['LG', '^built-in retina display$']
 
 
 # 'service' binding mode declaration.
@@ -251,3 +254,11 @@ run= "move-node-to-workspace 1Password"
 [[on-window-detected]]
 if.app-id="com.todesktop.230313mzl4w4u92"
 run= "move-node-to-workspace Cursor"
+
+[[on-window-detected]]
+if.app-id="com.openai.codex"
+run= "move-node-to-workspace Codex"
+
+[[on-window-detected]]
+if.app-id="dev.kdrag0n.MacVirt"
+run= "move-node-to-workspace OrbStack"

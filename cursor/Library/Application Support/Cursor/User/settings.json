@@ -10,7 +10,7 @@
         "markdown": false,
         "scminput": false
     },
-    "editor.fontSize": 14,
+    "editor.fontSize": 13,
     "editor.fontWeight": 500,
     "git.confirmSync": false,
     // vs code vim 
@@ -23,6 +23,7 @@
     "vim.useSystemClipboard": false,
     "vim.useCtrlKeys": true,
     "vim.hlsearch": true,
+    "window.zoomLevel": 0.6,
     // vim key bindings
     "vim.insertModeKeyBindings": [],
     "vim.normalModeKeyBindingsNonRecursive": [
@@ -103,9 +104,6 @@
         "<C-a>": false,
         "<C-f>": false
     },
-    "extensions.experimental.affinity": {
-        "vscodevim.vim": 1
-    },
     "files.insertFinalNewline": true,
     "terminal.external.osxExec": "Kitty.app",
     "terminal.integrated.fontSize": 16,
@@ -124,6 +122,7 @@
             "name": "latexmk",
             "command": "latexmk",
             "args": [
+                "-xelatex",
                 "-synctex=1",
                 "-interaction=nonstopmode",
                 "-file-line-error",
@@ -140,5 +139,7 @@
     "github.copilot.chat.newWorkspaceCreation.enabled": true,
     "github.copilot.advanced": {
         "authPermissions": "minimal"
-    }
+    },
+    "security.promptForLocalFileProtocolHandling": false,
+    "window.autoDetectColorScheme": false
 }
