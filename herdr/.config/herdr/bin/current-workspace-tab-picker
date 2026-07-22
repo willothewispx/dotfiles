@@ -1,0 +1,29 @@
+#!/bin/zsh
+set -euo pipefail
+
+: "${HERDR_BIN_PATH:?}"
+: "${HERDR_ACTIVE_WORKSPACE_ID:?}"
+
+picker_input=$("${0:A:h}/current-workspace-tab-picker-rows")
+
+picker_status=0
+selection=$(
+  printf '%s\n' "$picker_input" |
+    fzf \
+      --delimiter=$'\x1f' \
+      --with-nth=1 \
+      --layout=reverse \
+      --border \
+      --prompt='tabs> ' \
+      --header='icon  tab  status'
+) || picker_status=$?
+
+if (( picker_status == 130 )); then
+  exit 0
+fi
+
+(( picker_status == 0 )) || exit "$picker_status"
+[[ -n "$selection" ]] || exit 0
+
+tab_id=${selection#*$'\x1f'}
+"$HERDR_BIN_PATH" tab focus "$tab_id" >/dev/null

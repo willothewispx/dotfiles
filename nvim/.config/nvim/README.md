@@ -1,194 +1,240 @@
-# kickstart.nvim
+# Neovim config (lazy.nvim)
 
-## Introduction
+Minimal Lua configuration: **Catppuccin**, **bufferline.nvim**, **lualine.nvim**, **snacks.nvim** (dashboard + picker + lazygit), **nvim-tree.lua** (explorer), **grug-far.nvim** (find and replace), **supermaven-nvim** (AI completion), **tabterm.nvim** (tab-scoped terminal workspace), **kulala.nvim** (`.http` requests), **gitsigns.nvim**, **codediff.nvim**, **trouble.nvim**, **todo-comments.nvim**, [**nvim-treesitter**](https://github.com/nvim-treesitter/nvim-treesitter), **nvim-autopairs**, **nvim-surround**, **rainbow-delimiters.nvim**, **flash.nvim**, **nvim-dap** with **nvim-dap-ui** and **nvim-dap-go**, **native LSP** (`vim.lsp.config` / `vim.lsp.enable`), **nvim-cmp**, **which-key**. Leader: `,`.
 
-A starting point for Neovim that is:
+## First run
 
-* Small
-* Single-file
-* Completely Documented
+1. Symlink or copy this directory to `~/.config/nvim` (or point your dotfiles manager here).
+2. Install Neovim 0.12+, the Tree-sitter CLI 0.26.1+ outside npm, `curl`, `tar`, and a working C compiler so parser builds can succeed.
+3. Start Neovim; **lazy.nvim** will bootstrap on first launch.
+4. Run `:Lazy sync` to install plugins.
+5. Open files normally. Configured core parsers install proactively; other supported parsers install automatically the first time their filetype opens.
+6. For Supermaven, run `:SupermavenUseFree` the first time it prompts for an account tier.
+7. Install language servers so they are on your `$PATH` (this config does not install binaries). Examples:
+   - `npm install -g typescript-language-server` (for `ts_ls`)
+   - `npm install -g pyright`
+   - `brew install texlab latexindent` (for LaTeX)
+   - Others: see each server’s install docs in `:help lspconfig-all` or the [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) server list.
+8. Open a source file and check `:checkhealth vim.lsp` if something does not attach.
 
-**NOT** a Neovim distribution, but instead a starting point for your configuration.
+## Changing enabled servers
 
-## Installation
+Edit the `servers` table in [`lua/plugins/lsp.lua`](lua/plugins/lsp.lua), then restart Neovim (or `:lua vim.lsp.enable({...})` after adjusting config).
 
-### Install Neovim
+## Keymaps (where to edit)
 
-Kickstart.nvim targets *only* the latest
-['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest
-['nightly'](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim.
-If you are experiencing issues, please make sure you have the latest versions.
+| Area        | File                    |
+|------------|-------------------------|
+| Explorer   | `lua/plugins/file-tree.lua` (`<leader>e`, `<leader>E`) |
+| Search     | `lua/plugins/snacks.lua` (`<leader>ff`, `<leader>fg`, `<leader>fb`, `<leader>fs`, `<leader>fh`) |
+| Replace    | `lua/plugins/grug-far.lua` (`<leader>fr`, `<leader>fR`) |
+| AI completion | `lua/plugins/supermaven.lua` (`<Tab>`, `<C-j>`, `<C-]>`) |
+| Buffers    | `lua/plugins/bufferline.lua` (`[b`, `]b`, `<leader>bp`) |
+| Terminal   | `lua/plugins/tabterm.lua` |
+| Statusline | `lua/plugins/lualine.lua` |
+| HTTP       | `lua/plugins/kulala.lua` (`<leader>R`) |
+| LaTeX      | `lua/plugins/latex.lua` (`<leader>L`) |
+| Trouble    | `lua/plugins/trouble.lua` (`<leader>x`) |
+| Sorting    | `lua/plugins/sort.lua` (`<leader>ls`) |
+| Editing    | `lua/plugins/autopairs.lua`, `lua/plugins/surround.lua`, `lua/plugins/rainbow-delimiters.lua` |
+| Git        | `lua/plugins/git.lua`, `lua/plugins/snacks.lua` (`<leader>g`) |
+| Quickfix   | `lua/config/options.lua` (`<leader>cn`, `<leader>cp`) |
+| Todo       | `lua/plugins/todo-comments.lua` (`<leader>ft`, `]t`, `[t`) |
+| Dashboard  | `lua/plugins/snacks.lua` |
+| Treesitter | `lua/plugins/treesitter.lua` |
+| LSP / diag | `lua/plugins/lsp.lua`   |
+| File ops   | `lua/plugins/lsp-file-operations.lua` |
+| Completion | `lua/plugins/completion.lua` |
+| Navigation | `lua/plugins/flash.lua` (`s`, `S`) |
+| Debugging  | `lua/plugins/dap.lua` (`F7`, `F8`, `F9`, `<leader>d`) |
+| Which-key  | `lua/plugins/which-key.lua` (`<leader>?`) |
 
-### Install External Dependencies
+Plugin-local `keys = { ... }` in each file keeps bindings next to the feature.
 
-> **NOTE** 
-> [Backup](#FAQ) your previous configuration (if any exists)
+## Navigation
 
-External Requirements:
-- Basic utils: `git`, `make`, `unzip`, C Compiler (`gcc`)
-- [ripgrep](https://github.com/BurntSushi/ripgrep#installation)
-- Language Setup:
-  - If want to write Typescript, you need `npm`
-  - If want to write Golang, you will need `go`
-  - etc.
+Flash provides labeled jumps and Tree-sitter-aware selections:
 
-> **NOTE**
-> See [Windows Installation](#Windows-Installation) to double check any additional Windows notes
+- `s` jump to a visible target
+- `S` select a Tree-sitter target
+- `r` use a remote Flash target from operator-pending mode
+- `R` search Tree-sitter targets from operator-pending or visual mode
+- `<C-s>` toggle Flash while searching on the command line
 
-Neovim's configurations are located under the following paths, depending on your OS:
+## Go Debugging
 
-| OS | PATH |
-| :- | :--- |
-| Linux, MacOS | `$XDG_CONFIG_HOME/nvim`, `~/.config/nvim` |
-| Windows (cmd)| `%userprofile%\AppData\Local\nvim\` |
-| Windows (powershell)| `$env:USERPROFILE\AppData\Local\nvim\` |
+Go debugging uses nvim-dap with Delve, nvim-dap-go, and nvim-dap-ui. Install `dlv` on your `PATH` before starting a session.
 
-Clone kickstart.nvim:
+- `F7` step into
+- `F8` step over
+- `F9` start or continue
+- `<leader>db` toggle a breakpoint
+- `<leader>dB` set a conditional breakpoint
+- `<leader>do` step out
+- `<leader>dp` pause
+- `<leader>dx` terminate
+- `<leader>du` toggle the debugger UI
+- `<leader>de` evaluate the word or visual selection
+- `<leader>dr` toggle the REPL
+- `<leader>dl` rerun the previous session
+- `<leader>dt` debug the nearest Go test
+- `<leader>dT` debug the previous Go test
 
-<details><summary> Linux and Mac </summary>
+The debugger UI opens when a session launches or attaches and closes when the session exits.
 
-```sh
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
-```
+## Treesitter
 
-</details>
+Tree-sitter parser and query management is handled by [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter), loaded by `lazy.nvim`.
 
-<details><summary> Windows </summary>
+- `:TSInstall <lang>` installs one parser
+- `:TSUninstall <lang>` removes one parser
+- `:TSUpdate` updates installed parsers and queries
 
-If you're using `cmd.exe`:
+Configured core parsers install proactively. Other supported parsers install automatically when their filetype opens. `lazy.nvim` runs `:TSUpdate` after nvim-treesitter updates.
 
-```
-git clone https://github.com/nvim-lua/kickstart.nvim.git %userprofile%\AppData\Local\nvim\ 
-```
+Highlighting and injections are enabled. Tree-sitter folds and experimental indentation remain off.
 
-If you're using `powershell.exe`
+## LaTeX
 
-```
-git clone https://github.com/nvim-lua/kickstart.nvim.git $env:USERPROFILE\AppData\Local\nvim\ 
-```
+LaTeX editing uses VimTeX with MacTeX's `latexmk`, PDF Expert for PDF viewing, Texlab for LSP features, and Tree-sitter parsers for LaTeX and BibTeX.
 
-</details>
+- `<leader>Lb` compile
+- `<leader>Lv` view PDF
+- `<leader>Lt` open table of contents
+- `<leader>Lo` open compiler output
+- `<leader>Ls` show status
+- `<leader>Lk` stop compiler
+- `<leader>Lc` clean build artifacts
 
-### Post Installation
+## Search
 
-Start Neovim
+Search now uses `snacks.nvim` picker instead of Telescope:
 
-```sh
-nvim
-```
+- `<leader>ff` find files
+- `<leader>fF` find files, including `.gitignore`d files
+- `<leader>fg` grep in files
+- `<leader>fG` grep in files, including `.gitignore`d files
+- `<leader>fb` find buffers
+- `<leader>fs` search lines in the current buffer
+- `<leader>fh` search help tags
+- `<leader>ft` search todo comments
+- `<leader>fr` find and replace across the current project
+- `<leader>fR` find and replace in the current file
+- `<leader>gg` lazygit
+- `<leader>gl` lazygit log
+- `<leader>gf` lazygit file log
+- `<leader>gb` lazygit branches
+- `<leader>gs` lazygit stash
 
-That's it! Lazy will install all the plugins you have. Use `:Lazy` to view
-current plugin status.
+### Live vs non-live
 
-Read through the `init.lua` file in your configuration folder for more
-information about extending and exploring Neovim.
+Grep/files have two input fields; only one is active at a time:
 
-### Getting Started
+| Mode | Default for | What you type | Engine |
+|------|-------------|----------------|--------|
+| **live** | `<leader>fg` / `<leader>fG` | search + ripgrep args | `rg` (regex) |
+| **non-live** | after `<C-g>` | filter on current results | fzf fuzzy matcher |
 
-See [Effective Neovim: Instant IDE](https://youtu.be/stqUbv-5u2s), covering the
-previous version. Note: The install via init.lua is outdated, please follow the
-install instructions in this file instead. An updated video is coming soon.
+- **`<C-g>`** toggles live on/off inside the picker.
+- The `>` / `` icon is only the prompt — not a mode switch.
+- When you leave live, the previous live search stays frozen **left** of the prompt; the active field is **right** of it (e.g. `mykeyword -- -g=*.ts  file:src/`).
+- Args after `--` (e.g. `-g`, `-e`) only work in **live** mode.
 
-### Recommended Steps
+The ignored-file variants use Snacks' `ignored = true`; `.git` itself stays excluded by the shared picker config.
 
-[Fork](https://docs.github.com/en/get-started/quickstart/fork-a-repo) this repo
-(so that you have your own copy that you can modify) and then installing you
-can install to your machine using the methods above.
+### Live mode (`rg` args after `--`)
 
-> **NOTE**  
-> Your fork's url will be something like this: `https://github.com/<your_github_username>/kickstart.nvim.git`
+- `foo -- -e=lua` grep only Lua files
+- `foo -- -g=*.ts` grep only TypeScript files
+- `foo -- -g=*.{ts,tsx}` grep only TS/TSX files
+- `init -- -e=lua` in `<leader>ff` (live) narrows file search to Lua files
 
-#### Examples of adding popularly requested plugins
+### Non-live mode (fzf / field filter)
 
-<details>
-  <summary>Adding autopairs</summary>
+- `foo` fuzzy match
+- `foo bar` both terms must match
+- `'foo` exact match
+- `'foo'` exact word-boundary match
+- `^foo` prefix match
+- `foo$` suffix match
+- `!foo` exclude matches containing `foo`
+- `!^foo` exclude matches starting with `foo`
+- `!foo$` exclude matches ending with `foo`
+- `foo | bar` OR query
+- `file:lua$ 'function` match exact `function` in files ending in `lua`
+- `file:README ^install` match entries in files whose path contains `README`, with text starting with `install`
+- `main.ts:120` or `main.ts:120:8` jump directly to file position
 
-This will automatically install [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs) and enable it on startup. For more information, see documentation for [lazy.nvim](https://github.com/folke/lazy.nvim).
+## Find and Replace
 
-In the file: `lua/custom/plugins/autopairs.lua`, add:
+Find and replace uses [grug-far.nvim](https://github.com/MagicDuck/grug-far.nvim). It opens an editable search buffer backed by `rg`; searches update as you type, and replacements are only written when you run the replace action.
 
-```lua
--- File: lua/custom/plugins/autopairs.lua
+Inside one file:
 
-return {
-  "windwp/nvim-autopairs",
-  -- Optional dependency
-  dependencies = { 'hrsh7th/nvim-cmp' },
-  config = function()
-    require("nvim-autopairs").setup {}
-    -- If you want to automatically add `(` after selecting a function or method
-    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-    local cmp = require('cmp')
-    cmp.event:on(
-      'confirm_done',
-      cmp_autopairs.on_confirm_done()
-    )
-  end,
-}
-```
+1. Open the file you want to edit.
+2. Press `<leader>fR`.
+3. Fill in `Search:` with the text or regex to find.
+4. Fill in `Replace:` with the replacement text.
+5. Review the diff in the results area.
+6. In normal mode inside the grug-far buffer, press `<localleader>r` to apply the replacement. With this config, that is `,r`.
 
-</details>
-<details>
-  <summary>Adding a file tree plugin</summary>
+Project-wide:
 
-This will install the tree plugin and add the command `:Neotree` for you. You can explore the documentation at [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim) for more information.
+1. Press `<leader>fr`.
+2. Fill in `Search:` and `Replace:`.
+3. Leave `Paths:` empty to search from the current working directory, or set it to a narrower path like `lua/`, `README.md`, or multiple paths on separate lines.
+4. Optionally set `Files Filter:` to a glob like `*.lua` or `*.md`.
+5. Optionally add `Flags:` such as `--fixed-strings` for literal text or `--case-sensitive` for exact casing.
+6. Review the diff, delete result lines you do not want to apply, then press `<localleader>r` (`,r`) to replace.
 
-In the file: `lua/custom/plugins/filetree.lua`, add:
+Useful commands:
 
-```lua
--- Unless you are still migrating, remove the deprecated commands from v1.x
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
+- `:GrugFar` open project find and replace
+- `:GrugFarWithin` search and replace within a visual selection range
+- `:checkhealth grug-far` diagnose missing `rg` or plugin issues
 
-return {
-  "nvim-neo-tree/neo-tree.nvim",
-  version = "*",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-    "MunifTanjim/nui.nvim",
-  },
-  config = function ()
-    require('neo-tree').setup {}
-  end,
-}
-```
+## Explorer
 
-</details>
+`nvim-tree` uses its defaults plus two global mappings:
 
-### FAQ
+- `<leader>e` toggle tree and reveal current file
+- `<leader>E` focus tree and reveal current file
 
-* What should I do if I already have a pre-existing neovim configuration?
-  * You should back it up, then delete all files associated with it.
-  * This includes your existing init.lua and the neovim files in `~/.local` which can be deleted with `rm -rf ~/.local/share/nvim/`
-* Can I keep my existing configuration in parallel to kickstart?
-  * Yes! You can use [NVIM_APPNAME](https://neovim.io/doc/user/starting.html#%24NVIM_APPNAME)`=nvim-NAME` to maintain multiple configurations. For example you can install the kickstart configuration in `~/.config/nvim-kickstart` and create an alias:
-    ```
-    alias nvim-kickstart='NVIM_APPNAME="nvim-kickstart" nvim'
-    ```
-    When you run Neovim using `nvim-kickstart` alias it will use the alternative config directory and the matching local directory `~/.local/share/nvim-kickstart`. You can apply this approach to any Neovim distribution that you would like to try out.
-* What if I want to "uninstall" this configuration:
-  * See [lazy.nvim uninstall](https://github.com/folke/lazy.nvim#-uninstalling) information
-* Why is the kickstart `init.lua` a single file? Wouldn't it make sense to split it into multiple files?
-  * The main purpose of kickstart is to serve as a teaching tool and a reference
-    configuration that someone can easily `git clone` as a basis for their own.
-    As you progress in learning Neovim and Lua, you might consider splitting `init.lua`
-    into smaller parts. A fork of kickstart that does this while maintaining the exact
-    same functionality is available here:
-    * [kickstart-modular.nvim](https://github.com/dam9000/kickstart-modular.nvim)
-  * Discussions on this topic can be found here:
-    * [Restructure the configuration](https://github.com/nvim-lua/kickstart.nvim/issues/218)
-    * [Reorganize init.lua into a multi-file setup](https://github.com/nvim-lua/kickstart.nvim/pull/473)
+Inside `nvim-tree`, notable defaults include:
 
-### Windows Installation
+- `r` rename file or folder
+- `Y` copy relative path
+- `gy` copy absolute path
+- `H` toggle dotfiles
+- `I` toggle gitignored files
 
-Installation may require installing build tools, and updating the run command for `telescope-fzf-native`
+## Terminal Workspace
 
-See `telescope-fzf-native` documentation for [more details](https://github.com/nvim-telescope/telescope-fzf-native.nvim#installation)
+There is also a tab-scoped floating terminal workspace:
 
-This requires:
+- `<leader>tt` toggle the current tab's terminal workspace
+- `<leader>tT` create a new shell in the workspace
+- `<leader>tc` create a one-shot command terminal
 
-- Install CMake, and the Microsoft C++ Build Tools on Windows
+Inside the terminal workspace:
 
-```lua
-{'nvim-telescope/telescope-fzf-native.nvim', build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-```
+- `q` hides the workspace and restores editor focus
+- `<C-h>` focuses the terminal sidebar from the panel
+- `l` or `<C-l>` focuses the panel from the sidebar
+- `i` / `a` insert a shell before / after the selected terminal
+- `ci` / `ca` insert a command terminal before / after the selected terminal
+- `r` renames the selected terminal
+- `d` deletes the selected terminal
+
+## HTTP Requests
+
+For `.http` and `.rest` files, Kulala is configured with:
+
+- `<leader>Rs` send request under cursor
+- `<leader>Ra` send all requests
+- `<leader>Rb` open scratchpad
+- `<leader>Re` select environment
+
+## Optional: Mason
+
+To install language servers from inside Neovim, you can add `williamboman/mason.nvim` and `mason-lspconfig` later; this setup intentionally stays minimal and uses only native LSP + `nvim-lspconfig` defaults.
